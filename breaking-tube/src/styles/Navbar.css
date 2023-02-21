@@ -21,6 +21,7 @@ nav h1{
 }
 .nav-left{
     display: flex;
+    margin-left: 1vw;
 }
 article{
     display: flex;
