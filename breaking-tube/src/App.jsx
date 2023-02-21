@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from './Components/NavigationBar/NavBar'
-import SideBar from './Components/SideBar/SideBarClose'
+import SideBar from './Components/SideBar/SideBar'
 const App = () => {
   return (
     <>
