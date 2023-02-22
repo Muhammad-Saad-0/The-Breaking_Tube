@@ -12,6 +12,7 @@ const SideBar = () => {
     <>
       <SidebarProvider>
        {sidebarOpen?<SidebarOpen />: <SidebarClose />}
+       {/* <SidebarOpen /> */}
       </SidebarProvider>
     </>
   );

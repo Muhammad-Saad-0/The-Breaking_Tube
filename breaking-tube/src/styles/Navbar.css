@@ -3,12 +3,12 @@
 }
 nav{
     width: auto;
-    min-width: 100vw !important;
+    /* min-width: 100vw !important; */
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #303030;
-    flex-shrink: 1;
+
 }
 nav button{
     border: none;

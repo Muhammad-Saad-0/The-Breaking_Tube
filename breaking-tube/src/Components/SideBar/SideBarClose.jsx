@@ -27,6 +27,7 @@ const SideBar = () => {
           <a href="/"><img src={home} alt="home" />Home</a>
           <a href="/"><img src={explore} alt="explore" />Explore</a>
           <a href="/"><img src={library} alt="library" />Library</a>
+         
     
     </aside>
   )

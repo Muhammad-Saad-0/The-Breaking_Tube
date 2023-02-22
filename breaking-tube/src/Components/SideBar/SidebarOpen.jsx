@@ -1,5 +1,7 @@
 import React from 'react'
 import '../../styles/SideBar.css'
+import { useSidebar ,useSidebarUpdate } from "../../context/Context";
+
 import {
     arrowBottom,
     explore,
@@ -22,6 +24,7 @@ import {
 } from '../../assets/Icons/SideBarIcons'
 
 const SidebarOpen = () => {
+  const sidebarOpen = useSidebar()
   return (
     <aside className='open-sidebar'>
     <section>
