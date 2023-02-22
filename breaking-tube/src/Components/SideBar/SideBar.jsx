@@ -1,13 +1,20 @@
-import React from 'react'
-import SidebarOpen from './SidebarOpen'
-import SidebarClose from './SideBarClose'
+import React from "react";
+import SidebarOpen from "./SidebarOpen";
+import SidebarClose from "./SideBarClose";
+import { SidebarProvider } from "../../context/Context";
+import { useSidebar ,useSidebarUpdate } from "../../context/Context";
+
+
 
 const SideBar = () => {
+    const sidebarOpen = useSidebar()
   return (
     <>
-    <SidebarOpen />
+      <SidebarProvider>
+       {sidebarOpen?<SidebarOpen />: <SidebarClose />}
+      </SidebarProvider>
     </>
-  )
-}
+  );
+};
 
-export default SideBar
+export default SideBar;
