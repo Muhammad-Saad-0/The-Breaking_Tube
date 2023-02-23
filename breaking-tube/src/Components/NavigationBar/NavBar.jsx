@@ -1,16 +1,15 @@
-import React, { useContext, createContext } from "react";
+import React from "react";
 import SearchBar from "./SearchBar";
 import {
   apps,
   create,
   hamburger,
-  leftBottom,
   notifications,
 } from "../../assets/Icons/NavIcons";
 import profilepic from "../../assets/Icons/Profile/User-Avatar.svg";
 import "../../styles/Navbar.css";
 import { SidebarProvider } from "../../context/Context";
-import { useSidebarUpdate, useSidebar } from "../../context/Context";
+import { useSidebarUpdate} from "../../context/Context";
 
 const NavBar = () => {
 

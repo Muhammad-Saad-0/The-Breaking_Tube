@@ -2,13 +2,16 @@
     /* border: 1px green solid; */
 }
 nav{
-    width: auto;
+    width: 100%;
     /* min-width: 100vw !important; */
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #303030;
-
+    position: fixed;
+    transform: translateY(0%);
+    z-index: 10;
+    height: 6vw;
 }
 nav button{
     border: none;

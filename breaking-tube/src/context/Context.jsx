@@ -13,7 +13,10 @@ export function SidebarProvider({ children }) {
   const [SidebarOpen, setSidebarOpen] = useState(false);
 
   function toggleOpen() {
-    setSidebarOpen(prev => !prev);
+    setSidebarOpen(true);
+  }
+  function toggleClose() {
+    setSidebarOpen(false);
   }
   return (
     <SideBarContext.Provider value={SidebarOpen}>

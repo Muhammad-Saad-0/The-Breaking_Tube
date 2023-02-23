@@ -8,8 +8,8 @@ const App = () => {
     <>
    <SidebarProvider >
 
-   <NavBar />
-    <SideBar />
+   {/* <NavBar /> */}
+    {/* <SideBar /> */}
     <Main />
    </SidebarProvider>
     </>
