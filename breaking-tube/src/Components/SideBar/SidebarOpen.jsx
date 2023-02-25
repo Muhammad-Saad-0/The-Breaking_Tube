@@ -34,21 +34,15 @@ const SidebarOpen = () => {
   return (
   <SidebarProvider >
       <aside className='open-sidebar'>
-       <div className="sidebar-top">
-          <button onClick={toggleSidebar}>
-            <img src={hamburger} alt="menu" />
-          </button>
-          <h1>The Breaking Tube</h1>
-        </div>
     <section>
     <a href="/"><img src={home} alt="home" />Home</a>
-          <a href="/"><img src={explore} alt="explore" />Explore</a>
-          <a href="/"><img src={library} alt="library" />Library</a>
+          <a href="/"><img src={subscriptions} alt="playlist" />PlayList</a>
+          <a href="/"><img src={watchLater} alt="watchlater" />Watch Later</a>
     </section>
     <section>
           <a href="/"><img src={history} alt="history" />History</a>
-          <a href="/"><img src={watchLater} alt="watchLater" />Watch Later</a>
           <a href="/"><img src={liked} alt="liked" />Liked Videos</a>
+          <a href="/"><img src={library} alt="library" />Library</a>
     </section>
     </aside>
   </SidebarProvider>

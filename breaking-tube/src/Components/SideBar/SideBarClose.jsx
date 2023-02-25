@@ -20,13 +20,15 @@ import {
     watchLater,
     yourVideos
 } from '../../assets/Icons/SideBarIcons'
+import { Link } from 'react-router-dom'
+
 const SideBar = () => {
   return (
     <aside className='close-sidebar'>
       
-          <a href="/"><img src={home} alt="home" />Home</a>
-          <a href="/"><img src={explore} alt="explore" />Explore</a>
-          <a href="/"><img src={library} alt="library" />Library</a>
+          <Link to="/"><img src={home} alt="home" />Home</Link>
+          <Link to="/playlist"><img src={subscriptions} alt="playlist" />PlayList</Link>
+          <a href="/"><img src={watchLater} alt="library" />Watch Later</a>
          
     
     </aside>
