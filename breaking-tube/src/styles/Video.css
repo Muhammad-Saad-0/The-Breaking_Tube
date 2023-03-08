@@ -4,13 +4,12 @@ iframe{
     position: absolute;
     top: 6vw;
 }
-.video-page-name p{
+.video-page-name{
     position: absolute;
     font-size: 2.3vw;
     color: white;
     top: 40.5vw;
     font-weight: 600;
-    letter-spacing: .1vw;
     text-indent: 1vw;
 }
 .video-page-info{

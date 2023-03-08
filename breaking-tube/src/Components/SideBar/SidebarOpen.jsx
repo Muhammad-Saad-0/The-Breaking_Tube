@@ -32,7 +32,7 @@ const SidebarOpen = () => {
   const toggleSidebar = useSidebarUpdate();
 
   return (
-  <SidebarProvider >
+  // <SidebarProvider >
       <aside className='open-sidebar'>
     <section>
     <a href="/"><img src={home} alt="home" />Home</a>
@@ -45,7 +45,7 @@ const SidebarOpen = () => {
           <a href="/"><img src={library} alt="library" />Library</a>
     </section>
     </aside>
-  </SidebarProvider>
+  // </SidebarProvider>
   )
 }
 

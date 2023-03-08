@@ -14,7 +14,7 @@
   padding-left: 9vw;
   padding-top: 11vw;
   padding-right: 2.8vw;
-  width: 88.1%;
+  width: 88.05%;
   min-height: 90%;
 /* display: none; */
 }
@@ -24,7 +24,7 @@
 }
 /*******Video*******/
 .video {
-  margin: 2vw;
+  margin: 1vw;
   width: 25vw;
   display: flex;
   flex-direction: column;

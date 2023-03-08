@@ -56,19 +56,19 @@
     -webkit-animation: filterSlide 0.1s forwards;
 }
 @-webkit-keyframes filterSlide {
-    0% {transform: translate(6vw,5.5vw);
-    width: 93%;
-    }
-    100% {transform: translate(26vw,5.5vw); 
-    width: 75%;
-    }
+    0% {transform: translate(6vw,-5.5vw);
+        width: 92%;
+        }
+        100% {transform: translate(17.5vw,-5.5vw); 
+        width: 75%;
+        }
 }
 
 @keyframes filterSlide {
-    0% {transform: translate(6vw,5.5vw);
-        width: 93%;
+    0% {transform: translate(6vw,-5.5vw);
+        width: 92%;
         }
-        100% {transform: translate(26vw,5.5vw); 
+        100% {transform: translate(17.5vw,-5.5vw); 
         width: 75%;
         }
 }

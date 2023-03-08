@@ -10,10 +10,10 @@ const SideBar = () => {
     const sidebarOpen = useSidebar()
   return (
     <>
-      <SidebarProvider>
+      {/* <SidebarProvider> */}
        {sidebarOpen?<SidebarOpen />: <SidebarClose />}
        {/* <SidebarOpen /> */}
-      </SidebarProvider>
+      {/* </SidebarProvider> */}
     </>
   );
 };
