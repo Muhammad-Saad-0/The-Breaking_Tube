@@ -31,7 +31,7 @@ article{
     align-items: center;
     /* width: 100%; */
 }
-form{
+nav form{
     margin: 1.3rem;
     /* display: inline-block; */
     display: flex;
@@ -44,7 +44,7 @@ form{
     border-radius: 2rem;
     padding: 1px;
 }
-form>input{
+nav form>input{
     background-color: #0a5110;
     color: white;
     height: 99%;
@@ -55,10 +55,10 @@ form>input{
     font-size: 1.1vw;
 
 }
-form>input::placeholder{
+nav form>input::placeholder{
 color: rgba(255, 255, 255, 0.656);
 }
-form>button{
+nav form>button{
     position: absolute;
     right: 0rem;
     /* top: 1px; */
@@ -97,4 +97,6 @@ nav button img{
     height: 2.5vw;
     width: 2.5vw;
 }
-
+.user-pfp{
+    cursor: pointer;
+}

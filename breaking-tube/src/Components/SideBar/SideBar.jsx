@@ -1,8 +1,8 @@
 import React from "react";
 import SidebarOpen from "./SidebarOpen";
 import SidebarClose from "./SideBarClose";
-import { SidebarProvider } from "../../context/Context";
-import { useSidebar ,useSidebarUpdate } from "../../context/Context";
+import { SidebarProvider } from "../../context/SideBarContext";
+import { useSidebar ,useSidebarUpdate } from "../../context/SideBarContext";
 
 
 

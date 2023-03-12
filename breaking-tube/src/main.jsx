@@ -8,7 +8,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from './Components/Main/Home';
-import Playlist from './Components/Playlist';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
  

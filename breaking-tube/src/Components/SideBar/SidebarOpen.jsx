@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../styles/SideBar.css'
-import { SidebarProvider,useSidebarUpdate } from "../../context/Context";
+import { SidebarProvider,useSidebarUpdate } from "../../context/SideBarContext";
 
 import {
     arrowBottom,

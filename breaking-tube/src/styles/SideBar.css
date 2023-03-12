@@ -48,7 +48,7 @@
   position: fixed;
   z-index: 10;
   padding-bottom: 5vw;
-  
+  min-height: 100%;
 }
 .open-sidebar section {
   width: 100%;
@@ -87,22 +87,22 @@
   /* animation: slide 0.1s; */
   animation-delay: 2s;
   -webkit-animation: slide .1s;
-  transform: translateY(10%);
+  transform: translateY(6.5%);
 }
 @-webkit-keyframes slide {
   0% {
-    transform: translate(-70%,10%);
+    transform: translate(-70%,6.5%);
   }
   100% {
-    transform: translate(0%,10%);
+    transform: translate(0%,6.5%);
   }
 }
 
 @keyframes slide {
   0% {
-    transform: translate(-70%,10%);
+    transform: translate(-70%,6.5%);
   }
   100% {
-    transform: translate(0%,10%);
+    transform: translate(0%,6.5%);
   }
 }

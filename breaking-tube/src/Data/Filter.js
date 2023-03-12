@@ -1,21 +1,28 @@
 const filterData = [
+
+    {
+        destination:'/',
+        text:'All',
+        index:1,
+        category:'All'
+    },
     {
         destination:'/breakingBad',
         text:'Breaking Bad',
-        index:1,
+        index:2,
         category:'breakingBad'
     },
     {
         destination:'/betterCallSaul',
         text:'Better Call Saul',
-        index:2,
+        index:3,
         category:'betterCallSaul'
 
     },
     {
         destination:'/elCamino',
         text:'El Camino',
-        index:3,
+        index:4,
         category:'elCamino'
 
     },

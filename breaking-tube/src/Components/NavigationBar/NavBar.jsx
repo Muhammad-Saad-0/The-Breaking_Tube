@@ -6,12 +6,16 @@ import {
   hamburger,
   notifications,
 } from "../../assets/Icons/NavIcons";
-import profilepic from "../../assets/Icons/Profile/User-Avatar.svg";
+import profilepic from "../../assets/Icons/Profile/heisenberg.jpg";
 import "../../styles/Navbar.css";
-import { SidebarProvider } from "../../context/Context";
-import { useSidebarUpdate} from "../../context/Context";
+import { SidebarProvider } from "../../context/SideBarContext";
+import { useSidebarUpdate} from "../../context/SideBarContext";
+import {Link} from 'react-router-dom'
+import { useAuth } from "../../context/AuthContext";
 
 const NavBar = () => {
+
+const auth = useAuth()
 
   const toggleSidebar = useSidebarUpdate();
   return (
@@ -21,7 +25,9 @@ const NavBar = () => {
           <button onClick={toggleSidebar}>
             <img src={hamburger} alt="menu" />
           </button>
-          <h1>The Breaking Tube</h1>
+         <Link to={'/'} style={{ textDecoration: 'none' }}>
+         <h1>The Breaking Tube</h1>
+         </Link>
         </div>
         <div className="nav-mid">
           <SearchBar />
@@ -36,9 +42,12 @@ const NavBar = () => {
           <button>
             <img src={notifications} alt="notifications" />
           </button>
-          <button>
-            <img src={profilepic} alt="profile" />
-          </button>
+          <Link to={'/profile'}>
+            <button>
+            <img src={profilepic} alt="profile" className="user-pfp" />
+            </button>
+            
+          </Link>
         </div>
       </nav>
     </SidebarProvider>

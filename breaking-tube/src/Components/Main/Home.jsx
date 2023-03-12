@@ -6,40 +6,46 @@ import NavBar from "../NavigationBar/NavBar";
 import SideBar from "../SideBar/SideBar";
 import VideosGrid from "./VideosGrid";
 import { Route, Routes } from "react-router";
-import Playlist from "../Playlist";
+import Playlist from "./Playlist";
 import VideoPage from "./VideoPage";
 import { useVideoId } from "../../context/videoIdContext";
-
-import FilterRoute from "./filterRoutes/filterRoute";
 import { useFilterId } from "../../context/FilterContext";
+import { useSidebar } from "../../context/SideBarContext";
+import SignInPage from "./SignInPage";
+import Profile from "./Profile";
+import SignUp from "./SignUp";
+import SignIn from "./SignInPage";
+import { useAuth } from "../../context/AuthContext";
+import WatchLater from "./WatchLater";
 
 
 const Main = () => {
+  const sideBarOpen = useSidebar();
   const FilterId = useFilterId();
-
-  
-
-
-  const videoId = useVideoId()
+  const videoId = useVideoId();
+  const authUser = useAuth()
 
   return (
     <>
-    
-  
-  
+      <section
+        className="main-section"
+        style={
+          sideBarOpen
+            ? { backgroundColor: "#1e1d1d" }
+            : { backgroundColor: "#303030" }
+        }
+      >
+        <Routes>
+          {/* <Route exact path="/profile" element={<Profile />} /> */}
 
-      <section className="main-section">
- <Routes >
- <Route path="/playlist" element={<Playlist />} />
-
- <Route exact path="/" element={ <VideosGrid />} />
- <Route path={`/video/${videoId}`} element={ <VideoPage />} />
-
-  <Route path={`/${FilterId}`} element={ <FilterRoute />  } />
-
-
- </Routes>
-      
+          <Route exact path="/" element={<VideosGrid />} />
+          <Route exact path={`/video/${videoId}`} element={<VideoPage />} />
+          {/* <Route exact path="/signUp" element={ <SignUp />} /> */}
+          <Route exact path="/signIn" element={<SignIn />} />
+          <Route exact path={"/playlist"} element={authUser?<Playlist />:<SignUp />} />
+          <Route exact path={"/profile"} element={authUser?<Profile />:<SignUp />} />
+          <Route exact path={"/watchlater"} element={authUser?<WatchLater />:<SignUp />} />
+        </Routes>
       </section>
     </>
   );

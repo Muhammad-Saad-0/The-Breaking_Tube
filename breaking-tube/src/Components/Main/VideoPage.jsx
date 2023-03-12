@@ -16,17 +16,40 @@ const VideoPage = () => {
     <>
       {MainData.map(({ Avatar, Name }) => {
         return (
-          <React.Fragment   key={uuidv4()}>
+          // <React.Fragment key={uuidv4()}>
+          //   <iframe
+          //     width="560"
+          //     height="315"
+          //     // src={`https://www.youtube.com/embed/${embedId}?rel=0&modestbranding=1`}
+          //     src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
+          //     //  src='https://www.youtube.com/embed/bIcbKGilhME'
+          //     title="YouTube video player"
+          //     frameBorder="0"
+          //     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          //     allowFullScreen
+          //     key={uuidv4()}
+          //   ></iframe>
+          //   <p className="video-page-name" key={uuidv4()}>
+          //     {videoTitle}
+          //   </p>
+          //   <div className="video-page-info">
+          //     <img src={Avatar} alt="logo" />
+          //     <p>{Name}</p>
+          //   </div>
+          // </React.Fragment>
+          <React.Fragment key={uuidv4()}>
             <iframe
               width="560"
               height="315"
+              itemType="http://schema.org/VideoObject"
               // src={`https://www.youtube.com/embed/${embedId}?rel=0&modestbranding=1`}
               src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
               //  src='https://www.youtube.com/embed/bIcbKGilhME'
               title="YouTube video player"
               frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
+              
               key={uuidv4()}
             ></iframe>
             <p className="video-page-name" key={uuidv4()}>
