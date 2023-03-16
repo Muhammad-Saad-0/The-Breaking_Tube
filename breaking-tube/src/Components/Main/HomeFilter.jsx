@@ -21,7 +21,7 @@ const MainFilter = () => {
         return (
           // <Link to={destination} key={index} onClick={()=>{setFIlterId(category)}} >{text}</Link>
           <a
-          tabindex="1"
+          tabIndex="1"
             key={index}
             onClick={() => {
               setFIlterId(category);

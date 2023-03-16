@@ -8,8 +8,10 @@ import Avatar from "../../assets/Icons/Profile/Avatar.jpg";
 import { useVideoId } from "../../context/videoIdContext";
 import { useVideoTitle } from "../../context/videoTitleContext";
 import { v4 as uuidv4 } from "uuid";
-const VideoPage = () => {
+import { useParams } from "react-router-dom";
+const VideoPage = ({title}) => {
   const videoId = useVideoId();
+  const{ videoID} = useParams()
   const videoTitle = useVideoTitle();
   console.log(videoId, videoTitle);
   return (
@@ -43,7 +45,7 @@ const VideoPage = () => {
               height="315"
               itemType="http://schema.org/VideoObject"
               // src={`https://www.youtube.com/embed/${embedId}?rel=0&modestbranding=1`}
-              src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
+              src={`https://www.youtube.com/embed/${videoID}?rel=0&modestbranding=1`}
               //  src='https://www.youtube.com/embed/bIcbKGilhME'
               title="YouTube video player"
               frameBorder="0"

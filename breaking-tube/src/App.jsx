@@ -9,22 +9,28 @@ import { VideoIdProvider } from "./context/videoIdContext";
 import { VideoTitleProvider } from "./context/videoTitleContext";
 import { FilterIdProvider } from "./context/FilterContext";
 import { AuthProvider } from "./context/AuthContext";
+import { WatchLaterListProvider } from "./context/WatchLaterContext";
+import { WatchLaterIdProvider } from "./context/WatchLaterId";
 const App = () => {
   return (
     <>
-    <AuthProvider>
-    <FilterIdProvider >
-      <VideoTitleProvider>
-        <VideoIdProvider>
-          <SidebarProvider>
-            <NavBar />
-            <SideBar />
-            <Home />
-          </SidebarProvider>
-        </VideoIdProvider>
-      </VideoTitleProvider>
-      </FilterIdProvider>
+    <WatchLaterIdProvider>
+    <WatchLaterListProvider >
+      <AuthProvider>
+        <FilterIdProvider>
+          <VideoTitleProvider>
+            <VideoIdProvider>
+              <SidebarProvider>
+                <NavBar />
+                <SideBar />
+                <Home />
+              </SidebarProvider>
+            </VideoIdProvider>
+          </VideoTitleProvider>
+        </FilterIdProvider>
       </AuthProvider>
+      </WatchLaterListProvider>
+      </WatchLaterIdProvider>
     </>
   );
 };

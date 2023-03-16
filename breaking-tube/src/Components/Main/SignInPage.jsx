@@ -30,7 +30,7 @@ const navigate = useNavigate()
           alert('user not found')
         }
       });
-      if(errorMsg !== ''){
+      if(errorMsg !== '' || !errorMsg ){
         navigate(-1)
       }
   };

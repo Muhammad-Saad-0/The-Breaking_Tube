@@ -26,14 +26,14 @@ async  function signUp(e){
       try {
         await auth.signIn(email, password);
         userHasAuthenticated(true);
-        nav("/");
+       
       } catch (e) {
         console.log(e.message);
         if(e.message ='(intermediate value).signIn is not a function'){
 alert('email already in use')
         }
       }
-      // nav(-2)
+      nav(-2)
   };
   
   return (

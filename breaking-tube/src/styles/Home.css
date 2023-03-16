@@ -84,3 +84,51 @@ iframe{
   height: 15.3vw;
   width: 27vw;
 }
+.more-button{
+  background: none;
+  border: none;
+  transform:
+   rotate(90deg);
+   cursor: pointer;
+   border-radius: 50%;
+   height: 3vw;
+   width: 3vw;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.video-bottom button:active{
+  background: #676666;
+}
+
+.video-bottom button>img{
+  height: 2.5vw;
+  /* width: 3vw; */
+}
+.title-button-section>p{
+  font-size: 1.4vw;
+  padding-left: 1vw;
+  word-wrap: break-word;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  line-height: 1.7vw;
+}
+.title-button-section{
+  display: flex;
+  justify-content: space-between;
+  width: 24vw;
+  align-items: center;
+}
+/* .more-button{
+  background: none;
+  border: none;
+  transform:
+   rotate(90deg)
+   translate(17vw,-25vw)
+   ;
+   position: absolute;
+
+}
+.more-button>img{
+  height: 2.6vw;
+} */

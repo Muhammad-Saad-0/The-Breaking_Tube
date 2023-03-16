@@ -16,15 +16,15 @@ import Profile from "./Profile";
 import SignUp from "./SignUp";
 import SignIn from "./SignInPage";
 import { useAuth } from "../../context/AuthContext";
-import WatchLater from "./WatchLater";
-
+import WatchLater from "./WatchLaterPage";
+import { useVideoTitle } from "../../context/videoTitleContext";
 
 const Main = () => {
   const sideBarOpen = useSidebar();
   const FilterId = useFilterId();
   const videoId = useVideoId();
-  const authUser = useAuth()
-
+  const authUser = useAuth();
+   const title = useVideoTitle()
   return (
     <>
       <section
@@ -39,12 +39,28 @@ const Main = () => {
           {/* <Route exact path="/profile" element={<Profile />} /> */}
 
           <Route exact path="/" element={<VideosGrid />} />
-          <Route exact path={`/video/${videoId}`} element={<VideoPage />} />
+          {/* {MainData.map(({embedId})=>{
+            <Route exact path={`/video/${embedId}`} element={<VideoPage />} />
+          })} */}
+          {/* <Route exact path={`/video/${videoId}`} element={<VideoPage />} /> */}
+          <Route exact path='/video/:videoID' element={<VideoPage title={title} />} />
           {/* <Route exact path="/signUp" element={ <SignUp />} /> */}
           <Route exact path="/signIn" element={<SignIn />} />
-          <Route exact path={"/playlist"} element={authUser?<Playlist />:<SignUp />} />
-          <Route exact path={"/profile"} element={authUser?<Profile />:<SignUp />} />
-          <Route exact path={"/watchlater"} element={authUser?<WatchLater />:<SignUp />} />
+          <Route
+            exact
+            path={"/playlist"}
+            element={authUser ? <Playlist /> : <SignUp />}
+          />
+          <Route
+            exact
+            path={"/profile"}
+            element={authUser ? <Profile /> : <SignUp />}
+          />
+          <Route
+            exact
+            path={"/watchlater"}
+            element={authUser ? <WatchLater /> : <SignUp />}
+          />
         </Routes>
       </section>
     </>

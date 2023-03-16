@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MainData from "../../Data/MainData";
 import "../../styles/Home.css";
@@ -7,11 +7,35 @@ import { useVideoIdUpdate } from "../../context/videoIdContext";
 import { useVideoTitleUpdate } from "../../context/videoTitleContext";
 import { v4 as uuidv4 } from "uuid";
 import { useFilterId } from "../../context/FilterContext";
-
+import more from "../../assets/Icons/Misc/More.svg";
+import MoreModal from "./MoreModal";
+import { useWatchLaterIdUpdate } from "../../context/WatchLaterId";
+import { db } from "../../Data/base";
+import { doc,getDoc } from "firebase/firestore";
+import { async } from "@firebase/util";
 const VideosGrid = () => {
   const getId = useVideoIdUpdate();
   const getTitle = useVideoTitleUpdate();
-  const FilterId = useFilterId()
+  const FilterId = useFilterId();
+const getWatchLaterId = useWatchLaterIdUpdate()
+
+  // const handleClick = (e) =>{
+  //   e.Stop
+  //   console.log('clicked');
+  // }
+  const [moreModal, setMoreModal] = useState(false);
+  const [selectedId, setSelectedId] = useState("");
+  const [InWatchLater, setInWatchLater] = useState('');
+
+
+  const handleClick = async (embedId) => {
+    setSelectedId(embedId);
+    getWatchLaterId(embedId);
+    
+
+    // console.log(InWatchLater);
+  };
+
   return (
     <>
       <HomeFilter />
@@ -58,90 +82,160 @@ const VideosGrid = () => {
           }
         )}
       </section> */}
-        <section className="grid-section">
-        {FilterId==='All'|| !FilterId ?MainData.map(
-          ({ Thumbnail, text, Avatar, views, time, Name, embedId ,Category}) => {
-            return (
-            <Link
-                  to={`/video/${embedId}`}
-                 
-                  className="video"
-                  key={uuidv4()}
-
-                  onClick={() => {
-                    getId(embedId);
-                    getTitle(text);
-                
-                  }}
-                >
-                  <div className="video-top">
-                    <div className="thumbnail-section">
-                      <img src={Thumbnail} alt={text} />
-                    </div>
+      <section className="grid-section">
+        {FilterId === "All" || !FilterId
+          ? MainData.map(
+              ({
+                Thumbnail,
+                text,
+                Avatar,
+                views,
+                time,
+                Name,
+                embedId,
+                Category,
+              }) => {
+                return (
+                  <div 
                   
-                  </div>
-                  <div className="video-bottom">
-                    <div className="video-bottom-top">
-                      <img src={Avatar} alt="Avatar" />
-                    </div>
-                    <div className="video-info-section">
-                      <p> {text}</p>
-                      <p>{Name}</p>
-                      <div className="video-info">
-                        <p> {views}</p>
-                        <p className="time"> {time}</p>
-                      </div>
-                    </div>{" "}
-                  </div>
-                </Link>
-          
-         
-                
-           
-            );
-          }
-        ):MainData.filter(a => a.Category ===FilterId).map(
-          ({ Thumbnail, text, Avatar, views, time, Name, embedId ,Category}) => {
-            return (
-            <Link
-                  to={`/video/${embedId}`}
-                 
-                  className="video"
                   key={uuidv4()}
-
-                  onClick={() => {
-                    getId(embedId);
-                    getTitle(text);
-                
-                  }}
-                >
-                  <div className="video-top">
-                    <div className="thumbnail-section">
-                      <img src={Thumbnail} alt={text} />
-                    </div>
-                  
-                  </div>
-                  <div className="video-bottom">
-                    <div className="video-bottom-top">
-                      <img src={Avatar} alt="Avatar" />
-                    </div>
-                    <div className="video-info-section">
-                      <p> {text}</p>
-                      <p>{Name}</p>
-                      <div className="video-info">
-                        <p> {views}</p>
-                        <p className="time"> {time}</p>
+                  >
+                    <Link
+                      to={`/video/${embedId}`}
+                      className="video"
+                      onClick={() => {
+                        getId(embedId);
+                        getTitle(text);
+                      }}
+                    >
+                      <div className="video-top">
+                        <div className="thumbnail-section">
+                          <img src={Thumbnail} alt={text} />
+                        </div>
                       </div>
-                    </div>{" "}
+
+                      <div className="video-bottom">
+                        <div className="video-bottom-top">
+                          <img src={Avatar} alt="Avatar" />
+                        </div>
+                        <div className="video-info-section">
+                          <div className="title-button-section">
+                            {" "}
+                            <p> {text}</p>
+                            <button
+                              className="more-button"
+                              onClick={(e) => {
+                                handleClick(embedId);
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setMoreModal(!moreModal);
+                     
+                              }}
+                            >
+                              <img src={more} alt="more" />
+                            </button>
+                            {moreModal && embedId === selectedId ? (
+                              <MoreModal
+                                Id={selectedId}
+                                Thumbnail={Thumbnail}
+                                text={text}
+                                Avatar={Avatar}
+                                views={views}
+                                time={time}
+                                Name={Name}
+                                WL={InWatchLater}
+                              />
+                            ) : (
+                              false
+                            )}
+                          </div>
+
+                          <p>{Name}</p>
+
+                          <div className="video-info">
+                            <p> {views}</p>
+                            <p className="time"> {time}</p>
+                          </div>
+                        </div>{" "}
+                      </div>
+                    </Link>
                   </div>
-                </Link>
-          
-         
-                
-           
-            );
-          }
-        )}
+                );
+              }
+            )
+          : MainData.filter((a) => a.Category === FilterId).map(
+              ({
+                Thumbnail,
+                text,
+                Avatar,
+                views,
+                time,
+                Name,
+                embedId,
+                Category,
+              }) => {
+                return (
+                  <div key={uuidv4()}>
+                    <Link
+                      to={`/video/${embedId}`}
+                      className="video"
+                      
+                      onClick={() => {
+                        getId(embedId);
+                        getTitle(text);
+                      }}
+                    >
+                      <div className="video-top">
+                        <div className="thumbnail-section">
+                          <img src={Thumbnail} alt={text} />
+                        </div>
+                      </div>
+                      <div className="video-bottom">
+                        <div className="video-bottom-top">
+                          <img src={Avatar} alt="Avatar" />
+                        </div>
+                        <div className="video-info-section">
+                          <div className="title-button-section">
+                            {" "}
+                            <p> {text}</p>
+                            <button
+                              className="more-button"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                handleClick(embedId);
+                                setMoreModal(!moreModal);
+                              }}
+                            >
+                              <img src={more} alt="more" />
+                            </button>
+                            {moreModal && embedId === selectedId ? (
+                              <MoreModal
+                                Id={selectedId}
+                                Thumbnail={Thumbnail}
+                                text={text}
+                                Avatar={Avatar}
+                                views={views}
+                                time={time}
+                                Name={Name}
+                                WL = {InWatchLater}
+                              />
+                            ) : (
+                              false
+                            )}
+                          </div>
+                          <p>{Name}</p>
+                          <div className="video-info">
+                            <p> {views}</p>
+                            <p className="time"> {time}</p>
+                          </div>
+                        </div>{" "}
+                      </div>
+                    </Link>
+                  </div>
+                );
+              }
+            )}
       </section>
     </>
   );
