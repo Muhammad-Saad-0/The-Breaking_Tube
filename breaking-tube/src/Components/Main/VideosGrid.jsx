@@ -10,14 +10,16 @@ import { useFilterId } from "../../context/FilterContext";
 import more from "../../assets/Icons/Misc/More.svg";
 import MoreModal from "./MoreModal";
 import { useWatchLaterIdUpdate } from "../../context/WatchLaterId";
-import { db } from "../../Data/base";
-import { doc,getDoc } from "firebase/firestore";
+import { db,auth} from "../../Data/base";
+import { doc,getDoc,setDoc } from "firebase/firestore";
 import { async } from "@firebase/util";
+import SideBar from "../SideBar/SideBarClose";
 const VideosGrid = () => {
   const getId = useVideoIdUpdate();
   const getTitle = useVideoTitleUpdate();
   const FilterId = useFilterId();
 const getWatchLaterId = useWatchLaterIdUpdate()
+let user = auth.currentUser;
 
   // const handleClick = (e) =>{
   //   e.Stop
@@ -31,57 +33,46 @@ const getWatchLaterId = useWatchLaterIdUpdate()
   const handleClick = async (embedId) => {
     setSelectedId(embedId);
     getWatchLaterId(embedId);
-    
-
-    // console.log(InWatchLater);
+  };
+  const handleHistory = async ( Thumbnail, text,
+    Avatar,
+    views,
+    time,
+    Name,
+    embedId) => {
+    // setInWatchLater(!InWatchLater);
+    const docRef = doc(db, "History", embedId);
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) {
+      await setDoc(
+        doc(db, "History",embedId),
+        {
+          embedId,
+      Thumbnail,
+      text,
+      Avatar,
+      views,
+      time,
+      Name,
+          Author: auth.currentUser.uid,
+        },
+        { merge: true }
+      );
+    //   // setInWatchLater("Add to");
+    // }
+    // if (docSnap.exists()) {
+    //   await deleteDoc(
+    //     doc(db, "History", Id),
+    //     where("Author", "==", user.uid)
+    //   );
+    //   // setInWatchLater(true);
+    }
   };
 
   return (
     <>
       <HomeFilter />
-      {/* <section className="grid-section">
-        {MainData.map(
-          ({ Thumbnail, text, Avatar, views, time, Name, embedId ,Category}) => {
-            return (
-            <Link
-                  to={`/video/${embedId}`}
-                 
-                  className="video"
-                  key={uuidv4()}
-
-                  onClick={() => {
-                    getId(embedId);
-                    getTitle(text);
-                  }}
-                >
-                  <div className="video-top">
-                    <div className="thumbnail-section">
-                      <img src={Thumbnail} alt={text} />
-                    </div>
-                  
-                  </div>
-                  <div className="video-bottom">
-                    <div className="video-bottom-top">
-                      <img src={Avatar} alt="Avatar" />
-                    </div>
-                    <div className="video-info-section">
-                      <p> {text}</p>
-                      <p>{Name}</p>
-                      <div className="video-info">
-                        <p> {views}</p>
-                        <p className="time"> {time}</p>
-                      </div>
-                    </div>{" "}
-                  </div>
-                </Link>
-          
-         
-                
-           
-            );
-          }
-        )}
-      </section> */}
+      {/* <SideBar /> */}
       <section className="grid-section">
         {FilterId === "All" || !FilterId
           ? MainData.map(
@@ -106,6 +97,12 @@ const getWatchLaterId = useWatchLaterIdUpdate()
                       onClick={() => {
                         getId(embedId);
                         getTitle(text);
+                        handleHistory(Thumbnail, text,
+                          Avatar,
+                          views,
+                          time,
+                          Name,
+                          embedId);
                       }}
                     >
                       <div className="video-top">
@@ -183,6 +180,7 @@ const getWatchLaterId = useWatchLaterIdUpdate()
                       onClick={() => {
                         getId(embedId);
                         getTitle(text);
+                        handleHistory();
                       }}
                     >
                       <div className="video-top">

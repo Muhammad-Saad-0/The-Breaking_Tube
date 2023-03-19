@@ -12,7 +12,8 @@ import { SidebarProvider } from "../../context/SideBarContext";
 import { useSidebarUpdate} from "../../context/SideBarContext";
 import {Link} from 'react-router-dom'
 import { useAuth } from "../../context/AuthContext";
-
+import {CgProfile} from 'react-icons/cg'
+import { auth } from "../../Data/base";
 const NavBar = () => {
 
 const auth = useAuth()
@@ -44,7 +45,12 @@ const auth = useAuth()
           </button>
           <Link to={'/profile'}>
             <button>
-            <img src={profilepic} alt="profile" className="user-pfp" />
+{auth?
+            <img src={profilepic} alt="profile" className="user-pfp" />:
+            <CgProfile className="profile-icon" />
+
+
+}
             </button>
             
           </Link>

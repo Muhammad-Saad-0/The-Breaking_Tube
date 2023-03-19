@@ -9,63 +9,14 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { useWatchLaterId } from "../../context/WatchLaterId";
 import { v4 as uuidv4 } from "uuid";
+import SideBar from "../SideBar/SideBar";
 
 const WatchLater = ({ Id }) => {
   const watchLaterId = useWatchLaterId();
 
   const [t, setT] = useState("");
 
-  // useEffect(() => {
-  //   const data = onSnapshot(doc(db, "Watch Later", `${watchLaterId}`), (doc) => {
-  //     // console.log("Current data: ", doc.data().text);
-  //     setT(doc.data());
-  //   });
-  // }, []);
-  // console.log(watchLaterId);
-  // const docRef = doc(db, "Watch Later");
-  // const abc = async ()=>{
-  //   const docSnap = await getDoc(docRef);
-  // // docSnap.then(forEach(doc => {
-  //     console.log(docSnap.data());
-  // // }))
-  // }
-  // abc()
 
-  // const docRef = doc(db, "Watch Later");
-  //   const abc = async () => {
-  //     const docSnap = await getDocs(colRef);
-  // console.log(docSnap);
-  //     docSnap.forEach((doc) => {
-  //       setT(doc.data());
-  //     });
-  //   };
-  //   useEffect(() => {
-  //     abc();
-  //   // console.log(t);
-
-  //   }, []);
-
-  // abc()
-
-  //   try {
-  //     const docsSnap = await getDocs(colRef);
-  //     if(docsSnap.docs.length > 0) {
-  //        docsSnap.forEach(doc => {
-  //           console.log(doc.data());
-  //           console.log(doc.id);
-  //        })
-  //     }
-  // } catch (error) {
-  //     console.log(error);
-  // }
-
-  // if (docSnap.exists()) {
-  //   console.log("Document data:", docSnap.data());
-  // } else {
-  //   // doc.data() will be undefined in this case
-  //   console.log("No such document!");
-  // }
-  // console.log(t);
   const list = useWatchLaterList();
   let user = auth.currentUser;
   const q = query(collection(db, "Watch Later"), where("Author", "==", user.uid));
@@ -105,6 +56,8 @@ const WatchLater = ({ Id }) => {
   //  })
   // const list = useWatchLaterList();
   return (
+   <>
+   {/* <SideBar /> */}
     <section className="watchlater-section">
       {/* <WatchLaterVideo Id={Id} /> */}
       {/* {list} */}
@@ -163,6 +116,7 @@ const WatchLater = ({ Id }) => {
         );
       })}
     </section>
+   </>
   );
 };
 

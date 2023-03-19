@@ -1,0 +1,40 @@
+.profile-section{
+    height: 20vw;
+    width: 40vw;
+    background-color: #242121;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px white solid;
+    border-radius: 2vw;
+    transform: translate(20vw,4vw
+    );
+}
+.profile-section>img{
+    height: 5vw;
+    width: 5vw;
+}
+.profile-section>p{
+    color: white;
+    font-weight: 700;
+    font-size: 1.4vw;
+    margin-top: 1vw;
+}
+.profile-section>button{
+    background: none;
+    color: white;
+    padding: 1vw;
+    width: 10vw;
+    font-size: 1.4vw;
+    border-radius: 1vw;
+    border: 1px solid rgba(255, 255, 255, 0.481);
+    margin-top: 3vw;
+}
+.profile-section>button:active{
+    background-color: rgba(255, 255, 255, 0.194);
+}
+.profile-section>button:hover{
+    background-color: rgba(255, 255, 255, 0.239);
+    cursor: pointer;
+}

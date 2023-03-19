@@ -1,0 +1,75 @@
+.playlist-modal-section{
+    background-color: rgba(0, 0, 0, 0.522);
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0vw;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.playlist-modal-section ul li{
+    display: flex;
+    list-style: none;
+}
+.playlist-modal{
+    background-color: rgb(32, 31, 31);
+    min-height: 20vw;
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2vw;
+    flex-direction: column;
+    gap: 4vw;
+    padding: 2vw;
+}
+.playlist-modal form{
+    /* width: 120%; */
+}
+.playlist-modal form input{
+    background: none;
+    color: white;
+    padding: .6vw;
+    font-size: 1.2vw;
+    border: 1px solid white;
+    width: 20vw ;
+}
+.playlist-modal button{
+    background-color: green;
+    border: none;
+    color: white;
+    padding: .6vw;
+    border: 1px solid white;
+    font-size: 1.2vw;
+    
+
+}
+.playlist-modal ul{
+    /* transform: translateY(150%); */
+    display: flex;
+    flex-direction: column;
+  /* align-items: self-end !important; */
+  justify-content: start;
+  height: 100%;
+  width: 90%;
+}
+.playlist-modal h4{
+    color: white;
+    font-size: 2vw;
+    text-align: left;
+     width: 100%;
+     text-indent: 2vw;
+}
+.playlist-modal-section ul li{
+    color: white
+    ;
+    margin: .1vw;
+    font-size: 1.7vw;
+    text-indent: .5vw;
+}

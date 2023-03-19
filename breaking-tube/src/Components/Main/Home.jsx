@@ -18,6 +18,7 @@ import SignIn from "./SignInPage";
 import { useAuth } from "../../context/AuthContext";
 import WatchLater from "./WatchLaterPage";
 import { useVideoTitle } from "../../context/videoTitleContext";
+import History from "./History";
 
 const Main = () => {
   const sideBarOpen = useSidebar();
@@ -35,16 +36,11 @@ const Main = () => {
             : { backgroundColor: "#303030" }
         }
       >
+      
         <Routes>
-          {/* <Route exact path="/profile" element={<Profile />} /> */}
-
           <Route exact path="/" element={<VideosGrid />} />
-          {/* {MainData.map(({embedId})=>{
-            <Route exact path={`/video/${embedId}`} element={<VideoPage />} />
-          })} */}
-          {/* <Route exact path={`/video/${videoId}`} element={<VideoPage />} /> */}
           <Route exact path='/video/:videoID' element={<VideoPage title={title} />} />
-          {/* <Route exact path="/signUp" element={ <SignUp />} /> */}
+   
           <Route exact path="/signIn" element={<SignIn />} />
           <Route
             exact
@@ -60,6 +56,11 @@ const Main = () => {
             exact
             path={"/watchlater"}
             element={authUser ? <WatchLater /> : <SignUp />}
+          />
+          <Route
+            exact
+            path={"/history"}
+            element={authUser ? <History/> : <SignUp />}
           />
         </Routes>
       </section>

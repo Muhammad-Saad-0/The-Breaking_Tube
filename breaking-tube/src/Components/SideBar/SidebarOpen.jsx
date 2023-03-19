@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../styles/SideBar.css'
 import { SidebarProvider,useSidebarUpdate } from "../../context/SideBarContext";
-
+import {Link} from 'react-router-dom'
 import {
     arrowBottom,
     explore,
@@ -34,15 +34,22 @@ const SidebarOpen = () => {
   return (
   // <SidebarProvider >
       <aside className='open-sidebar'>
+         <div className="open-sidebar-top">
+          <button onClick={toggleSidebar}>
+            <img src={hamburger} alt="menu" />
+          </button>
+         <Link to={'/'} style={{ textDecoration: 'none' }}>
+         <h1>The Breaking Tube</h1>
+         </Link>
+        </div>
     <section>
-    <a href="/"><img src={home} alt="home" />Home</a>
-          <a href="/"><img src={subscriptions} alt="playlist" />PlayList</a>
-          <a href="/"><img src={watchLater} alt="watchlater" />Watch Later</a>
+    <Link to="/"><img src={home} alt="home" />Home</Link>
+          <Link to="/playlist"><img src={subscriptions} alt="playlist" />PlayList</Link>
+          <Link to="/watchlater"><img src={watchLater} alt="watchlater" />Watch Later</Link>
     </section>
     <section>
-          <a href="/"><img src={history} alt="history" />History</a>
-          <a href="/"><img src={liked} alt="liked" />Liked Videos</a>
-          <a href="/"><img src={library} alt="library" />Library</a>
+          <Link to="/history"><img src={history} alt="history" />History</Link>
+          <Link to="/liked"><img src={liked} alt="liked" />Liked Videos</Link>
     </section>
     </aside>
   // </SidebarProvider>

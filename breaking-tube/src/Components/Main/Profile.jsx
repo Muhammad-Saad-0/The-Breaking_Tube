@@ -4,6 +4,7 @@ import profilepic from "../../assets/Icons/Profile/heisenberg.jpg";
 import { useAuth } from "../../context/AuthContext";
 import {auth}from '../../Data/base'
 import SignUp from "./SignUp";
+import '../../styles/Profile.css'
 const Profile = () => {
   const authUser = useAuth();
   const userSignOut = () => {
@@ -15,7 +16,7 @@ const Profile = () => {
   };
   return (
     <>
-     {authUser? <section>
+     {authUser? <section className="profile-section">
         <img src={profilepic} alt="profile pic" />
         <p>{authUser?authUser.email:false}</p>
         <button onClick={userSignOut}>Sign Out</button>

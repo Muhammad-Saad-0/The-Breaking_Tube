@@ -100,3 +100,7 @@ nav button img{
 .user-pfp{
     cursor: pointer;
 }
+.profile-icon{
+    font-size: 2.5vw;
+    color: rgba(255, 255, 255, 0.752);
+}
