@@ -17,6 +17,8 @@ import {
 } from "firebase/firestore";
 import { db, auth } from "../../Data/base";
 import PlaylistModal from "./PlaylistModal";
+import { useNavigate } from "react-router";
+
 const MoreModal = ({
   Id,
   Thumbnail,
@@ -25,11 +27,13 @@ const MoreModal = ({
   views,
   time,
   Name,
-  embedId,
+  handleRemove,
   WL,
+  setWL
 }) => {
-  const [InWatchLater, setInWatchLater] = useState(false);
-  const [clickPlaylist,setClickPlaylist] = useState(false)
+  const [clickPlaylist, setClickPlaylist] = useState(false);
+
+  const nav = useNavigate();
   useEffect(() => {
     const abc = async () => {
       const docRef = doc(db, "Watch Later", Id);
@@ -40,9 +44,9 @@ const MoreModal = ({
     };
     //  abc()
   }, []);
+
   let user = auth.currentUser;
   const handleDoc = async () => {
-    setInWatchLater(!InWatchLater);
     const docRef = doc(db, "Watch Later", Id);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
@@ -60,53 +64,60 @@ const MoreModal = ({
         },
         { merge: true }
       );
-      // setInWatchLater("Add to");
+    
+    }else{
+      
     }
-    if (docSnap.exists()) {
-      await deleteDoc(
-        doc(db, "Watch Later", Id),
-        where("Author", "==", user.uid)
-      );
-      setInWatchLater(true);
-    }
+   
   };
   const handlePlaylist = () => {
-setClickPlaylist(true)
-    
+    setClickPlaylist(true);
   };
-  useEffect(()=>{
-    const docRef = doc(db, "Playlist",'adf');
-    const colRef = collection(docRef, "checkout_sessions")
-    addDoc(colRef, {
-     price: 2,
-     and: 1,
-     more: 'acd',
-    });
-  },[clickPlaylist])
+  // useEffect(() => {
+  //   const docRef = doc(db, "Playlist", "adf");
+  //   const colRef = collection(docRef, "checkout_sessions");
+  //   addDoc(colRef, {
+  //     price: 2,
+  //     and: 1,
+  //     more: "acd",
+  //   });
+  // }, [clickPlaylist]);
   return (
     <>
-    {clickPlaylist&& <PlaylistModal/> }
+      {clickPlaylist && <PlaylistModal   Id={Id}
+                                Thumbnail={Thumbnail}
+                                text={text}
+                                Avatar={Avatar}
+                                views={views}
+                                time={time}
+                                Name={Name}/>}
       <div className="more-modal">
         <button
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
             handleDoc();
+            setWL(true)
           }}
+          // disabled={WL = true}
+          style={
+            WL
+              ? { backgroundColor: "#4b4b4b" }
+              : { backgroundColor: "#212121" }
+          }
         >
           <img src={watchLater} alt="watchLater" />
-          {InWatchLater ? "Remove from" : "Add to"} Watch Later
+          {WL?'Added to ':'Add to'} Watch Later
         </button>
-        <button  onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-              handlePlaylist();
-            }}>
-          <img
-            src={subscriptions}
-            alt="playlist"
-           
-          />
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            handlePlaylist();
+            
+          }}
+        >
+          <img src={subscriptions} alt="playlist" />
           Add to PlayList
         </button>
       </div>

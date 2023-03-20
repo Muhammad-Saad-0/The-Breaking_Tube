@@ -50,6 +50,9 @@
     
 
 }
+.playlist-modal li button{
+    all: unset;
+}
 .playlist-modal ul{
     /* transform: translateY(150%); */
     display: flex;
@@ -72,4 +75,40 @@
     margin: .1vw;
     font-size: 1.7vw;
     text-indent: .5vw;
+
+}
+.playlist-modal-section ul li button{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    background: none;
+    padding: .3vw;
+    width:  20vw;
+    border-radius: 2vw;
+    /* text-indent: 2vw; */
+    padding-left: 1vw;
+}
+.playlist-modal-section ul li button:hover,
+.playlist-modal-section ul li button:active{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    background-color: rgba(33, 183, 33, 0.646) !important;
+}
+
+.playlist-modal-section ul li button:active{
+    background-color: rgba(96, 247, 96, 0.646) !important;
+}
+.playlist-modal-top {
+    display: flex;
+    gap: 11vw;
+    justify-content: center;
+    align-items: center;
+}
+.playlist-modal-top button {
+    all:  unset;
+    height: 3vw;
+    font-size: 3vw;
+    border-radius: 50%;
+    padding: .4vw;
 }

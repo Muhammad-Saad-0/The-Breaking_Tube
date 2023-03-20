@@ -27,7 +27,7 @@ let user = auth.currentUser;
   // }
   const [moreModal, setMoreModal] = useState(false);
   const [selectedId, setSelectedId] = useState("");
-  const [InWatchLater, setInWatchLater] = useState('');
+  const [InWatchLater, setInWatchLater] = useState(false);
 
 
   const handleClick = async (embedId) => {
@@ -68,7 +68,15 @@ let user = auth.currentUser;
     //   // setInWatchLater(true);
     }
   };
-
+const checkExistence = async (embedId)=>{
+  const docRef = doc(db, "Watch Later", embedId);
+  const docSnap = await getDoc(docRef);
+  if (!docSnap.exists()) {
+    setInWatchLater(false);
+  }else{
+    setInWatchLater(true);
+  }
+}
   return (
     <>
       <HomeFilter />
@@ -126,7 +134,7 @@ let user = auth.currentUser;
                                 e.preventDefault();
                                 e.stopPropagation();
                                 setMoreModal(!moreModal);
-                     
+                                 checkExistence(embedId)
                               }}
                             >
                               <img src={more} alt="more" />
@@ -141,6 +149,7 @@ let user = auth.currentUser;
                                 time={time}
                                 Name={Name}
                                 WL={InWatchLater}
+                                setWL={setInWatchLater}
                               />
                             ) : (
                               false
@@ -180,7 +189,12 @@ let user = auth.currentUser;
                       onClick={() => {
                         getId(embedId);
                         getTitle(text);
-                        handleHistory();
+                        handleHistory(Thumbnail, text,
+                          Avatar,
+                          views,
+                          time,
+                          Name,
+                          embedId);
                       }}
                     >
                       <div className="video-top">
@@ -217,6 +231,7 @@ let user = auth.currentUser;
                                 time={time}
                                 Name={Name}
                                 WL = {InWatchLater}
+                                setWL={setInWatchLater}
                               />
                             ) : (
                               false

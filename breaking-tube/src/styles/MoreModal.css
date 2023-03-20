@@ -36,3 +36,6 @@
     border-bottom-right-radius: 1vw;
     border-bottom-left-radius: 1vw;
 }
+.remove-modal button{
+border: none !important;
+}

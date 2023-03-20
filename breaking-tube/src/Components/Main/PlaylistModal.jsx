@@ -1,10 +1,72 @@
 import React, { useState } from "react";
 import "../../styles/PlaylistModal.css";
-import {ImCheckboxUnchecked,ImCheckboxChecked} from 'react-icons/im'
-const PlaylistModal = () => {
+import { RxCross2 } from "react-icons/rx";
+import { AiOutlinePlusSquare } from "react-icons/ai";
+import {
+  doc,
+  setDoc,
+  addDoc,
+  collection,
+  getDoc,
+  deleteDoc,
+  where,
+} from "firebase/firestore";
+import { db, auth } from "../../Data/base";
+const PlaylistModal = ({
+  Id,
+  Thumbnail,
+  text,
+  Avatar,
+  views,
+  time,
+  Name,
+  handleRemove,
+}) => {
   const [playlistNameList, setPlaylistNameList] = useState([]);
   const [playlistName, setPlaylistName] = useState("");
-  const [ checked,setChecked] = useState(false)
+  const [checked, setChecked] = useState(false);
+
+  const handleClick = () => {
+    {
+      playlistNameList.map(async (a) => {
+        const docRef = doc(db, "Playlist", a, "videos", Id);
+        const docSnap = await getDoc(docRef);
+        if (!docSnap.exists()) {
+          await setDoc(
+            doc(db, "Playlist", a, "videos", Id),
+            {
+              Id,
+              Thumbnail,
+              text,
+              Avatar,
+              views,
+              time,
+              Name,
+              Author: auth.currentUser.uid,
+            },
+            { merge: true }
+          );
+        }
+      });
+    }
+  };
+  const handleListDb = () => {
+    {
+      playlistNameList.map(async (a) => {
+        const docRef = doc(db, "Playlist", a);
+        const docSnap = await getDoc(docRef);
+        if (!docSnap.exists()) {
+          await setDoc(
+            doc(db, "Playlist", a),
+            {
+              a
+            },
+            { merge: true }
+          );
+        }
+      });
+    }
+  };
   return (
     <section
       className="playlist-modal-section"
@@ -14,8 +76,12 @@ const PlaylistModal = () => {
       }}
     >
       <section className="playlist-modal">
-        <h4>Create Playlist</h4>
-
+        <div className="playlist-modal-top">
+          <h4>Create Playlist</h4>
+          <button className="close-playlist-modal">
+            <RxCross2 />{" "}
+          </button>
+        </div>
         <ul>
           {playlistNameList.map((a) => {
             return (
@@ -25,21 +91,18 @@ const PlaylistModal = () => {
                   e.preventDefault();
                 }}
               >
-                {checked?<ImCheckboxUnchecked />:<ImCheckboxChecked />}
-                <input
+                <button
                   type="checkbox"
-                  id="option"
-                  onClick={(e)=>{
+                  id={`${a}`}
+                  onClick={(e) => {
                     e.preventDefault();
-                    e.stopPropagation()
-                    setChecked(!checked)
-                    console.log(checked);
+                    e.stopPropagation();
+                    handleClick();
                   }}
-                  
-                />
-                <label htmlFor="option">
-                  {a}{" "}
-                </label>
+                >
+                  <AiOutlinePlusSquare />
+                  {a}
+                </button>
               </li>
             );
           })}
@@ -65,6 +128,7 @@ const PlaylistModal = () => {
               setPlaylistName("");
               e.preventDefault();
               console.log(playlistNameList);
+              handleListDb();
             }}
             disabled={playlistNameList.length >= 8}
           >
