@@ -1,65 +1,87 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/Video.css";
 import MainData from "../../Data/MainData";
 import { v4 as uuidv4 } from "uuid";
 import { useParams } from "react-router-dom";
 import ReactPlayer from 'react-player/youtube'
 import SideBar from "../SideBar/SideBar";
+import more from "../../assets/Icons/Misc/More.svg";
+import MoreModal from "./MoreModal";
+import { doc,getDoc,setDoc } from "firebase/firestore";
+import { db,auth} from "../../Data/base";
+import {AiOutlineHeart,AiFillHeart} from 'react-icons/ai'
 const VideoPage = () => {
   const{ videoID} = useParams()
+  const [moreModal, setMoreModal] = useState(false);
+  const [InWatchLater, setInWatchLater] = useState(false);
+const [videoLiked,setVideoLiked] = useState(false)
+  const style = {transform : 'translate(55vw,-5vw)'}
 
+  const checkExistence = async (embedId)=>{
+    const docRef = doc(db, "Watch Later", embedId);
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) {
+      setInWatchLater(false);
+    }else{
+      setInWatchLater(true);
+    }
+  }
   return (
     <>
     {/* <SideBar /> */}
-      {MainData.filter((a)=>a.embedId === videoID).map(({ Avatar, Name ,text}) => {
+      {MainData.filter((a)=>a.embedId === videoID).map(({ Avatar, Name ,text,Thumbnail,time ,views,embedId}) => {
         return (
-          <React.Fragment key={uuidv4()}>
+          <div>
             <ReactPlayer
              width='100%'
              height='100%'
-              // itemType="http://schema.org/VideoObject"
-              // src={`https://www.youtube.com/embed/${embedId}?rel=0&modestbranding=1`}
               url={`https://www.youtube.com/embed/${videoID}?rel=0&modestbranding=1`}
-              //  src='https://www.youtube.com/embed/bIcbKGilhME'
-              // title="YouTube video player"
-              // frameBorder="0"
-              // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              // allowFullScreen
               controls
-              // playing
-              key={uuidv4()}
+              playing
             />
             <p className="video-page-name" key={uuidv4()}>
               {text}
             </p>
             <div className="video-page-info">
               <img src={Avatar} alt="logo" />
-              <p>{Name}</p>
+            <p>{Name}</p>
+
+            <div className="video-buttons-container">
+              <button onClick={()=>{
+                setVideoLiked(!videoLiked)
+              }}>
+                {videoLiked? <AiFillHeart />:<AiOutlineHeart />}
+              </button>
+              <button
+                              className="more-button more-button-video"
+                              onClick={(e) => {
+                                // handleClick(embedId);
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setMoreModal(!moreModal);
+                                checkExistence(embedId)
+
+                              }}
+                            >
+                              <img src={more} alt="more" />
+                            </button>
             </div>
-          </React.Fragment>
-          // <React.Fragment key={uuidv4()}>
-          //   <iframe
-          //     width="560"
-          //     height="315"
-          //     itemType="http://schema.org/VideoObject"
-          //     // src={`https://www.youtube.com/embed/${embedId}?rel=0&modestbranding=1`}
-          //     src={`https://www.youtube.com/embed/${videoID}?rel=0&modestbranding=1`}
-          //     //  src='https://www.youtube.com/embed/bIcbKGilhME'
-          //     title="YouTube video player"
-          //     frameBorder="0"
-          //     // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          //     allowFullScreen
-              
-          //     key={uuidv4()}
-          //   ></iframe>
-          //   <p className="video-page-name" key={uuidv4()}>
-          //     {videoTitle}
-          //   </p>
-          //   <div className="video-page-info">
-          //     <img src={Avatar} alt="logo" />
-          //     <p>{Name}</p>
-          //   </div>
-          // </React.Fragment>
+                            {moreModal &&
+                              <MoreModal
+                              style={style}
+                                // Id={selectedId}
+                                Thumbnail={Thumbnail}
+                                text={text}
+                                Avatar={Avatar}
+                                views={views}
+                                time={time}
+                                Name={Name}
+                                WL={InWatchLater}
+                                setWL={setInWatchLater}
+                              />}
+            </div>
+        
+          </div>
         );
       })}
     </>

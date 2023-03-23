@@ -1,0 +1,36 @@
+.playlist-page{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+.playlist-page div img{
+    height: 15.3vw;
+  width: 27vw;
+  margin-bottom: 1vw;
+  border-radius: 0.7vw;
+  
+}
+.playlist-page div{
+    position: relative;
+}
+.playlist-page p{
+    position: absolute;
+    /* transform: translate(16vw,6vw); */
+    font-size: 2.5vw;
+    color: rgba(255, 255, 255, 0.952);
+    font-weight: 700;
+    text-align: center;
+}
+
+.playlist-page span{
+    position: absolute;
+    transform: translate(12.5vw,0vw);
+    width: 50%;
+    height: 92%;
+    background-color: rgba(0, 0, 0, 0.693); 
+  border-top-right-radius: 0.7vw;
+  border-bottom-right-radius: 0.7vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}

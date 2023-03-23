@@ -14,6 +14,7 @@ import {
   getDoc,
   deleteDoc,
   where,
+  getDocs,
 } from "firebase/firestore";
 import { db, auth } from "../../Data/base";
 import PlaylistModal from "./PlaylistModal";
@@ -29,9 +30,11 @@ const MoreModal = ({
   Name,
   handleRemove,
   WL,
-  setWL
+  setWL,
+  style
 }) => {
   const [clickPlaylist, setClickPlaylist] = useState(false);
+  const [playlistNameListDB, setPlaylistNameListDB] = useState([]);
 
   const nav = useNavigate();
   useEffect(() => {
@@ -73,6 +76,17 @@ const MoreModal = ({
   const handlePlaylist = () => {
     setClickPlaylist(true);
   };
+
+
+  const getPlaylistNames = async () => {
+    const docRef = collection(db, "Playlist");
+    const Playlists = await getDocs(docRef);
+    Playlists.forEach((Playlist) => {
+      setPlaylistNameListDB((r) =>
+        [...r, [Playlist.data().Name]]
+        .slice(0, Playlists.docs.length)
+      );
+    });}
   // useEffect(() => {
   //   const docRef = doc(db, "Playlist", "adf");
   //   const colRef = collection(docRef, "checkout_sessions");
@@ -90,8 +104,12 @@ const MoreModal = ({
                                 Avatar={Avatar}
                                 views={views}
                                 time={time}
-                                Name={Name}/>}
-      <div className="more-modal">
+                                Name={Name}
+                                closePlaylist = {setClickPlaylist}
+                                playlistNameListDB={playlistNameListDB}
+                                />
+                                }
+      <div className="more-modal" style={style} >
         <button
           onClick={(e) => {
             e.stopPropagation();
@@ -114,6 +132,8 @@ const MoreModal = ({
             e.stopPropagation();
             e.preventDefault();
             handlePlaylist();
+              getPlaylistNames();
+           
             
           }}
         >

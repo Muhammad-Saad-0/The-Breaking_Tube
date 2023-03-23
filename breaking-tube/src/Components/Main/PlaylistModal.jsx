@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/PlaylistModal.css";
 import { RxCross2 } from "react-icons/rx";
 import { AiOutlinePlusSquare } from "react-icons/ai";
@@ -10,6 +10,7 @@ import {
   getDoc,
   deleteDoc,
   where,
+  getDocs,
 } from "firebase/firestore";
 import { db, auth } from "../../Data/base";
 const PlaylistModal = ({
@@ -21,19 +22,38 @@ const PlaylistModal = ({
   time,
   Name,
   handleRemove,
+  closePlaylist,
+  playlistNameListDB
 }) => {
   const [playlistNameList, setPlaylistNameList] = useState([]);
   const [playlistName, setPlaylistName] = useState("");
-  const [checked, setChecked] = useState(false);
+  // const [playlistNameListDB, setPlaylistNameListDB] = useState([]);
 
-  const handleClick = () => {
-    {
-      playlistNameList.map(async (a) => {
-        const docRef = doc(db, "Playlist", a, "videos", Id);
+  // useEffect(() => {
+    // const getPlaylistNames = async () => {
+    //   const docRef = collection(db, "Playlist");
+    //   const Playlists = await getDocs(docRef);
+    //   Playlists.forEach((Playlist) => {
+    //     setPlaylistNameListDB((r) =>
+    //       [...r, [Playlist.data().Name]]
+    //       .slice(0, Playlists.docs.length)
+    //     );
+    //   });
+setInterval(() => {
+  setPlaylistNameList(playlistNameListDB);
+  
+}, 1000);
+    // };
+    // getPlaylistNames();
+  // }, []);
+  const handleClick = async (a) => {
+    { console.log(a[0]);
+      // playlistNameList.map(async () => {
+        const docRef = doc(db, "Playlist",a[0]  , "videos", Id);
         const docSnap = await getDoc(docRef);
         if (!docSnap.exists()) {
           await setDoc(
-            doc(db, "Playlist", a, "videos", Id),
+            doc(db, "Playlist",  a[0], "videos", Id),
             {
               Id,
               Thumbnail,
@@ -43,30 +63,39 @@ const PlaylistModal = ({
               time,
               Name,
               Author: auth.currentUser.uid,
+              PlaylistName : a[0]
             },
             { merge: true }
           );
         }
-      });
+        // console.log(a);
+      // });
     }
   };
-  const handleListDb = () => {
-    {
-      playlistNameList.map(async (a) => {
-        const docRef = doc(db, "Playlist", a);
-        const docSnap = await getDoc(docRef);
-        if (!docSnap.exists()) {
-          await setDoc(
-            doc(db, "Playlist", a),
-            {
-              a
-            },
-            { merge: true }
-          );
-        }
-      });
-    }
-  };
+  useEffect(() => {
+    const handleListDb = () => {
+      {
+        console.log(playlistNameList);
+        playlistNameList.map(async (N) => {
+        console.log(N);
+
+          const docRef = doc(db, "Playlist", N);
+          const docSnap = await getDoc(docRef);
+          if (!docSnap.exists()) {
+            await setDoc(
+              doc(db, "Playlist", N),
+              {
+                Name:N,
+              },
+              { merge: true }
+            );
+          }
+        });
+      }
+    };
+    handleListDb();
+  }, [playlistNameList]);
+
   return (
     <section
       className="playlist-modal-section"
@@ -78,26 +107,26 @@ const PlaylistModal = ({
       <section className="playlist-modal">
         <div className="playlist-modal-top">
           <h4>Create Playlist</h4>
-          <button className="close-playlist-modal">
+          <button
+            className="close-playlist-modal"
+            onClick={() => {
+              closePlaylist(false);
+            }}
+          >
             <RxCross2 />{" "}
           </button>
         </div>
         <ul>
           {playlistNameList.map((a) => {
             return (
-              <li
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                }}
-              >
+              <li>
                 <button
                   type="checkbox"
                   id={`${a}`}
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    handleClick();
+                    handleClick(a);
                   }}
                 >
                   <AiOutlinePlusSquare />
@@ -127,10 +156,8 @@ const PlaylistModal = ({
               setPlaylistNameList([...playlistNameList, playlistName]);
               setPlaylistName("");
               e.preventDefault();
-              console.log(playlistNameList);
-              handleListDb();
             }}
-            disabled={playlistNameList.length >= 8}
+            disabled={playlistNameList.length >= 8 || playlistName === ""}
           >
             Enter
           </button>

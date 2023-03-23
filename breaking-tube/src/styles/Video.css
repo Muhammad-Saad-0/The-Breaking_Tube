@@ -19,6 +19,7 @@ iframe{
     top: 44.5vw;
     width: 80%;
     align-items: center;
+    gap: 75vw;
 }
 img{
     height: 4vw;
@@ -36,3 +37,27 @@ img{
     text-indent: 5vw;
     padding-top: 1vw;
 }
+.more-button-video{
+    background: none;
+    border: none;
+    transform:
+     rotate(90deg);
+     cursor: pointer;
+     border-radius: 50%;
+     height: 3vw;
+     width: 3vw;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+  }
+  .video-buttons-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+  }
+  .video-buttons-container button:nth-child(1){
+    all: unset;
+    font-size: 3vw;
+    color: rgb(8, 203, 8);
+  }

@@ -14,7 +14,7 @@ import {
 } from "firebase/firestore";
 import { async } from "@firebase/util";
 import { doc, onSnapshot } from "firebase/firestore";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useWatchLaterId } from "../../context/WatchLaterId";
 import { v4 as uuidv4 } from "uuid";
 import SideBar from "../SideBar/SideBar";
@@ -22,18 +22,19 @@ import more from "../../assets/Icons/Misc/More.svg";
 import MoreModal from "./MoreModal";
 import RemoveWatchLater from "./RemoveWatchLater";
 
-const WatchLater = ({ Id }) => {
+const SinglePlaylist = ({ Id }) => {
   const watchLaterId = useWatchLaterId();
   const [moreModal, setMoreModal] = useState(false);
   const [selectedId, setSelectedId] = useState("");
   const handleClick = (embedId) => {
     setSelectedId(embedId);
   };
-
+const {playlistID} = useParams()
+console.log(playlistID);
   let user = auth.currentUser;
   const q = query(
-    collection(db, "Watch Later"),
-    where("Author", "==", user.uid)
+    collection(db, "Playlist",playlistID,'videos'),
+    where("PlaylistName", "==", playlistID)
   );
 
   const [ro, setRo] = useState([]);
@@ -130,4 +131,4 @@ const WatchLater = ({ Id }) => {
   );
 };
 
-export default WatchLater;
+export default SinglePlaylist;

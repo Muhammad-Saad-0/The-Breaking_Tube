@@ -19,6 +19,7 @@ import { useAuth } from "../../context/AuthContext";
 import WatchLater from "./WatchLaterPage";
 import { useVideoTitle } from "../../context/videoTitleContext";
 import History from "./History";
+import SinglePlaylist from "./SinglePlaylist";
 
 const Main = () => {
   const sideBarOpen = useSidebar();
@@ -40,6 +41,7 @@ const Main = () => {
         <Routes>
           <Route exact path="/" element={<VideosGrid />} />
           <Route exact path='/video/:videoID' element={<VideoPage title={title} />} />
+          <Route exact path='/playlist/:playlistID' element={<SinglePlaylist />} />
    
           <Route exact path="/signIn" element={<SignIn />} />
           <Route
