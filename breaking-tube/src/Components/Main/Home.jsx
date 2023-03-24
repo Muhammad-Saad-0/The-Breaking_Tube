@@ -20,6 +20,7 @@ import WatchLater from "./WatchLaterPage";
 import { useVideoTitle } from "../../context/videoTitleContext";
 import History from "./History";
 import SinglePlaylist from "./SinglePlaylist";
+import Liked from "./Liked";
 
 const Main = () => {
   const sideBarOpen = useSidebar();
@@ -63,6 +64,11 @@ const Main = () => {
             exact
             path={"/history"}
             element={authUser ? <History/> : <SignUp />}
+          />
+          <Route
+            exact
+            path={"/liked"}
+            element={authUser ? <Liked/> : <SignUp />}
           />
         </Routes>
       </section>

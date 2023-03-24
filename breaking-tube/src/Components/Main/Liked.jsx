@@ -22,18 +22,18 @@ import more from "../../assets/Icons/Misc/More.svg";
 import MoreModal from "./MoreModal";
 import RemoveWatchLater from "./RemoveWatchLater";
 
-const WatchLater = ({ Id }) => {
+const Liked = ({ Id }) => {
   const watchLaterId = useWatchLaterId();
   const [moreModal, setMoreModal] = useState(false);
   const [selectedId, setSelectedId] = useState("");
   const handleClick = (embedId) => {
     setSelectedId(embedId);
-    
+    console.log(selectedId);
   };
 
   let user = auth.currentUser;
   const q = query(
-    collection(db, "Watch Later"),
+    collection(db, "Liked"),
     where("Author", "==", user.uid)
   );
 
@@ -46,7 +46,7 @@ const WatchLater = ({ Id }) => {
           setRo((r) => [
             ...r,
             {
-              Id: Vid.data().Id,
+              embedId: Vid.data().embedId,
               Name: Vid.data().Name,
               Thumbnail: Vid.data().Thumbnail,
               text: Vid.data().text,
@@ -62,9 +62,6 @@ const WatchLater = ({ Id }) => {
     getVids();
   }, []);
 
-  //  ro.map((r)=>{
-  // console.log(r.Name);
-  //  })
   // const list = useWatchLaterList();
   return (
     <>
@@ -74,7 +71,7 @@ const WatchLater = ({ Id }) => {
         {/* {list} */}
         {ro.map((r) => {
           return (
-            <Link to={`/video/${r.Id}`} className="video" key={uuidv4()}>
+            <Link to={`/video/${r.embedId}`} className="video" key={uuidv4()}>
               <div className="video-top">
                 <div className="thumbnail-section">
                   <img src={r.Thumbnail} alt={r.text} />
@@ -92,7 +89,7 @@ const WatchLater = ({ Id }) => {
                     <button
                       className="more-button"
                       onClick={(e) => {
-                        handleClick(r.Id);
+                        handleClick(r.embedId);
                         e.preventDefault();
                         e.stopPropagation();
                         setMoreModal(!moreModal);
@@ -100,7 +97,7 @@ const WatchLater = ({ Id }) => {
                     >
                       <img src={more} alt="more" />
                     </button>
-                    {moreModal && r.Id === selectedId ? (
+                    {moreModal && r.embedId === selectedId ? (
                       <RemoveWatchLater
                         Id={selectedId}
                         Thumbnail={r.Thumbnail}
@@ -131,4 +128,4 @@ const WatchLater = ({ Id }) => {
   );
 };
 
-export default WatchLater;
+export default Liked;

@@ -14,11 +14,17 @@ import { db,auth} from "../../Data/base";
 import { doc,getDoc,setDoc } from "firebase/firestore";
 import { async } from "@firebase/util";
 import SideBar from "../SideBar/SideBarClose";
+import { useCheckLikedUpdate } from "../../context/LikedContext";
+import { useCheckLiked } from "../../context/LikedContext";
+
 const VideosGrid = () => {
   const getId = useVideoIdUpdate();
   const getTitle = useVideoTitleUpdate();
   const FilterId = useFilterId();
 const getWatchLaterId = useWatchLaterIdUpdate()
+const setVideoLiked = useCheckLikedUpdate()
+const VideoLiked = useCheckLiked()
+
 let user = auth.currentUser;
 
   // const handleClick = (e) =>{
@@ -77,6 +83,19 @@ const checkExistence = async (embedId)=>{
     setInWatchLater(true);
   }
 }
+// const [videoLiked, setVideoLiked] = useState(false);
+
+const checkLikedExistence = async (embedId) => {
+  const docRef = doc(db, "Liked", embedId);
+  const docSnap = await getDoc(docRef);
+  if (!docSnap.exists()) {
+    setVideoLiked(false);
+  } else {
+    setVideoLiked(true);
+  }
+  console.log(VideoLiked);
+  console.log('agw');
+};
   return (
     <>
       <HomeFilter />
@@ -111,6 +130,8 @@ const checkExistence = async (embedId)=>{
                           time,
                           Name,
                           embedId);
+                          checkLikedExistence(embedId)
+
                       }}
                     >
                       <div className="video-top">
@@ -134,7 +155,7 @@ const checkExistence = async (embedId)=>{
                                 e.preventDefault();
                                 e.stopPropagation();
                                 setMoreModal(!moreModal);
-                                 checkExistence(embedId)
+                                 checkExistence(embedId);
                               }}
                             >
                               <img src={more} alt="more" />
@@ -217,6 +238,8 @@ const checkExistence = async (embedId)=>{
                                 e.stopPropagation();
                                 handleClick(embedId);
                                 setMoreModal(!moreModal);
+                                checkExistence(embedId)
+
                               }}
                             >
                               <img src={more} alt="more" />

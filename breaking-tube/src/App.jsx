@@ -11,9 +11,11 @@ import { FilterIdProvider } from "./context/FilterContext";
 import { AuthProvider } from "./context/AuthContext";
 import { WatchLaterListProvider } from "./context/WatchLaterContext";
 import { WatchLaterIdProvider } from "./context/WatchLaterId";
+import { CheckLikedProvider } from "./context/LikedContext";
 const App = () => {
   return (
     <>
+    <CheckLikedProvider>
     <WatchLaterIdProvider>
     <WatchLaterListProvider >
       <AuthProvider>
@@ -31,6 +33,7 @@ const App = () => {
       </AuthProvider>
       </WatchLaterListProvider>
       </WatchLaterIdProvider>
+      </CheckLikedProvider>
     </>
   );
 };
