@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   background-color: #303030;
-  width: 6.5%;
+  width: 8.5%;
   /* justify-content: space-between; */
   align-items: center;
   /* justify-content: center; */
@@ -24,15 +24,17 @@
   width: 100%;
   text-decoration: none;
   color: white;
-  font-size: 1.1vw;
+  font-size:calc(16px + .1vw);
   align-items: center;
   gap: 0.1vw;
   padding-top: 2vw;
   padding-bottom: 2vw;
+  width: calc(16px + 8vw);
+  text-align: center;
 }
 .close-sidebar a img {
-  height: 2.7vw;
-  width: 2.7vw;
+  height:calc(16px + 1.3vw);
+  width: calc(16px + 1.3vw);
 }
 
 /****End of CLOSE SIDEBAR****/
@@ -43,7 +45,8 @@
   display: flex;
   flex-direction: column;
   background-color: #303030;
-  width: 27%;
+  width:  calc(16px + 25.5vw);
+  /* width: 27%; */
   align-items: center;
   height: auto;
   position: fixed;
@@ -63,7 +66,7 @@
   width: 100%;
   text-decoration: none;
   color: white;
-  font-size: 1.5vw;
+  font-size: calc(16px + .4vw);
   align-items: center;
   gap: 0.1vw;
   padding-top: 1.8vw;
@@ -79,8 +82,8 @@
   padding-top: 2.5vw;
 }
 .open-sidebar section a img {
-  height: 2.7vw;
-  width: 2.7vw;
+  height: calc(16px + 2vw);
+  width: calc(16px + 2vw);
   padding-left: 2vw;
   padding-right: 1vw;
 }

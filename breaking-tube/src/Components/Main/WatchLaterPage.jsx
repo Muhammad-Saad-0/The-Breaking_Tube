@@ -69,6 +69,7 @@ const WatchLater = ({ Id }) => {
   return (
     <>
       {/* <SideBar /> */}
+      <h3>Watch Later</h3>
       <section className="watchlater-section">
         {/* <WatchLaterVideo Id={Id} /> */}
         {/* {list} */}

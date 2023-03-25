@@ -49,6 +49,8 @@ const History = () => {
   }, []);
 
   return (
+  <>
+  <h3>History</h3>
     <section className="history-section">
       {/* <WatchLaterVideo Id={Id} /> */}
       {/* {list} */}
@@ -107,6 +109,7 @@ const History = () => {
         );
       })}
     </section>
+  </>
   );
 };
 

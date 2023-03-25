@@ -1,10 +1,30 @@
 *{
     /* border: 1px green solid; */
 }
-
+h3{
+    color: white;
+    font-size: calc(16px + 1.4vw);
+    text-indent: 1vw;
+}
 .watchlater-section{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     /* width: 90vw; */
    
+}
+@media only screen and (max-width: 71.875em) {
+    .watchlater-section{
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media only screen and (max-width: 60em) {
+    .watchlater-section {
+      grid-template-columns: repeat(2, 1fr);
+    }}
+  @media only screen and (max-width: 37.5em) {
+    .watchlater-section {
+    grid-template-columns: repeat(1, 1fr);
+    transform: translateX(30%);
+    width: 70%;
+    }
 }

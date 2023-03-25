@@ -7,11 +7,13 @@ nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* gap:  calc(16px + 2vw) ; */
     background-color: #303030;
     position: fixed;
     transform: translateY(0%);
     z-index: 10;
-    height: 6vw;
+    height: calc(16px + 7vw);
+    /* height: 6vw; */
 }
 nav button{
     border: none;
@@ -20,7 +22,8 @@ nav button{
 nav h1{
     color: rgba(151, 255, 53, 0.885);
     font-weight: 700;
-    font-size: 2vw;
+    font-size: calc(16px + .7vw);
+    /* font-size: 2vw; */
 }
 .nav-left{
     display: flex;
@@ -37,22 +40,32 @@ nav form{
     display: flex;
     align-items: center;
     position: relative;
-    width: 34vw;
-    height: 3.2vw;
+    /* width: 34vw; */
+    width: calc(16px + 34vw);
+    height: calc(16px + 2.3vw);
+    /* height: 3.2vw; */
     overflow: hidden;
     /* overflow-clip-margin: 20px; */
     border-radius: 2rem;
     padding: 1px;
 }
 nav form>input{
-    background-color: #0a5110;
-    color: white;
+    background-color: #126c1a;
+    color: rgb(255, 247, 247);
     height: 99%;
     width: 99.5%;
-    text-indent: 1.3vw;
+    text-indent: 2vw;
     border-radius: 2vw;
-    border: 1px rgb(255, 255, 255) solid;
-    font-size: 1.1vw;
+    /* border: 1px rgb(255, 255, 255) solid; */
+    font-size: calc(16px + .4vw);
+    /* font-size: 1.1vw; */
+    border: none;
+
+}
+nav form>input:focus-visible,
+nav form>input:focus{
+   border: none;
+   outline: none;
 
 }
 nav form>input::placeholder{
@@ -74,7 +87,7 @@ nav form>button{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px rgb(255, 255, 255) solid;
+    /* border: 1px rgb(255, 255, 255) solid; */
 
 }
 .nav-left>button,h1,
@@ -94,13 +107,13 @@ nav form>button{
     align-items: center;
 }
 nav button img{
-    height: 2.5vw;
-    width: 2.5vw;
+    height: calc(16px + 1.5vw);
+    width: calc(16px + 1.5vw);
 }
 .user-pfp{
     cursor: pointer;
 }
 .profile-icon{
-    font-size: 2.5vw;
+    font-size: calc(16px + 1.5vw);
     color: rgba(255, 255, 255, 0.752);
 }
