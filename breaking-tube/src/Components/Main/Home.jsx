@@ -21,29 +21,52 @@ import { useVideoTitle } from "../../context/videoTitleContext";
 import History from "./History";
 import SinglePlaylist from "./SinglePlaylist";
 import Liked from "./Liked";
-
+import { useTheme } from "../../context/ThemeContext";
 const Main = () => {
   const sideBarOpen = useSidebar();
   const FilterId = useFilterId();
   const videoId = useVideoId();
   const authUser = useAuth();
-   const title = useVideoTitle()
+  const title = useVideoTitle();
+  const theme = useTheme();
+  // function getBg() {
+  //   if (sideBarOpen && !theme) {
+  //     return "#1e1d1d";
+  //   }
+  //   if(!sideBarOpen && !theme){
+  //     "#303030"
+  //   }
+  //   if (sideBarOpen && theme) {
+  //     return '#B2BEB5';
+  //   }
+  //   if(!sideBarOpen && theme){
+  //     "#fffffff"
+  //   }
+  // }
   return (
     <>
       <section
         className="main-section"
         style={
+          // {backgroundColor: getBg() }}
           sideBarOpen
             ? { backgroundColor: "#1e1d1d" }
             : { backgroundColor: "#303030" }
-        }
+  }
       >
-      
         <Routes>
           <Route exact path="/" element={<VideosGrid />} />
-          <Route exact path='/video/:videoID' element={<VideoPage title={title} />} />
-          <Route exact path='/playlist/:playlistID' element={<SinglePlaylist />} />
-   
+          <Route
+            exact
+            path="/video/:videoID"
+            element={<VideoPage title={title} />}
+          />
+          <Route
+            exact
+            path="/playlist/:playlistID"
+            element={<SinglePlaylist />}
+          />
+
           <Route exact path="/signIn" element={<SignIn />} />
           <Route
             exact
@@ -63,12 +86,12 @@ const Main = () => {
           <Route
             exact
             path={"/history"}
-            element={authUser ? <History/> : <SignUp />}
+            element={authUser ? <History /> : <SignUp />}
           />
           <Route
             exact
             path={"/liked"}
-            element={authUser ? <Liked/> : <SignUp />}
+            element={authUser ? <Liked /> : <SignUp />}
           />
         </Routes>
       </section>

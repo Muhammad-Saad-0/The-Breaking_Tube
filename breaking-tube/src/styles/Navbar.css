@@ -2,28 +2,41 @@
     /* border: 1px green solid; */
 }
 nav{
+    /* width:  calc(16px + 97vw) ; */
     width: 100%;
     /* min-width: 100vw !important; */
     display: flex;
     align-items: center;
     justify-content: space-between;
     /* gap:  calc(16px + 2vw) ; */
-    background-color: #303030;
     position: fixed;
     transform: translateY(0%);
     z-index: 10;
     height: calc(16px + 7vw);
     /* height: 6vw; */
 }
+#light{
+    background-color: #ffffff;
+    transition: all 300ms ease;
+}
+#dark{
+    background-color: #303030;
+    transition: all 300ms ease;
+
+}
 nav button{
     border: none;
     background: none;
+    cursor:  pointer;
 }
 nav h1{
-    color: rgba(151, 255, 53, 0.885);
+    color: rgba(141, 246, 42, 0.885);
     font-weight: 700;
     font-size: calc(16px + .7vw);
     /* font-size: 2vw; */
+}
+nav#light h1{
+    color: rgb(102, 211, 0);
 }
 .nav-left{
     display: flex;
@@ -110,10 +123,38 @@ nav button img{
     height: calc(16px + 1.5vw);
     width: calc(16px + 1.5vw);
 }
+ nav#light .nav-right button img{
+    filter: invert(100%);
+}
+ nav#light .nav-left button img{
+    filter: invert(100%);
+}
 .user-pfp{
     cursor: pointer;
 }
 .profile-icon{
     font-size: calc(16px + 1.5vw);
-    color: rgba(255, 255, 255, 0.752);
+}
+#dark .profile-icon{
+    color: #ffffff;
+}
+#light .profile-icon{
+    color: #303030
+}
+
+.theme-toggle{
+    font-size: calc(16px + 1.3vw);
+
+}
+#dark .theme-toggle{
+    color: #ffffff;
+
+}
+#light .theme-toggle {
+    color: #303030
+}
+@media only screen and (max-width: 45em) {
+    nav{
+       width:97% ; 
+    }
 }

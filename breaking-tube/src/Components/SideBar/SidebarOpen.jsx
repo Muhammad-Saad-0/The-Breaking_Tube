@@ -25,15 +25,17 @@ import {
 import {
   hamburger,
 } from "../../assets/Icons/NavIcons";
+import { useTheme } from "../../context/ThemeContext";
 
 
 const SidebarOpen = () => {
 
+  const theme = useTheme();
   const toggleSidebar = useSidebarUpdate();
 
   return (
   // <SidebarProvider >
-      <aside className='open-sidebar'>
+      <aside className='open-sidebar'  id={theme?'light':'dark'}>
          <div className="open-sidebar-top">
           <button onClick={toggleSidebar}>
             <img src={hamburger} alt="menu" />

@@ -20,11 +20,15 @@ import {
     watchLater,
     yourVideos
 } from '../../assets/Icons/SideBarIcons'
-import { Link} from 'react-router-dom'
+import { Link} from 'react-router-dom';
+import { useTheme } from "../../context/ThemeContext";
+
 
 const SideBar = () => {
+  const theme = useTheme();
+
   return (
-    <aside className='close-sidebar'>
+    <aside className='close-sidebar' id={theme?'light':'dark'}>
       
           <Link to="/"><img src={home} alt="home" />Home</Link>
           <Link to="/playlist"><img src={subscriptions} alt="playlist" />PlayList</Link>

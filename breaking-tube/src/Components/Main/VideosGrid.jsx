@@ -16,6 +16,7 @@ import { async } from "@firebase/util";
 import SideBar from "../SideBar/SideBarClose";
 import { useCheckLikedUpdate } from "../../context/LikedContext";
 import { useCheckLiked } from "../../context/LikedContext";
+import { useTheme } from "../../context/ThemeContext";
 
 const VideosGrid = () => {
   const getId = useVideoIdUpdate();
@@ -24,6 +25,7 @@ const VideosGrid = () => {
 const getWatchLaterId = useWatchLaterIdUpdate()
 const setVideoLiked = useCheckLikedUpdate()
 const VideoLiked = useCheckLiked()
+const theme = useTheme();
 
 let user = auth.currentUser;
 
@@ -100,7 +102,7 @@ const checkLikedExistence = async (embedId) => {
     <>
       <HomeFilter />
       {/* <SideBar /> */}
-      <section className="grid-section">
+      <section className="grid-section"  id={theme?'light':'dark'}>
         {FilterId === "All" || !FilterId
           ? MainData.map(
               ({

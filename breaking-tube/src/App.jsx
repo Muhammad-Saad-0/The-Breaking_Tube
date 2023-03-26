@@ -12,28 +12,31 @@ import { AuthProvider } from "./context/AuthContext";
 import { WatchLaterListProvider } from "./context/WatchLaterContext";
 import { WatchLaterIdProvider } from "./context/WatchLaterId";
 import { CheckLikedProvider } from "./context/LikedContext";
+import { ThemeProvider } from "./context/ThemeContext";
 const App = () => {
   return (
     <>
-    <CheckLikedProvider>
-    <WatchLaterIdProvider>
-    <WatchLaterListProvider >
-      <AuthProvider>
-        <FilterIdProvider>
-          <VideoTitleProvider>
-            <VideoIdProvider>
-              <SidebarProvider>
-                <NavBar />
-                <SideBar />
-                <Home />
-              </SidebarProvider>
-            </VideoIdProvider>
-          </VideoTitleProvider>
-        </FilterIdProvider>
-      </AuthProvider>
-      </WatchLaterListProvider>
-      </WatchLaterIdProvider>
+    <ThemeProvider>
+      <CheckLikedProvider>
+        <WatchLaterIdProvider>
+          <WatchLaterListProvider>
+            <AuthProvider>
+              <FilterIdProvider>
+                <VideoTitleProvider>
+                  <VideoIdProvider>
+                    <SidebarProvider>
+                      <NavBar />
+                      <SideBar />
+                      <Home />
+                    </SidebarProvider>
+                  </VideoIdProvider>
+                </VideoTitleProvider>
+              </FilterIdProvider>
+            </AuthProvider>
+          </WatchLaterListProvider>
+        </WatchLaterIdProvider>
       </CheckLikedProvider>
+      </ThemeProvider>
     </>
   );
 };

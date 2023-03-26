@@ -1,14 +1,18 @@
+*{
+    /* border: 1px green solid; */
+}
 iframe{
     height: 34vw;
     width: 86vw;
     position: absolute;
-    top: 6vw;
+    top: 8vw;
 }
 .video-page-name{
     position: absolute;
-    font-size: 2.3vw;
+    font-size: calc(16px + .9vw);
+    /* font-size: 2.3vw; */
     color: white;
-    top: 40.5vw;
+    top: 42.5vw;
     font-weight: 600;
     text-indent: 1vw;
     
@@ -16,25 +20,26 @@ iframe{
 .video-page-info{
     display: flex;
     position: absolute;
-    top: 44.5vw;
+    top: 45.5vw;
     width: 80%;
     align-items: center;
-    gap: 75vw;
+    gap: 71vw;
 }
 img{
-    height: 4vw;
-    width: 4vw;
+    height:  calc(16px + 2vw);
+    width:  calc(16px + 2vw);
     border-radius: 50%;
 
 }
 .video-page-info>p{
     position: absolute;
     top: 0 ;
-    font-size: 1.7vw;
+    font-size: calc(16px + .6vw);
+    /* font-size: 1.7vw; */
     color: rgba(255, 255, 255, 0.719);
     z-index: 100;
     font-weight: 400;
-    text-indent: 5vw;
+    text-indent: 4vw;
     padding-top: 1vw;
 }
 .more-button-video{
@@ -44,8 +49,8 @@ img{
      rotate(90deg);
      cursor: pointer;
      border-radius: 50%;
-     height: 3vw;
-     width: 3vw;
+     height:  calc(16px + 1vw);
+     width:  calc(16px + 1vw);
      display: flex;
      justify-content: center;
      align-items: center;
@@ -58,6 +63,6 @@ img{
   }
   .video-buttons-container button:nth-child(1){
     all: unset;
-    font-size: 3vw;
+    font-size:  calc(16px + 2vw);
     color: rgb(8, 203, 8);
   }
