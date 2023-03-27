@@ -42,6 +42,7 @@
 @media only screen and (max-width: 60em) {
   .playlist-page {
     grid-template-columns: repeat(2, 1fr);
+    /* display: none; */
   }
   .playlist-page div img{
     height: 18.5vw;
@@ -49,16 +50,9 @@
   
 }
 .playlist-page span{
-  position: absolute;
   transform: translate(17.5vw,0vw);
   width: 50%;
   height: 92%;
-  background-color: rgba(0, 0, 0, 0.693); 
-border-top-right-radius: 0.7vw;
-border-bottom-right-radius: 0.7vw;
-display: flex;
-justify-content: center;
-align-items: center;
 
 }
 }

@@ -20,12 +20,14 @@ import { v4 as uuidv4 } from "uuid";
 import SideBar from "../SideBar/SideBar";
 import more from "../../assets/Icons/Misc/More.svg";
 import MoreModal from "./MoreModal";
+import { useTheme } from "../../context/ThemeContext";
 import RemoveWatchLater from "./RemoveWatchLater";
-
+import '../../styles/Home.css'
 const SinglePlaylist = ({ Id }) => {
   const watchLaterId = useWatchLaterId();
   const [moreModal, setMoreModal] = useState(false);
-  const [selectedId, setSelectedId] = useState("");
+const theme = useTheme()
+const [selectedId, setSelectedId] = useState("");
   const handleClick = (embedId) => {
     setSelectedId(embedId);
   };
@@ -69,7 +71,9 @@ console.log(playlistID);
   return (
     <>
       {/* <SideBar /> */}
-      <section className="watchlater-section">
+      <section className="grid-section"
+        id={theme ? "light" : "dark"}
+        >
         {/* <WatchLaterVideo Id={Id} /> */}
         {/* {list} */}
         {ro.map((r) => {

@@ -16,8 +16,14 @@
     /* max-width: fit-content; */
     width: 93%;
     z-index: 100;
+    transition: all 300ms ease;
 
     
+}
+.main-filter-section#light{
+    background-color: #ffffff;
+    transition: all 300ms ease;
+
 }
 .main-filter-section a{
     position: relative;
@@ -70,7 +76,7 @@
         
         width: 92%;
         }
-        100% {    transform: translate(17.3vw,calc(16px + -4vw));
+        100% {    transform: translate(16.7vw,calc(16px + -4vw));
  
         width: 75%;
         }
@@ -81,8 +87,32 @@
         
         width: 92%;
         }
-        100% {    transform: translate(17.3vw,calc(16px + -4vw));
+        100% {    transform: translate(16.7vw,calc(16px + -4vw));
  
         width: 75%;
         }
 }
+@media only screen and (max-width: 830px) {
+    .main-filter-section a{
+        margin-left: 2vw;
+        padding: .8vw;
+        padding-left: 1.8vw;
+        padding-right: 1.8vw;
+        font-size: 2vw;
+    }
+ }
+ @media only screen and (max-width: 620px) {
+    .main-filter-section a{
+        margin-left: 2vw;
+        padding: .8vw;
+        padding-left: 3vw;
+        padding-right: 3vw;
+        font-size: 3vw;
+    }
+ }
+ @media only screen and (max-width: 550px) {
+    .main-filter-section a{
+        padding-left: 3vw;
+        padding-right: 3vw;
+    }
+ }

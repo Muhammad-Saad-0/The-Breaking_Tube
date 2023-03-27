@@ -12,8 +12,9 @@ import { db, auth } from "../../Data/base";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useCheckLikedUpdate } from "../../context/LikedContext";
 import { useCheckLiked } from "../../context/LikedContext";
+import { useTheme } from "../../context/ThemeContext";
 const VideoPage = () => {
-
+const theme = useTheme()
   const { videoID } = useParams();
 
   const [moreModal, setMoreModal] = useState(false);
@@ -71,6 +72,7 @@ const VideoPage = () => {
   }
   return (
     <>
+    <section id={theme?'light':'dark'}>
       {/* <SideBar /> */}
       {MainData.filter((a) => a.embedId === videoID).map(
         ({ Avatar, Name, text, Thumbnail, time, views, embedId }) => {
@@ -133,6 +135,7 @@ const VideoPage = () => {
           );
         }
       )}
+      </section>
     </>
   );
 };

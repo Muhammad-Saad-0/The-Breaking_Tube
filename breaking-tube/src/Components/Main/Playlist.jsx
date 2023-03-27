@@ -22,6 +22,7 @@ import more from "../../assets/Icons/Misc/More.svg";
 import MoreModal from "./MoreModal";
 import RemoveWatchLater from "./RemoveWatchLater";
 import "../../styles/Playlist.css";
+import { useTheme } from "../../context/ThemeContext";
 const Playlist = ({ Id }) => {
   const watchLaterId = useWatchLaterId();
   const [moreModal, setMoreModal] = useState(false);
@@ -29,7 +30,7 @@ const Playlist = ({ Id }) => {
   const handleClick = (embedId) => {
     setSelectedId(embedId);
   };
-
+const theme = useTheme()
   let user = auth.currentUser;
   const q = query(collection(db, "Playlist"));
 
@@ -81,8 +82,8 @@ const Playlist = ({ Id }) => {
   // console.log(arr);
   return (
     <>
-    <h3>Playlists</h3>
-      <section className="watchlater-section playlist-page">
+    <h3 style={theme?{color:'#303030'}:{color:'#ffffff'}}>Playlists</h3>
+      <section className="playlist-page" id={theme?'light':'dark'}>
         {playlistName.map((r) => {
           return (
             <Link to={`/playlist/${r.Name}`} className="video" key={uuidv4()}>

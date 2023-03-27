@@ -10,8 +10,8 @@ import { useFilterId } from "../../context/FilterContext";
 import more from "../../assets/Icons/Misc/More.svg";
 import MoreModal from "./MoreModal";
 import { useWatchLaterIdUpdate } from "../../context/WatchLaterId";
-import { db,auth} from "../../Data/base";
-import { doc,getDoc,setDoc } from "firebase/firestore";
+import { db, auth } from "../../Data/base";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { async } from "@firebase/util";
 import SideBar from "../SideBar/SideBarClose";
 import { useCheckLikedUpdate } from "../../context/LikedContext";
@@ -22,12 +22,12 @@ const VideosGrid = () => {
   const getId = useVideoIdUpdate();
   const getTitle = useVideoTitleUpdate();
   const FilterId = useFilterId();
-const getWatchLaterId = useWatchLaterIdUpdate()
-const setVideoLiked = useCheckLikedUpdate()
-const VideoLiked = useCheckLiked()
-const theme = useTheme();
+  const getWatchLaterId = useWatchLaterIdUpdate();
+  const setVideoLiked = useCheckLikedUpdate();
+  const VideoLiked = useCheckLiked();
+  const theme = useTheme();
 
-let user = auth.currentUser;
+  let user = auth.currentUser;
 
   // const handleClick = (e) =>{
   //   e.Stop
@@ -37,72 +37,74 @@ let user = auth.currentUser;
   const [selectedId, setSelectedId] = useState("");
   const [InWatchLater, setInWatchLater] = useState(false);
 
-
   const handleClick = async (embedId) => {
     setSelectedId(embedId);
     getWatchLaterId(embedId);
   };
-  const handleHistory = async ( Thumbnail, text,
+  const handleHistory = async (
+    Thumbnail,
+    text,
     Avatar,
     views,
     time,
     Name,
-    embedId) => {
+    embedId
+  ) => {
     // setInWatchLater(!InWatchLater);
     const docRef = doc(db, "History", embedId);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
       await setDoc(
-        doc(db, "History",embedId),
+        doc(db, "History", embedId),
         {
           embedId,
-      Thumbnail,
-      text,
-      Avatar,
-      views,
-      time,
-      Name,
+          Thumbnail,
+          text,
+          Avatar,
+          views,
+          time,
+          Name,
           Author: auth.currentUser.uid,
         },
         { merge: true }
       );
-    //   // setInWatchLater("Add to");
-    // }
-    // if (docSnap.exists()) {
-    //   await deleteDoc(
-    //     doc(db, "History", Id),
-    //     where("Author", "==", user.uid)
-    //   );
-    //   // setInWatchLater(true);
+      //   // setInWatchLater("Add to");
+      // }
+      // if (docSnap.exists()) {
+      //   await deleteDoc(
+      //     doc(db, "History", Id),
+      //     where("Author", "==", user.uid)
+      //   );
+      //   // setInWatchLater(true);
     }
   };
-const checkExistence = async (embedId)=>{
-  const docRef = doc(db, "Watch Later", embedId);
-  const docSnap = await getDoc(docRef);
-  if (!docSnap.exists()) {
-    setInWatchLater(false);
-  }else{
-    setInWatchLater(true);
-  }
-}
-// const [videoLiked, setVideoLiked] = useState(false);
+  const checkExistence = async (embedId) => {
+    const docRef = doc(db, "Watch Later", embedId);
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) {
+      setInWatchLater(false);
+    } else {
+      setInWatchLater(true);
+    }
+  };
+  // const [videoLiked, setVideoLiked] = useState(false);
 
-const checkLikedExistence = async (embedId) => {
-  const docRef = doc(db, "Liked", embedId);
-  const docSnap = await getDoc(docRef);
-  if (!docSnap.exists()) {
-    setVideoLiked(false);
-  } else {
-    setVideoLiked(true);
-  }
-  console.log(VideoLiked);
-  console.log('agw');
-};
+  const checkLikedExistence = async (embedId) => {
+    const docRef = doc(db, "Liked", embedId);
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) {
+      setVideoLiked(false);
+    } else {
+      setVideoLiked(true);
+    }
+    console.log(VideoLiked);
+    console.log("agw");
+  };
   return (
     <>
       <HomeFilter />
       {/* <SideBar /> */}
-      <section className="grid-section"  id={theme?'light':'dark'}>
+      <section className="grid-section" id={theme ? "light" : "dark"}>
         {FilterId === "All" || !FilterId
           ? MainData.map(
               ({
@@ -116,24 +118,23 @@ const checkLikedExistence = async (embedId) => {
                 Category,
               }) => {
                 return (
-                  <div 
-                  
-                  key={uuidv4()}
-                  >
+                  <div key={uuidv4()}>
                     <Link
                       to={`/video/${embedId}`}
                       className="video"
                       onClick={() => {
                         getId(embedId);
                         getTitle(text);
-                        handleHistory(Thumbnail, text,
+                        handleHistory(
+                          Thumbnail,
+                          text,
                           Avatar,
                           views,
                           time,
                           Name,
-                          embedId);
-                          checkLikedExistence(embedId)
-
+                          embedId
+                        );
+                        checkLikedExistence(embedId);
                       }}
                     >
                       <div className="video-top">
@@ -157,7 +158,7 @@ const checkLikedExistence = async (embedId) => {
                                 e.preventDefault();
                                 e.stopPropagation();
                                 setMoreModal(!moreModal);
-                                 checkExistence(embedId);
+                                checkExistence(embedId);
                               }}
                             >
                               <img src={more} alt="more" />
@@ -208,16 +209,18 @@ const checkLikedExistence = async (embedId) => {
                     <Link
                       to={`/video/${embedId}`}
                       className="video"
-                      
                       onClick={() => {
                         getId(embedId);
                         getTitle(text);
-                        handleHistory(Thumbnail, text,
+                        handleHistory(
+                          Thumbnail,
+                          text,
                           Avatar,
                           views,
                           time,
                           Name,
-                          embedId);
+                          embedId
+                        );
                       }}
                     >
                       <div className="video-top">
@@ -240,8 +243,7 @@ const checkLikedExistence = async (embedId) => {
                                 e.stopPropagation();
                                 handleClick(embedId);
                                 setMoreModal(!moreModal);
-                                checkExistence(embedId)
-
+                                checkExistence(embedId);
                               }}
                             >
                               <img src={more} alt="more" />
@@ -255,7 +257,7 @@ const checkLikedExistence = async (embedId) => {
                                 views={views}
                                 time={time}
                                 Name={Name}
-                                WL = {InWatchLater}
+                                WL={InWatchLater}
                                 setWL={setInWatchLater}
                               />
                             ) : (

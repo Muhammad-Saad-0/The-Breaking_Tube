@@ -29,30 +29,37 @@ const Main = () => {
   const authUser = useAuth();
   const title = useVideoTitle();
   const theme = useTheme();
-  // function getBg() {
-  //   if (sideBarOpen && !theme) {
-  //     return "#1e1d1d";
-  //   }
-  //   if(!sideBarOpen && !theme){
-  //     "#303030"
-  //   }
-  //   if (sideBarOpen && theme) {
-  //     return '#B2BEB5';
-  //   }
-  //   if(!sideBarOpen && theme){
-  //     "#fffffff"
-  //   }
-  // }
+
+  function getBg() {
+    if (sideBarOpen && !theme) {
+      return "#1e1d1d";
+    }
+    if(!sideBarOpen && !theme){
+      return "#303030"
+    }
+    if (sideBarOpen && theme) {
+      return '#B0B0B0';
+    }
+    if(!sideBarOpen && theme){
+     return "#ffffff"
+    }
+    // return '#ffffff'
+  }
+  console.log(theme);
+  console.log(getBg());
   return (
     <>
       <section
         className="main-section"
         style={
-          // {backgroundColor: getBg() }}
-          sideBarOpen
-            ? { backgroundColor: "#1e1d1d" }
-            : { backgroundColor: "#303030" }
+          {backgroundColor: `${getBg()}`,
+        transition: "all 300ms ease"}
+          
+          // sideBarOpen
+          //   ? { backgroundColor: "#1e1d1d" }
+          //   : { backgroundColor: "#303030" }
   }
+  // id={theme?'light':'dark'}
       >
         <Routes>
           <Route exact path="/" element={<VideosGrid />} />

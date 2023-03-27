@@ -18,9 +18,9 @@
   min-height: 90%;
 /* display: none; */
 }
-/* .main-section#light  {
+.main-section#light  {
   background-color: #ffffff;
-} */
+}
 .grid-section{
     display: grid;
     grid-template-columns: repeat(3,1fr);
@@ -115,6 +115,9 @@ iframe{
    display: flex;
    justify-content: center;
    align-items: center;
+}
+#light .more-button{
+  filter: invert(100%);
 }
 .video-bottom button:active{
   background: #676666;

@@ -21,10 +21,12 @@ import SideBar from "../SideBar/SideBar";
 import more from "../../assets/Icons/Misc/More.svg";
 import MoreModal from "./MoreModal";
 import RemoveWatchLater from "./RemoveWatchLater";
+import { useTheme } from "../../context/ThemeContext";
 
 const Liked = ({ Id }) => {
   const watchLaterId = useWatchLaterId();
   const [moreModal, setMoreModal] = useState(false);
+  const theme = useTheme()
   const [selectedId, setSelectedId] = useState("");
   const handleClick = (embedId) => {
     setSelectedId(embedId);
@@ -65,9 +67,10 @@ const Liked = ({ Id }) => {
   // const list = useWatchLaterList();
   return (
     <>
-    <h3>Liked</h3>
+    <h3 style={theme?{color:'#303030'}:{color:'#ffffff'}}>Liked</h3>
       {/* <SideBar /> */}
-      <section className="watchlater-section">
+      <section className="grid-section"
+        id={theme ? "light" : "dark"}>
         {/* <WatchLaterVideo Id={Id} /> */}
         {/* {list} */}
         {ro.map((r) => {

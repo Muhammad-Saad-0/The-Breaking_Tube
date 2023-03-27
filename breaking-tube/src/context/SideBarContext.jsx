@@ -14,7 +14,6 @@ export function SidebarProvider({ children }) {
 
   function toggleOpen() {
     setSidebarOpen(prev => !prev);
-    console.log(SidebarOpen);
   }
   return (
     <SideBarContext.Provider value={SidebarOpen}>

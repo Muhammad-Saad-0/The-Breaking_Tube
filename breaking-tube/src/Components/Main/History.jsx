@@ -13,9 +13,10 @@ import { async } from "@firebase/util";
 import { doc, onSnapshot } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-
+import { useTheme } from "../../context/ThemeContext";
 const History = () => {
   let user = auth.currentUser;
+  const theme = useTheme()
   const q = query(collection(db, "History"), where("Author", "==", user.uid));
 
   const [ro, setRo] = useState([]);
@@ -50,8 +51,11 @@ const History = () => {
 
   return (
   <>
-  <h3>History</h3>
-    <section className="history-section">
+  <h3 style={theme?{color:'#303030'}:{color:'#ffffff'}}>History</h3>
+    <section className="grid-section"
+        id={theme ? "light" : "dark"}
+    
+    >
       {/* <WatchLaterVideo Id={Id} /> */}
       {/* {list} */}
       {ro.map((r) => {

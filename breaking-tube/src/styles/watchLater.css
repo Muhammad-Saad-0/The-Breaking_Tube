@@ -6,7 +6,16 @@ h3{
     font-size: calc(16px + 1.4vw);
     text-indent: 1vw;
 }
+#light h3{
+    color: #303030;
+}
 .watchlater-section{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    /* width: 90vw; */
+   
+}
+.watchlater-section#light{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     /* width: 90vw; */
