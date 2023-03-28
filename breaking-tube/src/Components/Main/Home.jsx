@@ -45,8 +45,6 @@ const Main = () => {
     }
     // return '#ffffff'
   }
-  console.log(theme);
-  console.log(getBg());
   return (
     <>
       <section

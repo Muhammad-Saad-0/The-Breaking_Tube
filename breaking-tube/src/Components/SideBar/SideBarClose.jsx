@@ -33,7 +33,8 @@ const SideBar = () => {
           <Link to="/"><img src={home} alt="home" />Home</Link>
           <Link to="/playlist"><img src={subscriptions} alt="playlist" />PlayList</Link>
           <Link to="/watchlater"><img src={watchLater} alt="library" />Watch Later</Link>
-         
+          <Link to="/history"><img src={history} alt="history" />History</Link>
+          <Link to="/liked"><img src={liked} alt="liked" />Liked Videos</Link>
     
     </aside>
   )

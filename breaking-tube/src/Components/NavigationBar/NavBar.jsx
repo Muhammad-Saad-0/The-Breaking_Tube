@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import {
   apps,
@@ -16,19 +16,35 @@ import { CgProfile } from "react-icons/cg";
 import { auth } from "../../Data/base";
 import { IoMoonSharp, IoSunny } from "react-icons/io5";
 import { useTheme } from "../../context/ThemeContext";
-import SearchLogo from '../../assets/Icons/NavIcons/search.svg'
+import SearchLogo from "../../assets/Icons/NavIcons/search.svg";
 import { useThemeUpdate } from "../../context/ThemeContext";
+import { useSidebar } from "../../context/SideBarContext";
 const NavBar = () => {
   const auth = useAuth();
 
   const toggleSidebar = useSidebarUpdate();
+  const SidebarOpen = useSidebar()
   const toggleTheme = useThemeUpdate();
   const theme = useTheme();
+
+
+
+let mql = window.matchMedia("(max-width: 620px)");
+
+useEffect(()=>{
+// if(mql.matches){
+  toggleSidebar(false)
+  console.log(window.innerWidth);
+
+// }
+  },[window.innerWidth])
+// console.log(mql.matches);
+
   return (
     <SidebarProvider>
       <nav id={theme ? "light" : "dark"}>
         <div className="nav-left">
-          <button onClick={toggleSidebar}>
+          <button onClick={()=>{toggleSidebar(true)}}>
             <img src={hamburger} alt="menu" />
           </button>
           <Link to={"/"} style={{ textDecoration: "none" }}>
@@ -39,7 +55,9 @@ const NavBar = () => {
           <SearchBar />
         </div>
         <div className="nav-right">
-        <button id='search-btn-right'><img src={SearchLogo} alt="search" /></button>
+          <button id="search-btn-right">
+            <img src={SearchLogo} alt="search" />
+          </button>
           <button>
             <img src={create} alt="create" />
           </button>

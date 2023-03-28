@@ -76,3 +76,42 @@ img{
     font-size:  calc(16px + 2vw);
     color: rgb(8, 203, 8);
   }
+
+  @media only screen and (max-width: 620px) {
+    iframe{
+        height: 50vw;
+        width: 95vw;
+        position: absolute;
+        top: 12vw;
+        left: 2.5vw;
+    }
+    .video-page-name{
+        font-size: calc(16px + 2.5vw);
+        top: 64vw;
+        left: 4vw;
+    }
+    .video-page-info{
+    top: 72vw;
+    width: 80%;
+    align-items: center;
+    gap: 65vw;
+    }
+    .video-page-info>p{
+    text-indent: 5vw;
+    font-size: 3.5vw;
+    padding-top: 2vw;
+    }
+    img{
+        height:  calc(16px + 6vw);
+        width:  calc(16px + 6vw);
+    }
+    .channel-logo{
+        position: relative;
+        left: -5vw;
+    }
+    .video-buttons-container button:nth-child(1){
+        all: unset;
+        font-size:  calc(16px + 4vw);
+        color: rgb(8, 203, 8);
+      }
+  }

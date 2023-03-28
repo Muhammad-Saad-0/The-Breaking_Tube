@@ -12,12 +12,15 @@ export function useSidebarUpdate(){
 export function SidebarProvider({ children }) {
   const [SidebarOpen, setSidebarOpen] = useState(false);
 
-  function toggleOpen() {
-    setSidebarOpen(prev => !prev);
-  }
+  // function toggleOpen() {
+    // setSidebarOpen(!SidebarOpen);
+  // }
+  // function toggleOpen() {
+  //   setSidebarOpen(prev => !prev);
+  // }
   return (
     <SideBarContext.Provider value={SidebarOpen}>
-      <SideBarUpdateContext.Provider value={toggleOpen}>
+      <SideBarUpdateContext.Provider value={setSidebarOpen}>
         {children}
       </SideBarUpdateContext.Provider>
     </SideBarContext.Provider>

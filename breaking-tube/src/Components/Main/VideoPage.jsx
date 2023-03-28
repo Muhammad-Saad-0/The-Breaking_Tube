@@ -89,7 +89,7 @@ const theme = useTheme()
                 {text}
               </p>
               <div className="video-page-info">
-                <img src={Avatar} alt="logo" />
+                <img className="channel-logo" src={Avatar} alt="logo" />
                 <p>{Name}</p>
 
                 <div className="video-buttons-container">
