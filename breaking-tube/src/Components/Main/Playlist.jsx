@@ -23,16 +23,23 @@ import MoreModal from "./MoreModal";
 import RemoveWatchLater from "./RemoveWatchLater";
 import "../../styles/Playlist.css";
 import { useTheme } from "../../context/ThemeContext";
+import { BsFillTrash3Fill } from "react-icons/bs";
+import { useNavigate } from "react-router";
+import NoVideos from "./NoVideos";
+
 const Playlist = ({ Id }) => {
+  const nav = useNavigate()
+  const [empty,setEmpty] = useState(false)
+
   const watchLaterId = useWatchLaterId();
   const [moreModal, setMoreModal] = useState(false);
   const [selectedId, setSelectedId] = useState("");
   const handleClick = (embedId) => {
     setSelectedId(embedId);
   };
-const theme = useTheme()
+  const theme = useTheme();
   let user = auth.currentUser;
-  const q = query(collection(db, "Playlist"));
+  const q = query(collection(db, "Playlist"), where("Author", "==", user.uid));
 
   const [playlistName, setPlaylistName] = useState([]);
   useEffect(() => {
@@ -49,56 +56,57 @@ const theme = useTheme()
           ]);
         }
       });
+      if(Vids.docs.length === 0){
+        setEmpty(true)
+      }
     };
 
     getPlaylist();
   }, []);
-  // const [playlistThumbnail, setPlaylistThumbnail] = useState([]);
+  const handleDel = async (Id)=>{
+    const docRef = doc(db, "Playlist", Id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      await deleteDoc(
+        doc(db, "Playlist", Id),
+        where("Author", "==", user.uid)
+      );
 
-  // useEffect(() => {
-  //   const getPlaylistThumbnail = () => {
-  //     playlistName.map(async (name) => {
-  //       console.log(Object.values(name)[0]);
-
-  //       const q2 = query(collection(db, "Playlist", Object.values(name)[0], "videos"));
-  //       const Vids = await getDocs(q2);
-  //       Vids.forEach((Vid) => {
-  //         setPlaylistThumbnail((r) => [
-  //           ...r,
-            
-  //            Vid.data().Thumbnail,
-  //           ,
-  //         ].slice(0,Vids.docs.length + 1));
-  //         // }
-  //       });
-  //     });
-  //   };
-
-  //   getPlaylistThumbnail();
- 
-  // }, []);
-  // console.log(playlistThumbnail);
-  // const arr = [playlistName,playlistThumbnail]
-  // console.log(arr);
+     nav(0)
+    }
+  }
   return (
     <>
-    <h3 style={theme?{color:'#303030'}:{color:'#ffffff'}}>Playlists</h3>
-      <section className="playlist-page" id={theme?'light':'dark'}>
+      <h3 style={theme ? { color: "#303030" } : { color: "#ffffff" }}>
+        Playlists
+      </h3>
+      {empty?<NoVideos /> :<section
+        className="playlist-page video-grid"
+        id={theme ? "light" : "dark"}
+      >
         {playlistName.map((r) => {
           return (
             <Link to={`/playlist/${r.Name}`} className="video" key={uuidv4()}>
-            <div>
-            <span>
-              <p>{r.Name}</p>
-
-              </span>
-         
-              <img src='https://i3.ytimg.com/vi/40tX4s5Ecwc/maxresdefault.jpg'/>
+              <div>
+                {" "}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    handleDel(r.Name)
+                  }}
+                >
+                  <BsFillTrash3Fill />
+                </button>
+                <span>
+                  <p>{r.Name}</p>
+                </span>
+                <img src="https://i3.ytimg.com/vi/40tX4s5Ecwc/maxresdefault.jpg" />
               </div>
             </Link>
           );
         })}
-      </section>
+      </section>}
     </>
   );
 };

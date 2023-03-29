@@ -8,17 +8,25 @@ import {
   Firestore,
   where,
   query,
+  deleteDoc,
+  getDoc
 } from "firebase/firestore";
 import { async } from "@firebase/util";
+import { BsFillTrash3Fill } from "react-icons/bs";
 import { doc, onSnapshot } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import NoVideos from "./NoVideos";
+import { useNavigate } from "react-router";
 import { useTheme } from "../../context/ThemeContext";
 const History = () => {
   let user = auth.currentUser;
+  console.log(user.uid);
   const theme = useTheme()
   const q = query(collection(db, "History"), where("Author", "==", user.uid));
+  const [empty,setEmpty] = useState(false)
 
+  const nav = useNavigate()
   const [ro, setRo] = useState([]);
   useEffect(() => {
     const getVids = async () => {
@@ -44,15 +52,29 @@ const History = () => {
           ]);
         }
       });
+      if(Vids.docs.length === 0){
+        setEmpty(true)
+      }
     };
 
     getVids();
   }, []);
+  const handleDel = async (Id)=>{
+    const docRef = doc(db, "History", Id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      await deleteDoc(
+        doc(db, "History", Id),
+        where("Author", "==", user.uid)
+      );
 
+     nav(0)
+    }
+  }
   return (
   <>
   <h3 style={theme?{color:'#303030'}:{color:'#ffffff'}}>History</h3>
-    <section className="grid-section"
+    {empty?<NoVideos />:<section className="grid-section"
         id={theme ? "light" : "dark"}
     
     >
@@ -62,7 +84,17 @@ const History = () => {
         return (
           <Link to={`/video/${r.Id}`} className="video" key={uuidv4()}>
             <div className="video-top">
+
               <div className="thumbnail-section">
+              <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    handleDel(r.Id)
+                  }}
+                >
+                  <BsFillTrash3Fill />
+                </button>
                 <img src={r.Thumbnail} alt={r.text} />
               </div>
             </div>
@@ -112,7 +144,7 @@ const History = () => {
           </Link>
         );
       })}
-    </section>
+    </section>}
   </>
   );
 };

@@ -9,6 +9,22 @@
   border-radius: 0.7vw;
   
 }
+.playlist-page button{
+  all: unset;
+  color: rgb(217, 3, 3);
+  position: absolute;
+  margin: 1vw;
+  font-size: calc(16px + 2vw);
+  padding: 1.2vw;
+  border-radius: 50%;
+  height: 3vw;
+  transition: all 200ms ease;
+  width: 3vw;
+}
+.playlist-page button:hover{
+  background-color: rgba(224, 134, 134, 0.593);
+  transition: all 200ms ease;
+}
 .playlist-page div{
     position: relative;
 }
@@ -59,7 +75,19 @@
 @media only screen and (max-width: 37.5em) {
 .playlist-page {
   grid-template-columns: repeat(1, 1fr);
-  transform: translateX(30%);
+  transform: translateX(0%);
   width: 70%;
-  }
+  }  .playlist-page div img{
+    height: calc(16px + 41.58vw);
+    width: calc(16px + 77vw);
+  
+}
+.playlist-page span{
+  transform: translate(40vw,0vw);
+  width: 50%;
+  height: 92%;
+
+}.playlist-page p{ 
+  font-size:6vw;
+}
 }

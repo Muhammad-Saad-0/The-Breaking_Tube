@@ -86,6 +86,7 @@ setInterval(() => {
               doc(db, "Playlist", N),
               {
                 Name:N,
+                Author: auth.currentUser.uid
               },
               { merge: true }
             );
@@ -147,7 +148,11 @@ setInterval(() => {
             placeholder="Name of Playlist..."
             onChange={(e) => {
               setPlaylistName(e.target.value);
-            }}
+              e.stopPropagation()
+              e.preventDefault()
+              
+            }} 
+            onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
             value={playlistName}
           />
           <button
@@ -157,6 +162,8 @@ setInterval(() => {
               setPlaylistName("");
               e.preventDefault();
             }}
+            onKeyDown={(e) => { e.key === 'Enter' && e.preventDefault(); }}
+
             disabled={playlistNameList.length >= 8 || playlistName === ""}
           >
             Enter

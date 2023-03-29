@@ -104,6 +104,22 @@ iframe{
   height: 15.3vw;
   width: 27vw;
 }
+.thumbnail-section>button{
+  all: unset;
+  color: rgb(217, 3, 3);
+  position: absolute;
+  margin: 1vw;
+  font-size: calc(16px + 2vw);
+  padding: 1.2vw;
+  border-radius: 50%;
+  height: 3vw;
+  transition: all 200ms ease;
+  width: 3vw;
+}
+.thumbnail-section button:hover{
+  background-color: rgba(224, 134, 134, 0.593);
+  transition: all 200ms ease;
+}
 .more-button{
   background: none;
   border: none;

@@ -28,7 +28,6 @@ const VideosGrid = () => {
   const theme = useTheme();
 
   let user = auth.currentUser;
-
   // const handleClick = (e) =>{
   //   e.Stop
   //   console.log('clicked');

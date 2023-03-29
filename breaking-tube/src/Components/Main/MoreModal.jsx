@@ -36,17 +36,17 @@ const MoreModal = ({
   const [clickPlaylist, setClickPlaylist] = useState(false);
   const [playlistNameListDB, setPlaylistNameListDB] = useState([]);
 
-  const nav = useNavigate();
-  useEffect(() => {
-    const abc = async () => {
-      const docRef = doc(db, "Watch Later", Id);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setInWatchLater(false);
-      }
-    };
-    //  abc()
-  }, []);
+  // const nav = useNavigate();
+  // useEffect(() => {
+  //   const abc = async () => {
+  //     const docRef = doc(db, "Watch Later", Id);
+  //     const docSnap = await getDoc(docRef);
+  //     if (docSnap.exists()) {
+  //       setInWatchLater(false);
+  //     }
+  //   };
+  //   //  abc()
+  // }, []);
 
   let user = auth.currentUser;
   const handleDoc = async () => {

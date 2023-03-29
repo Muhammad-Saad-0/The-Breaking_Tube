@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useWatchLaterList } from "../../context/WatchLaterContext";
 import WatchLaterVideo from "./WatchLaterVideo";
-import "../../styles/watchLater.css";
+// import "../../styles/watchLater.css";
 import { db, colRef, auth } from "../../Data/base";
 import {
   getDocs,
@@ -21,10 +21,15 @@ import SideBar from "../SideBar/SideBar";
 import more from "../../assets/Icons/Misc/More.svg";
 import MoreModal from "./MoreModal";
 import RemoveWatchLater from "./RemoveWatchLater";
+import NoVideos from "./NoVideos";
 import { useTheme } from "../../context/ThemeContext";
+import { BsFillTrash3Fill } from "react-icons/bs";
+import { useNavigate } from "react-router";
 
 const Liked = ({ Id }) => {
   const watchLaterId = useWatchLaterId();
+  const nav = useNavigate()
+  const [empty,setEmpty] = useState(false)
   const [moreModal, setMoreModal] = useState(false);
   const theme = useTheme()
   const [selectedId, setSelectedId] = useState("");
@@ -58,18 +63,31 @@ const Liked = ({ Id }) => {
             },
           ]);
         }
-      });
+      });if(Vids.docs.length === 0){
+        setEmpty(true)
+      }
     };
 
     getVids();
   }, []);
+  const handleDel = async (Id)=>{
+    const docRef = doc(db, "Liked", Id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      await deleteDoc(
+        doc(db, "Liked", Id),
+        where("Author", "==", user.uid)
+      );
 
+     nav(0)
+    }
+  }
   // const list = useWatchLaterList();
   return (
     <>
     <h3 style={theme?{color:'#303030'}:{color:'#ffffff'}}>Liked</h3>
       {/* <SideBar /> */}
-      <section className="grid-section"
+    {empty?<NoVideos />:  <section className="grid-section"
         id={theme ? "light" : "dark"}>
         {/* <WatchLaterVideo Id={Id} /> */}
         {/* {list} */}
@@ -78,6 +96,15 @@ const Liked = ({ Id }) => {
             <Link to={`/video/${r.embedId}`} className="video" key={uuidv4()}>
               <div className="video-top">
                 <div className="thumbnail-section">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    handleDel(r.embedId)
+                  }}
+                >
+                  <BsFillTrash3Fill />
+                </button>
                   <img src={r.Thumbnail} alt={r.text} />
                 </div>
               </div>
@@ -127,7 +154,7 @@ const Liked = ({ Id }) => {
             </Link>
           );
         })}
-      </section>
+      </section>}
     </>
   );
 };

@@ -23,10 +23,12 @@ import MoreModal from "./MoreModal";
 import RemoveWatchLater from "./RemoveWatchLater";
 import { useTheme } from "../../context/ThemeContext";
 import "../../styles/Home.css";
+import NoVideos from "./NoVideos";
 const WatchLater = ({ Id }) => {
   const watchLaterId = useWatchLaterId();
   const [moreModal, setMoreModal] = useState(false);
   const [selectedId, setSelectedId] = useState("");
+  const [empty,setEmpty] = useState(false)
   const handleClick = (embedId) => {
     setSelectedId(embedId);
   };
@@ -57,6 +59,9 @@ const theme = useTheme()
           ]);
         }
       });
+      if(Vids.docs.length === 0){
+        setEmpty(true)
+      }
     };
 
     getVids();
@@ -70,7 +75,7 @@ const theme = useTheme()
     <>
       {/* <SideBar /> */}
       <h3 style={theme?{color:'#303030'}:{color:'#ffffff'}}>Watch Later</h3>
-      <section
+    {empty?<NoVideos />:   <section
         // className="watchlater-section"
         className="grid-section"
         id={theme ? "light" : "dark"}
@@ -133,7 +138,7 @@ const theme = useTheme()
             </div>
           );
         })}
-      </section>
+      </section>}
     </>
   );
 };
