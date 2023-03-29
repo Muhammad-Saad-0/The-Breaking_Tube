@@ -13,12 +13,8 @@ const SideBar = () => {
     // console.log(sidebarOpen);
   return (
     <>
-      {/* <SidebarProvider> */}
-       {sidebarOpen
-        // && !isTabletOrMobile
+       {sidebarOpen && window.innerWidth >= 620
          ?<SidebarOpen />: <SidebarClose />}
-       {/* <SidebarOpen /> */}
-      {/* </SidebarProvider> */}
     </>
   );
 };

@@ -23,28 +23,14 @@ const NavBar = () => {
   const auth = useAuth();
 
   const toggleSidebar = useSidebarUpdate();
-  const SidebarOpen = useSidebar()
   const toggleTheme = useThemeUpdate();
   const theme = useTheme();
-
-
-
-let mql = window.matchMedia("(max-width: 620px)");
-
-useEffect(()=>{
-// if(mql.matches){
-  toggleSidebar(false)
-  console.log(window.innerWidth);
-
-// }
-  },[window.innerWidth])
-// console.log(mql.matches);
 
   return (
     <SidebarProvider>
       <nav id={theme ? "light" : "dark"}>
         <div className="nav-left">
-          <button onClick={()=>{toggleSidebar(true)}}>
+          <button onClick={toggleSidebar}>
             <img src={hamburger} alt="menu" />
           </button>
           <Link to={"/"} style={{ textDecoration: "none" }}>

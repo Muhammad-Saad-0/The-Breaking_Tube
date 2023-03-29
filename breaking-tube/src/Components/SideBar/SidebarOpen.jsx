@@ -37,7 +37,7 @@ const SidebarOpen = () => {
   // <SidebarProvider >
       <aside className='open-sidebar'  id={theme?'light':'dark'}>
          <div className="open-sidebar-top">
-          <button onClick={()=>{toggleSidebar(false)}}>
+          <button onClick={toggleSidebar}>
             <img src={hamburger} alt="menu" />
           </button>
          <Link to={'/'} style={{ textDecoration: 'none' }}>

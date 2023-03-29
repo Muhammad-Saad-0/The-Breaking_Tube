@@ -38,3 +38,44 @@
     background-color: rgba(255, 255, 255, 0.239);
     cursor: pointer;
 }
+@media only screen and (max-width: 830px) {
+    .profile-section{
+        height: 30vw;
+    width: 60vw; 
+     transform: translate(12vw,4vw
+    );
+    }
+    .profile-section>img{
+        height: 8vw;
+        width: 8vw;
+    }.profile-section>p{
+        color: white;
+        font-weight: 700;
+        font-size: 2vw;
+        margin-top: 1vw;
+    }.profile-section>button{
+        padding: 2vw;
+        width: 14vw;
+        font-size: 2vw;
+    }
+}
+@media only screen and (max-width: 620px) {
+    .profile-section{
+        height: 70vw;
+    width: 70vw; 
+     transform: translate(5vw,4vw
+    );
+    } .profile-section>img{
+        height: 12vw;
+        width: 12vw;
+    }.profile-section>p{
+        color: white;
+        font-weight: 700;
+        font-size: 4vw;
+        margin-top: 1vw;
+    }.profile-section>button{
+        padding: 3vw;
+        width: 26vw;
+        font-size: 4vw;
+    }
+}
