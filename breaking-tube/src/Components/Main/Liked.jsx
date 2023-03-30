@@ -71,11 +71,11 @@ const Liked = ({ Id }) => {
     getVids();
   }, []);
   const handleDel = async (Id)=>{
-    const docRef = doc(db, "Liked", Id);
+    const docRef = doc(db, "Liked", `${Id + "+"+auth.currentUser.uid}`);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       await deleteDoc(
-        doc(db, "Liked", Id),
+        doc(db, "Liked", `${Id + "+"+auth.currentUser.uid}`),
         where("Author", "==", user.uid)
       );
 

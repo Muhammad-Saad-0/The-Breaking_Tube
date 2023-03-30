@@ -23,31 +23,44 @@ const PlaylistModal = ({
   Name,
   handleRemove,
   closePlaylist,
-  playlistNameListDB
+  // playlistNameListDB
 }) => {
   const [playlistNameList, setPlaylistNameList] = useState([]);
   const [playlistName, setPlaylistName] = useState("");
-  // const [playlistNameListDB, setPlaylistNameListDB] = useState([]);
+  const [playlistNameListDB, setPlaylistNameListDB] = useState([]);
 
   // useEffect(() => {
-    // const getPlaylistNames = async () => {
-    //   const docRef = collection(db, "Playlist");
-    //   const Playlists = await getDocs(docRef);
-    //   Playlists.forEach((Playlist) => {
-    //     setPlaylistNameListDB((r) =>
-    //       [...r, [Playlist.data().Name]]
-    //       .slice(0, Playlists.docs.length)
-    //     );
-    //   });
-setInterval(() => {
-  setPlaylistNameList(playlistNameListDB);
-  
-}, 1000);
-    // };
-    // getPlaylistNames();
+    const getPlaylistNames = async () => {
+      const docRef = collection(db, "Playlist");
+      const Playlists = await getDocs(docRef);
+      Playlists.forEach((Playlist) => {
+        setPlaylistNameListDB((r) =>
+          [...r, [Playlist.data().Name]]
+          .slice(0, Playlists.docs.length)
+        );
+      });
+
+
+
+    };
+    getPlaylistNames();
+  // setPlaylistNameList(playlistNameListDB);
+
   // }, []);
+
+
+  // useEffect(()=>{
+    // setPlaylistNameList(playlistNameListDB);
+  // },[])
+
+//   setTimeout(() => {
+// getPlaylistNames()
+//     setPlaylistNameList(playlistNameListDB);
+  
+// }, 300);
+
   const handleClick = async (a) => {
-    { console.log(a[0]);
+    {
       // playlistNameList.map(async () => {
         const docRef = doc(db, "Playlist",a[0]  , "videos", Id);
         const docSnap = await getDoc(docRef);
@@ -72,18 +85,16 @@ setInterval(() => {
       // });
     }
   };
+
   useEffect(() => {
     const handleListDb = () => {
       {
-        console.log(playlistNameList);
         playlistNameList.map(async (N) => {
-        console.log(N);
-
-          const docRef = doc(db, "Playlist", N);
+          const docRef = doc(db, "Playlist", `${N + "+"+auth.currentUser.uid}`);
           const docSnap = await getDoc(docRef);
           if (!docSnap.exists()) {
             await setDoc(
-              doc(db, "Playlist", N),
+              doc(db, "Playlist", `${N + "+"+auth.currentUser.uid}`),
               {
                 Name:N,
                 Author: auth.currentUser.uid
@@ -96,7 +107,7 @@ setInterval(() => {
     };
     handleListDb();
   }, [playlistNameList]);
-
+// console.log(playlistNameListDB);
   return (
     <section
       className="playlist-modal-section"
@@ -118,7 +129,7 @@ setInterval(() => {
           </button>
         </div>
         <ul>
-          {playlistNameList.map((a) => {
+          {playlistNameListDB.map((a) => {
             return (
               <li>
                 <button
@@ -158,7 +169,8 @@ setInterval(() => {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              setPlaylistNameList([...playlistNameList, playlistName]);
+              // setPlaylistNameList([...playlistNameList, playlistName]);
+            
               setPlaylistName("");
               e.preventDefault();
             }}

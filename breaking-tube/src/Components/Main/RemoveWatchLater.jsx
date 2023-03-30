@@ -27,11 +27,11 @@ const RemoveWatchLater = ({
   let user = auth.currentUser;
   const handleDoc = async () => {
     
-    const docRef = doc(db, "Watch Later", Id);
+    const docRef = doc(db, "Watch Later",  `${Id + "+"+auth.currentUser.uid}`);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       await deleteDoc(
-        doc(db, "Watch Later", Id),
+        doc(db, "Watch Later", `${Id + "+"+auth.currentUser.uid}`),
         where("Author", "==", user.uid)
       );
 

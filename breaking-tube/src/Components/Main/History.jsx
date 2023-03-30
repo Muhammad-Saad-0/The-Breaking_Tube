@@ -60,11 +60,11 @@ const History = () => {
     getVids();
   }, []);
   const handleDel = async (Id)=>{
-    const docRef = doc(db, "History", Id);
+    const docRef = doc(db, "History", `${Id + "+"+auth.currentUser.uid}`);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       await deleteDoc(
-        doc(db, "History", Id),
+        doc(db, "History", `${Id + "+"+auth.currentUser.uid}`),
         where("Author", "==", user.uid)
       );
 

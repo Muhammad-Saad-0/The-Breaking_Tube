@@ -15,6 +15,7 @@ import {
   deleteDoc,
   where,
   getDocs,
+  query,
 } from "firebase/firestore";
 import { db, auth } from "../../Data/base";
 import PlaylistModal from "./PlaylistModal";
@@ -50,11 +51,11 @@ const MoreModal = ({
 
   let user = auth.currentUser;
   const handleDoc = async () => {
-    const docRef = doc(db, "Watch Later", Id);
+    const docRef = doc(db, "Watch Later", `${Id + "+"+user.uid}`);
     const docSnap = await getDoc(docRef);
-    if (!docSnap.exists()) {
+    // if (!docSnap.exists()) {
       await setDoc(
-        doc(db, "Watch Later", Id),
+        doc(db, "Watch Later",  `${Id + "+" +user.uid}`),
         {
           Id,
           Thumbnail,
@@ -68,19 +69,22 @@ const MoreModal = ({
         { merge: true }
       );
     
-    }else{
+    // }else{
       
-    }
+    // }
    
   };
   const handlePlaylist = () => {
     setClickPlaylist(true);
   };
 
-
+  const q = query(
+    collection(db, "Playlist"),
+    where("Author", "==", user.uid)
+  );
   const getPlaylistNames = async () => {
-    const docRef = collection(db, "Playlist");
-    const Playlists = await getDocs(docRef);
+    // const docRef = collection(db, "Playlist");
+    const Playlists = await getDocs(q);
     Playlists.forEach((Playlist) => {
       setPlaylistNameListDB((r) =>
         [...r, [Playlist.data().Name]]

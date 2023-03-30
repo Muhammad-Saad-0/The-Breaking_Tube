@@ -48,12 +48,12 @@
     .No-videos-section>p{
         color: white;
         font-weight: 700;
-        font-size: 2vw;
+        font-size: 4vw;
         margin-top: 1vw;
-    }.No-videos-section>button{
+    }.No-videos-section a button{
         padding: 2vw;
-        width: 14vw;
-        font-size: 2vw;
+        width: 30vw;
+        font-size: 3vw;
     }
 }
 @media only screen and (max-width: 620px) {
@@ -68,11 +68,11 @@
     }.No-videos-section>p{
         color: white;
         font-weight: 700;
-        font-size: 4vw;
+        font-size: 6vw;
         margin-top: 1vw;
-    }.No-videos-section>button{
+    }.No-videos-section a button{
         padding: 3vw;
-        width: 26vw;
-        font-size: 4vw;
+        width: 48vw;
+        font-size: 5vw;
     }
 }

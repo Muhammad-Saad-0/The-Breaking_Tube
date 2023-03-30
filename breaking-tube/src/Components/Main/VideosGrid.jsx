@@ -11,7 +11,7 @@ import more from "../../assets/Icons/Misc/More.svg";
 import MoreModal from "./MoreModal";
 import { useWatchLaterIdUpdate } from "../../context/WatchLaterId";
 import { db, auth } from "../../Data/base";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc,query,collection,where,getDocs } from "firebase/firestore";
 import { async } from "@firebase/util";
 import SideBar from "../SideBar/SideBarClose";
 import { useCheckLikedUpdate } from "../../context/LikedContext";
@@ -52,9 +52,9 @@ const VideosGrid = () => {
     // setInWatchLater(!InWatchLater);
     const docRef = doc(db, "History", embedId);
     const docSnap = await getDoc(docRef);
-    if (!docSnap.exists()) {
+    // if (!docSnap.exists()) {
       await setDoc(
-        doc(db, "History", embedId),
+        doc(db, "History", `${embedId +'+'+ auth.currentUser.uid}`),
         {
           embedId,
           Thumbnail,
@@ -67,18 +67,10 @@ const VideosGrid = () => {
         },
         { merge: true }
       );
-      //   // setInWatchLater("Add to");
-      // }
-      // if (docSnap.exists()) {
-      //   await deleteDoc(
-      //     doc(db, "History", Id),
-      //     where("Author", "==", user.uid)
-      //   );
-      //   // setInWatchLater(true);
-    }
+    // }
   };
   const checkExistence = async (embedId) => {
-    const docRef = doc(db, "Watch Later", embedId);
+    const docRef = doc(db, "Watch Later", `${embedId + "+"+auth.currentUser.uid}`);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
       setInWatchLater(false);
@@ -87,18 +79,26 @@ const VideosGrid = () => {
     }
   };
   // const [videoLiked, setVideoLiked] = useState(false);
-
+  // const q = query(
+  //   collection(db, "Liked",embedId),
+  //   where("Author", "==", auth.currentUser.uid)
+  // );
   const checkLikedExistence = async (embedId) => {
-    const docRef = doc(db, "Liked", embedId);
+    // const q = query(
+    //     collection(db, "Liked"),
+    //     where("Author", "==", auth.currentUser.uid),
+    //     where("embedId","==",embedId)
+    //   );
+    const docRef = doc(db, "Liked", `${embedId + "+"+auth.currentUser.uid}`);
     const docSnap = await getDoc(docRef);
+    console.log(docSnap.docs);
     if (!docSnap.exists()) {
       setVideoLiked(false);
     } else {
       setVideoLiked(true);
     }
-    console.log(VideoLiked);
-    console.log("agw");
   };
+
   return (
     <>
       <HomeFilter />

@@ -7,7 +7,7 @@ import ReactPlayer from "react-player/youtube";
 import SideBar from "../SideBar/SideBar";
 import more from "../../assets/Icons/Misc/More.svg";
 import MoreModal from "./MoreModal";
-import { deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, setDoc ,query,collection,where} from "firebase/firestore";
 import { db, auth } from "../../Data/base";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useCheckLikedUpdate } from "../../context/LikedContext";
@@ -27,24 +27,26 @@ const theme = useTheme()
 
 
 
-  // const checkLikedExistence = async (embedId) => {
-  //   const docRef = doc(db, "Liked", embedId);
-  //   const docSnap = await getDoc(docRef);
-  //   if (!docSnap.exists()) {
-  //     setVideoLiked(true);
-  //   } else {
-  //     setVideoLiked(true);
-  //   }
-  // };
+//   useEffect(()=>{
+//     const checkLikedExistence = async (embedId) => {
+//     const docRef = doc(db, "Liked", embedId);
+//     const docSnap = await getDoc(docRef);
+//     if (!docSnap.exists()) {
+//       setVideoLiked(true);
+//     } else {
+//       setVideoLiked(true);
+//     }
+//   };
 // checkLikedExistence()
+//   },[])
 
 
   const addtoLiked = async (Avatar, Name, text, Thumbnail, time, views, embedId)=>{
     console.log(embedId);
-    const docRef = doc(db, "Liked", embedId);
+    const docRef = doc(db, "Liked", `${embedId + "+"+auth.currentUser.uid}`);
     const docSnap = await getDoc(docRef);
-    if (!docSnap.exists()) {
-     setDoc(doc(db, "Liked", embedId),
+    // if (!docSnap.exists()) {
+     setDoc(doc(db, "Liked", `${embedId + "+"+auth.currentUser.uid}`),
      {
        embedId,
        Thumbnail,
@@ -57,10 +59,14 @@ const theme = useTheme()
      },
      { merge: true }
    );
-    }else{
-      deleteDoc(doc(db,'Liked',embedId))
-    }
+    // }else{
+      if(docSnap.exists()){
+        deleteDoc(doc(db,'Liked',`${embedId + "+"+user.uid}`))
+
+      }
+    // }
   }
+ 
   const checkExistence = async (embedId)=>{
     const docRef = doc(db, "Watch Later", embedId);
     const docSnap = await getDoc(docRef);
