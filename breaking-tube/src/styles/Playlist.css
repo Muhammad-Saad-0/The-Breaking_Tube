@@ -35,6 +35,7 @@
     color: rgba(255, 255, 255, 0.952);
     font-weight: 700;
     text-align: center;
+    word-break: break-all;
 }
 
 .playlist-page span{

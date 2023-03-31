@@ -23,6 +23,9 @@ import MoreModal from "./MoreModal";
 import { useTheme } from "../../context/ThemeContext";
 import RemoveWatchLater from "./RemoveWatchLater";
 import '../../styles/Home.css'
+import { BsFillTrash3Fill } from "react-icons/bs";
+import { useNavigate } from "react-router";
+import { onAuthStateChanged } from "firebase/auth";
 const SinglePlaylist = ({ Id }) => {
   const watchLaterId = useWatchLaterId();
   const [moreModal, setMoreModal] = useState(false);
@@ -31,16 +34,20 @@ const [selectedId, setSelectedId] = useState("");
   const handleClick = (embedId) => {
     setSelectedId(embedId);
   };
-const {playlistID} = useParams()
+  const nav = useNavigate()
+  const {playlistID} = useParams()
 console.log(playlistID);
   let user = auth.currentUser;
-  const q = query(
-    collection(db, "Playlist",playlistID,'videos'),
-    where("PlaylistName", "==", playlistID)
-  );
+
 
   const [ro, setRo] = useState([]);
   useEffect(() => {
+
+   auth.onAuthStateChanged(()=>{
+    const q = query(
+      collection(db, "Playlist",`${playlistID +'+'+ auth.currentUser.uid}`,'videos'),
+      where("PlaylistName", "==", playlistID)
+    );
     const getVids = async () => {
       const Vids = await getDocs(q);
       Vids.forEach((Vid) => {
@@ -59,11 +66,24 @@ console.log(playlistID);
           ]);
         }
       });
-    };
-
-    getVids();
+    };  getVids();
+  } )
+  
   }, []);
+  const handleDel = async (Id)=>{
+    console.log(Id);
+     const docRef=  doc(db, "Playlist", `${playlistID +'+'+ auth.currentUser.uid}`, "videos", Id)
+    // const docRef = doc(db, "Liked", `${Id + "+"+auth.currentUser.uid}`);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      await deleteDoc(
+        doc(db, "Playlist", `${playlistID +'+'+ auth.currentUser.uid}`, "videos", Id),
+        where("Author", "==", user.uid)
+      );
 
+     nav(0)
+    }
+  }
   //  ro.map((r)=>{
   // console.log(r.Name);
   //  })
@@ -80,7 +100,16 @@ console.log(playlistID);
           return (
             <Link to={`/video/${r.Id}`} className="video" key={uuidv4()}>
               <div className="video-top">
-                <div className="thumbnail-section">
+                
+                <div className="thumbnail-section">    <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    handleDel(r.Id)
+                  }}
+                >
+                  <BsFillTrash3Fill />
+                </button>
                   <img src={r.Thumbnail} alt={r.text} />
                 </div>
               </div>

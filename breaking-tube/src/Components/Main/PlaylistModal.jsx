@@ -23,50 +23,60 @@ const PlaylistModal = ({
   Name,
   handleRemove,
   closePlaylist,
-  // playlistNameListDB
+  playlistNameListDB
 }) => {
   const [playlistNameList, setPlaylistNameList] = useState([]);
   const [playlistName, setPlaylistName] = useState("");
-  const [playlistNameListDB, setPlaylistNameListDB] = useState([]);
+  // const [playlistNameListDB, setPlaylistNameListDB] = useState([]);
 
   // useEffect(() => {
-    const getPlaylistNames = async () => {
-      const docRef = collection(db, "Playlist");
-      const Playlists = await getDocs(docRef);
-      Playlists.forEach((Playlist) => {
-        setPlaylistNameListDB((r) =>
-          [...r, [Playlist.data().Name]]
-          .slice(0, Playlists.docs.length)
-        );
-      });
+    // const getPlaylistNames = async () => {
+    //   const docRef = collection(db, "Playlist");
+    //   const Playlists = await getDocs(docRef);
+    //   Playlists.forEach((Playlist) => {
+    //     setPlaylistNameListDB((r) =>
+    //       [...r, [Playlist.data().Name]]
+    //       .slice(0, Playlists.docs.length)
+    //     );
+    //   });
 
 
 
-    };
-    getPlaylistNames();
+    // };
+    // getPlaylistNames();
   // setPlaylistNameList(playlistNameListDB);
 
   // }, []);
 
 
   // useEffect(()=>{
-    // setPlaylistNameList(playlistNameListDB);
+  //   setPlaylistNameList(playlistNameListDB);
   // },[])
 
-//   setTimeout(() => {
-// getPlaylistNames()
-//     setPlaylistNameList(playlistNameListDB);
-  
-// }, 300);
+  // useEffect(()=>{
+  //   // getPlaylistNames()
+  //       setPlaylistNameList(playlistNameListDB);
+      
+  //   },[])
+//   const a = async ()=>{
+//     await playlistNameListDB
+//     setPlaylistNameList(playlistNameListDB)
+//   }
+// a()
+const [btn,setBtn] = useState(true)
+const handleRefresh = ()=>{
+  setPlaylistNameList(playlistNameListDB);
+  setBtn(false)
 
+}
   const handleClick = async (a) => {
-    {
+console.log(a.toString());
       // playlistNameList.map(async () => {
-        const docRef = doc(db, "Playlist",a[0]  , "videos", Id);
+        const docRef = doc(db, "Playlist",`${a +'+'+ auth.currentUser.uid}`  , "videos", Id);
         const docSnap = await getDoc(docRef);
         if (!docSnap.exists()) {
           await setDoc(
-            doc(db, "Playlist",  a[0], "videos", Id),
+            doc(db, "Playlist", `${a +'+'+ auth.currentUser.uid}`, "videos", Id),
             {
               Id,
               Thumbnail,
@@ -76,14 +86,14 @@ const PlaylistModal = ({
               time,
               Name,
               Author: auth.currentUser.uid,
-              PlaylistName : a[0]
+              PlaylistName : a.toString()
             },
             { merge: true }
           );
         }
         // console.log(a);
       // });
-    }
+    
   };
 
   useEffect(() => {
@@ -97,7 +107,8 @@ const PlaylistModal = ({
               doc(db, "Playlist", `${N + "+"+auth.currentUser.uid}`),
               {
                 Name:N,
-                Author: auth.currentUser.uid
+                Author: auth.currentUser.uid,
+                Thumbnail,
               },
               { merge: true }
             );
@@ -128,8 +139,11 @@ const PlaylistModal = ({
             <RxCross2 />{" "}
           </button>
         </div>
+       {btn&& <button onClick={handleRefresh}>
+          Refresh
+        </button>}
         <ul>
-          {playlistNameListDB.map((a) => {
+          {playlistNameList.map((a) => {
             return (
               <li>
                 <button
@@ -169,7 +183,7 @@ const PlaylistModal = ({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              // setPlaylistNameList([...playlistNameList, playlistName]);
+              setPlaylistNameList([...playlistNameList, playlistName]);
             
               setPlaylistName("");
               e.preventDefault();

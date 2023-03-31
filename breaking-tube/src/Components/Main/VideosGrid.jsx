@@ -11,12 +11,21 @@ import more from "../../assets/Icons/Misc/More.svg";
 import MoreModal from "./MoreModal";
 import { useWatchLaterIdUpdate } from "../../context/WatchLaterId";
 import { db, auth } from "../../Data/base";
-import { doc, getDoc, setDoc,query,collection,where,getDocs } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  query,
+  collection,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { async } from "@firebase/util";
 import SideBar from "../SideBar/SideBarClose";
 import { useCheckLikedUpdate } from "../../context/LikedContext";
 import { useCheckLiked } from "../../context/LikedContext";
 import { useTheme } from "../../context/ThemeContext";
+import { useAuth } from "../../context/AuthContext";
 
 const VideosGrid = () => {
   const getId = useVideoIdUpdate();
@@ -26,7 +35,7 @@ const VideosGrid = () => {
   const setVideoLiked = useCheckLikedUpdate();
   const VideoLiked = useCheckLiked();
   const theme = useTheme();
-
+  const AuthUser = useAuth();
   let user = auth.currentUser;
   // const handleClick = (e) =>{
   //   e.Stop
@@ -53,24 +62,30 @@ const VideosGrid = () => {
     const docRef = doc(db, "History", embedId);
     const docSnap = await getDoc(docRef);
     // if (!docSnap.exists()) {
-      await setDoc(
-        doc(db, "History", `${embedId +'+'+ auth.currentUser.uid}`),
-        {
-          embedId,
-          Thumbnail,
-          text,
-          Avatar,
-          views,
-          time,
-          Name,
-          Author: auth.currentUser.uid,
-        },
-        { merge: true }
-      );
+    await setDoc(
+      doc(db, "History", `${embedId + "+" + auth.currentUser.uid}`),
+      {
+        embedId,
+        Thumbnail,
+        text,
+        Avatar,
+        views,
+        time,
+        Name,
+        Author: auth.currentUser.uid,
+      },
+      { merge: true }
+    );
     // }
   };
+  // auth.onAuthStateChanged(()=>{
+
   const checkExistence = async (embedId) => {
-    const docRef = doc(db, "Watch Later", `${embedId + "+"+auth.currentUser.uid}`);
+    const docRef = doc(
+      db,
+      "Watch Later",
+      `${embedId + "+" + auth.currentUser.uid}`
+    );
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
       setInWatchLater(false);
@@ -78,6 +93,7 @@ const VideosGrid = () => {
       setInWatchLater(true);
     }
   };
+  // checkExistence() } )
   // const [videoLiked, setVideoLiked] = useState(false);
   // const q = query(
   //   collection(db, "Liked",embedId),
@@ -89,7 +105,7 @@ const VideosGrid = () => {
     //     where("Author", "==", auth.currentUser.uid),
     //     where("embedId","==",embedId)
     //   );
-    const docRef = doc(db, "Liked", `${embedId + "+"+auth.currentUser.uid}`);
+    const docRef = doc(db, "Liked", `${embedId + "+" + auth.currentUser.uid}`);
     const docSnap = await getDoc(docRef);
     console.log(docSnap.docs);
     if (!docSnap.exists()) {
@@ -150,18 +166,26 @@ const VideosGrid = () => {
                           <div className="title-button-section">
                             {" "}
                             <p> {text}</p>
-                            <button
-                              className="more-button"
-                              onClick={(e) => {
-                                handleClick(embedId);
-                                e.preventDefault();
-                                e.stopPropagation();
-                                setMoreModal(!moreModal);
-                                checkExistence(embedId);
-                              }}
-                            >
-                              <img src={more} alt="more" />
-                            </button>
+                            {AuthUser ? (
+                              <button
+                                className="more-button"
+                                onClick={(e) => {
+                                  handleClick(embedId);
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  setMoreModal(!moreModal);
+                                  checkExistence(embedId);
+                                }}
+                              >
+                                <img src={more} alt="more" />
+                              </button>
+                            ) : (
+                              <Link to={'/profile'}>
+                                <button className="more-button">
+                                  <img src={more} alt="more" />
+                                </button>
+                              </Link>
+                            )}
                             {moreModal && embedId === selectedId ? (
                               <MoreModal
                                 Id={selectedId}

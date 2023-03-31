@@ -52,6 +52,7 @@ const Playlist = ({ Id }) => {
             ...r,
             {
               Name: Vid.data().Name,
+              Thumbnail: Vid.data().Thumbnail,
             },
           ]);
         }
@@ -64,11 +65,11 @@ const Playlist = ({ Id }) => {
     getPlaylist();
   }, []);
   const handleDel = async (Id)=>{
-    const docRef = doc(db, "Playlist", Id);
+    const docRef = doc(db, "Playlist", `${Id +'+'+ auth.currentUser.uid}`);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       await deleteDoc(
-        doc(db, "Playlist", Id),
+        doc(db, "Playlist", `${Id +'+'+ auth.currentUser.uid}`),
         where("Author", "==", user.uid)
       );
 
@@ -101,7 +102,7 @@ const Playlist = ({ Id }) => {
                 <span>
                   <p>{r.Name}</p>
                 </span>
-                <img src="https://i3.ytimg.com/vi/40tX4s5Ecwc/maxresdefault.jpg" />
+                <img src={r.Thumbnail} />
               </div>
             </Link>
           );

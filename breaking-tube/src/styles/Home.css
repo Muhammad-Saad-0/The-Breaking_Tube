@@ -112,9 +112,9 @@ iframe{
   font-size: calc(16px + 2vw);
   padding: 1.2vw;
   border-radius: 50%;
-  height: 3vw;
+  height: calc(16px + 2vw);
   transition: all 200ms ease;
-  width: 3vw;
+  width: calc(16px + 2vw);
 }
 .thumbnail-section button:hover{
   background-color: rgba(224, 134, 134, 0.593);
