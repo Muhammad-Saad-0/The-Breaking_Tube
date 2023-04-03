@@ -1,75 +1,134 @@
+*{
+    /* border: 1px green solid !important; */
+}
+.sign-in-section {
+  max-height: 40vw;
+  max-width: 40vw;
+  padding: 2vw;
+  transform: translate(50%, 10%);
+  border: rgba(255, 255, 255, 0.45) 3px solid;
+  border-radius: 1vw;
+  background-color: #242121;
+}
+.sign-in-form {
+  display: flex;
+  flex-direction: column;
+}
+.sign-in-form label {
+  color: white;
+  margin-bottom: 0.5vw;
+  margin-top: 0.5vw;
+  font-size: 1.5vw;
+}
+.sign-in-form input {
+  padding: 0.5vw;
+  font-size: 1.5vw;
+  text-indent: 1vw;
+  background-color: rgba(255, 255, 255, 0.707);
+  border: none;
+  border-radius: 0.3vw;
+  color: rgba(0, 0, 0, 0.724);
+}
+.sign-in-form input:focus-visible {
+  border: none;
+  outline: none;
+}
 
-.sign-in-section{
-    max-height: 40vw;
-    max-width: 40vw;
-    padding: 2vw;
-    transform: translate(50%,10%);
-    border: rgba(255, 255, 255, 0.45) 3px solid;
-    border-radius: 1vw;
-     background-color: #242121;
-}
-.sign-in-form{
-    display: flex;
-    flex-direction: column;
-}
-.sign-in-form label{
-    color: white;
-    margin-bottom: .5vw;
-    margin-top: .5vw;
-    font-size: 1.5vw;
-
-}
-.sign-in-form input{
-    padding: .5vw;
-    font-size: 1.5vw;
-    text-indent: 1vw;
-    background-color: rgba(255, 255, 255, 0.707);
-    border: none;
-    border-radius: .3vw;
-    color: rgba(0, 0, 0, 0.724);
-}
-.sign-in-form input:focus-visible{
-    border: none;
-    outline: none;
-}
-
-.sign-in-form div label{
-font-size: 1vw;
-padding-left: .5vw;
+.sign-in-form div label {
+  font-size: 1vw;
+  padding-left: 0.5vw;
 }
 .sign-in-form div {
-    padding: 1vw;
+  padding: 1vw;
 }
-.sign-in-form button{
-    background-color: #13cc25af;
-    color: white;
-    border: none;
-    font-size: 1.5vw;
-    padding: .7vw;
-    border-radius: 2vw;
-    margin-top: 1vw;
-    cursor: pointer;
-    font-weight: 700;
-    letter-spacing: .1vw;
+.sign-in-form button {
+  background-color: #13cc25af;
+  color: white;
+  border: none;
+  font-size: 1.5vw;
+  padding: 0.7vw;
+  border-radius: 2vw;
+  margin-top: 1vw;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.1vw;
 }
-.sign-in-form button:hover{
-    background-color: #19b72997;
-    transition: all 200ms ease;
-
+.sign-in-form button:hover {
+  background-color: #19b72997;
+  transition: all 200ms ease;
 }
-.sign-in-form input[type='checkbox']{
-    accent-color: #097513fd;
+.sign-in-form input[type="checkbox"] {
+  accent-color: #097513fd;
 }
-.sign-in-section h4{
-    color: white;
-    margin-bottom: 1vw;
-    font-size: 2.2vw;
-    text-align: center;
+.sign-in-section h4 {
+  color: white;
+  margin-bottom: 1vw;
+  font-size: 2.2vw;
+  text-align: center;
 }
-.signup-redirect{
-    font-size: 1.3vw;
-    color: white;
-    margin-top: 1vw;
-   display: flex;
-   gap: 1vw;
+.signup-redirect {
+  font-size: 1.3vw;
+  color: white;
+  margin-top: 1vw;
+  display: flex;
+  gap: 1vw;
+}
+@media only screen and (max-width: 830px) {
+    .sign-in-section h4{
+        font-size: 3vw;
+    }
+  .sign-in-section {
+    min-height: 40vw;
+    max-width: 60vw; 
+    transform: translate(12vw,4vw
+    );
+  }
+  .sign-in-section > p {
+    font-size: 2vw;
+  }
+  .sign-in-form button {
+    font-size: 2vw;
+  }
+  .sign-in-form label {
+    font-size: 3vw;
+  }
+  .sign-in-form input {
+    font-size: 2vw;
+  }.sign-in-form div label {
+    font-size: 2vw;
+    padding-left: 0.5vw;
+  }
+}
+@media only screen and (max-width: 620px) {
+    .sign-in-form label {
+        margin-bottom: 2vw;
+        margin-top: 2vw;
+      }
+      .sign-in-section h4{
+        font-size: 5vw;
+    }
+    .sign-in-section{
+        min-height: 60vw;
+    min-width: 70vw; 
+     transform: translate(0vw,10vw
+    );
+    padding: 6vw;
+    }
+      .sign-in-section > p {
+        font-size: 3vw;
+      }
+      .sign-in-form button {
+        font-size: 4vw;
+        padding: 1vw;
+        border-radius: 4vw;
+      }
+      .sign-in-form label {
+        font-size: 5vw;
+      }
+      .sign-in-form input {
+        font-size: 4vw;
+      }.sign-in-form div label {
+        font-size: 3vw;
+        padding-left: 1vw;
+      }
 }

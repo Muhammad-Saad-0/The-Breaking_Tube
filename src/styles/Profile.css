@@ -61,9 +61,9 @@
 }
 @media only screen and (max-width: 620px) {
     .profile-section{
-        height: 70vw;
-    width: 70vw; 
-     transform: translate(5vw,4vw
+        height: 80vw;
+    width: 76vw; 
+     transform: translate(3vw,4vw
     );
     } .profile-section>img{
         height: 12vw;
@@ -71,8 +71,10 @@
     }.profile-section>p{
         color: white;
         font-weight: 700;
-        font-size: 4vw;
+        font-size: 5vw;
+        word-break: break-all;
         margin-top: 1vw;
+        width: 90%;
     }.profile-section>button{
         padding: 3vw;
         width: 26vw;
