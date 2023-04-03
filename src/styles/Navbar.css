@@ -67,7 +67,7 @@ nav form{
 nav form>input{
     background-color: #126c1a;
     color: rgb(255, 247, 247);
-    height: 99%;
+    height: 98%;
     width: 99.5%;
     text-indent: 2vw;
     border-radius: 2vw;
@@ -89,7 +89,7 @@ color: rgba(255, 255, 255, 0.656);
 nav form>button{
     position: absolute;
     right: 0rem;
-    /* top: 1px; */
+    top:0.1rem;
     /* bottom: .9vw; */
     background-color: #06300a;
     /* height: 2.55rem; */

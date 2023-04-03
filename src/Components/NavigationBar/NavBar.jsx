@@ -41,7 +41,7 @@ const NavBar = () => {
           <SearchBar />
         </div>
         <div className="nav-right">
-          <button id="search-btn-right">
+          <button id="search-btn-right" >
             <img src={SearchLogo} alt="search" />
           </button>
           <button>
