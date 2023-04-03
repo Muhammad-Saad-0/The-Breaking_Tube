@@ -181,7 +181,10 @@ const VideosGrid = () => {
                               </button>
                             ) : (
                               <Link to={'/profile'}>
-                                <button className="more-button">
+                                <button className="more-button"    onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                }} >
                                   <img src={more} alt="more" />
                                 </button>
                               </Link>
@@ -243,7 +246,8 @@ const VideosGrid = () => {
                           time,
                           Name,
                           embedId
-                        );
+                        ); 
+                         checkLikedExistence(embedId);
                       }}
                     >
                       <div className="video-top">
@@ -259,18 +263,26 @@ const VideosGrid = () => {
                           <div className="title-button-section">
                             {" "}
                             <p> {text}</p>
-                            <button
-                              className="more-button"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                handleClick(embedId);
-                                setMoreModal(!moreModal);
-                                checkExistence(embedId);
-                              }}
-                            >
-                              <img src={more} alt="more" />
-                            </button>
+                            {AuthUser ? (
+                              <button
+                                className="more-button"
+                                onClick={(e) => {
+                                  handleClick(embedId);
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  setMoreModal(!moreModal);
+                                  checkExistence(embedId);
+                                }}
+                              >
+                                <img src={more} alt="more" />
+                              </button>
+                            ) : (
+                              <Link to={'/profile'}>
+                                <button className="more-button">
+                                  <img src={more} alt="more" />
+                                </button>
+                              </Link>
+                            )}
                             {moreModal && embedId === selectedId ? (
                               <MoreModal
                                 Id={selectedId}

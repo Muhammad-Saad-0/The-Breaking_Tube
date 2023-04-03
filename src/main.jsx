@@ -8,7 +8,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from "./Components/Main/Home";
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode> 
     <BrowserRouter>
