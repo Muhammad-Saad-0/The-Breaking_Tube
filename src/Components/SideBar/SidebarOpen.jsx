@@ -3,24 +3,11 @@ import '../../styles/SideBar.css'
 import { SidebarProvider,useSidebarUpdate } from "../../context/SideBarContext";
 import {Link} from 'react-router-dom'
 import {
-    arrowBottom,
-    explore,
-    feedback,
-    gaming,
-    help,
     history,
     home,
-    library,
     liked,
-    live,
-    play,
-    premium,
-    queue,
-    report,
-    settings,
     subscriptions,
     watchLater,
-    yourVideos
 } from '../../assets/Icons/SideBarIcons'
 import {
   hamburger,
@@ -34,7 +21,6 @@ const SidebarOpen = () => {
   const toggleSidebar = useSidebarUpdate();
 
   return (
-  // <SidebarProvider >
       <aside className='open-sidebar'  id={theme?'light':'dark'}>
          <div className="open-sidebar-top">
           <button onClick={toggleSidebar}>
@@ -54,7 +40,6 @@ const SidebarOpen = () => {
           <Link to="/liked"><img src={liked} alt="liked" />Liked Videos</Link>
     </section>
     </aside>
-  // </SidebarProvider>
   )
 }
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import {
-  apps,
   create,
   hamburger,
   notifications,
@@ -13,12 +12,10 @@ import { useSidebarUpdate } from "../../context/SideBarContext";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { CgProfile } from "react-icons/cg";
-import { auth } from "../../Data/base";
 import { IoMoonSharp, IoSunny } from "react-icons/io5";
 import { useTheme } from "../../context/ThemeContext";
 import SearchLogo from "../../assets/Icons/NavIcons/search.svg";
 import { useThemeUpdate } from "../../context/ThemeContext";
-import { useSidebar } from "../../context/SideBarContext";
 const NavBar = () => {
   const auth = useAuth();
 

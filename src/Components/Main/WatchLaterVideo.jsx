@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import more from "../../assets/Icons/Misc/More.svg";
 import MoreModal from "./MoreModal";
 import { v4 as uuidv4 } from "uuid";
-import { doc, setDoc } from "firebase/firestore";
 const WatchLaterVideo = ({Id}) => {
     const [moreModal, setMoreModal] = useState(false);
     const [selectedId,setSelectedId] = useState('')
@@ -12,14 +11,13 @@ const WatchLaterVideo = ({Id}) => {
    const handleClick =(embedId)=>{
   
     setSelectedId(embedId)
-    console.log(embedId);
+    
    }
-    console.log(Id);
+    
   return (
     <div  >
       {MainData
       .filter((a) => a.embedId === Id)
-    //   .filter((a) => a.embedId === Id)
       .map(
         ({ Thumbnail, text, Avatar, views, time, Name, embedId, Category }) => {
           return (
@@ -53,7 +51,6 @@ const WatchLaterVideo = ({Id}) => {
                           handleClick(embedId);
                           e.preventDefault();
                           e.stopPropagation();
-                          console.log("clicked");
                           setMoreModal(!moreModal);
                         }}
                       >

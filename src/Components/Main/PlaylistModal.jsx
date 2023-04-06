@@ -5,12 +5,7 @@ import { AiOutlinePlusSquare } from "react-icons/ai";
 import {
   doc,
   setDoc,
-  addDoc,
-  collection,
   getDoc,
-  deleteDoc,
-  where,
-  getDocs,
 } from "firebase/firestore";
 import { db, auth } from "../../Data/base";
 const PlaylistModal = ({
@@ -21,48 +16,12 @@ const PlaylistModal = ({
   views,
   time,
   Name,
-  handleRemove,
   closePlaylist,
   playlistNameListDB
 }) => {
   const [playlistNameList, setPlaylistNameList] = useState([]);
   const [playlistName, setPlaylistName] = useState("");
-  // const [playlistNameListDB, setPlaylistNameListDB] = useState([]);
-
-  // useEffect(() => {
-    // const getPlaylistNames = async () => {
-    //   const docRef = collection(db, "Playlist");
-    //   const Playlists = await getDocs(docRef);
-    //   Playlists.forEach((Playlist) => {
-    //     setPlaylistNameListDB((r) =>
-    //       [...r, [Playlist.data().Name]]
-    //       .slice(0, Playlists.docs.length)
-    //     );
-    //   });
-
-
-
-    // };
-    // getPlaylistNames();
-  // setPlaylistNameList(playlistNameListDB);
-
-  // }, []);
-
-
-  // useEffect(()=>{
-  //   setPlaylistNameList(playlistNameListDB);
-  // },[])
-
-  // useEffect(()=>{
-  //   // getPlaylistNames()
-  //       setPlaylistNameList(playlistNameListDB);
-      
-  //   },[])
-//   const a = async ()=>{
-//     await playlistNameListDB
-//     setPlaylistNameList(playlistNameListDB)
-//   }
-// a()
+ 
 const [btn,setBtn] = useState(true)
 const handleRefresh = ()=>{
   setPlaylistNameList(playlistNameListDB);
@@ -70,8 +29,6 @@ const handleRefresh = ()=>{
 
 }
   const handleClick = async (a) => {
-console.log(a.toString());
-      // playlistNameList.map(async () => {
         const docRef = doc(db, "Playlist",`${a +'+'+ auth.currentUser.uid}`  , "videos", Id);
         const docSnap = await getDoc(docRef);
         if (!docSnap.exists()) {
@@ -91,8 +48,6 @@ console.log(a.toString());
             { merge: true }
           );
         }
-        // console.log(a);
-      // });
     
   };
 
@@ -118,7 +73,6 @@ console.log(a.toString());
     };
     handleListDb();
   }, [playlistNameList]);
-// console.log(playlistNameListDB);
   return (
     <section
       className="playlist-modal-section"

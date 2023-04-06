@@ -1,24 +1,12 @@
 import React from 'react'
 import '../../styles/SideBar.css'
 import {
-    arrowBottom,
-    explore,
-    feedback,
-    gaming,
-    help,
+    
     history,
     home,
-    library,
     liked,
-    live,
-    play,
-    premium,
-    queue,
-    report,
-    settings,
     subscriptions,
     watchLater,
-    yourVideos
 } from '../../assets/Icons/SideBarIcons'
 import { Link} from 'react-router-dom';
 import { useTheme } from "../../context/ThemeContext";

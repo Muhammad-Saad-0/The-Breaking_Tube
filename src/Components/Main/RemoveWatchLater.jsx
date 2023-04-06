@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/MoreModal.css";
 import { watchLater } from "../../assets/Icons/SideBarIcons";
-import { subscriptions } from "../../assets/Icons/SideBarIcons";
-import { useWatchLaterListUpdate } from "../../context/WatchLaterContext";
-import { useWatchLaterList } from "../../context/WatchLaterContext";
-import WatchLaterVideo from "./WatchLaterVideo";
-import { v4 as uuidv4 } from "uuid";
 import {
   doc,
-  setDoc,
-  addDoc,
-  collection,
   getDoc,
   deleteDoc,
   where,

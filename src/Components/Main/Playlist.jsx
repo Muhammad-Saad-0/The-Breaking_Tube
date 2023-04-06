@@ -1,26 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useWatchLaterList } from "../../context/WatchLaterContext";
-import WatchLaterVideo from "./WatchLaterVideo";
 import "../../styles/watchLater.css";
-import { db, colRef, auth } from "../../Data/base";
+import { db,auth } from "../../Data/base";
 import {
   getDocs,
   collection,
-  Firestore,
   where,
   query,
   getDoc,
   deleteDoc,
 } from "firebase/firestore";
-import { async } from "@firebase/util";
-import { doc, onSnapshot } from "firebase/firestore";
-import { Link, useParams } from "react-router-dom";
-import { useWatchLaterId } from "../../context/WatchLaterId";
+import { doc} from "firebase/firestore";
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import SideBar from "../SideBar/SideBar";
-import more from "../../assets/Icons/Misc/More.svg";
-import MoreModal from "./MoreModal";
-import RemoveWatchLater from "./RemoveWatchLater";
 import "../../styles/Playlist.css";
 import { useTheme } from "../../context/ThemeContext";
 import { BsFillTrash3Fill } from "react-icons/bs";
@@ -30,13 +21,6 @@ import NoVideos from "./NoVideos";
 const Playlist = ({ Id }) => {
   const nav = useNavigate()
   const [empty,setEmpty] = useState(false)
-
-  const watchLaterId = useWatchLaterId();
-  const [moreModal, setMoreModal] = useState(false);
-  const [selectedId, setSelectedId] = useState("");
-  const handleClick = (embedId) => {
-    setSelectedId(embedId);
-  };
   const theme = useTheme();
   let user = auth.currentUser;
   const q = query(collection(db, "Playlist"), where("Author", "==", user.uid));
@@ -45,7 +29,6 @@ const Playlist = ({ Id }) => {
   useEffect(() => {
     const getPlaylist = async () => {
       const Vids = await getDocs(q);
-      console.log(Vids.docs.length);
       Vids.forEach((Vid) => {
         if (Vids.docs.length != playlistName.length) {
           setPlaylistName((r) => [

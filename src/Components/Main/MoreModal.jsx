@@ -2,24 +2,17 @@ import React, { useEffect, useState } from "react";
 import "../../styles/MoreModal.css";
 import { watchLater } from "../../assets/Icons/SideBarIcons";
 import { subscriptions } from "../../assets/Icons/SideBarIcons";
-import { useWatchLaterListUpdate } from "../../context/WatchLaterContext";
-import { useWatchLaterList } from "../../context/WatchLaterContext";
-import WatchLaterVideo from "./WatchLaterVideo";
-import { v4 as uuidv4 } from "uuid";
 import {
   doc,
   setDoc,
-  addDoc,
   collection,
   getDoc,
-  deleteDoc,
   where,
   getDocs,
   query,
 } from "firebase/firestore";
 import { db, auth } from "../../Data/base";
 import PlaylistModal from "./PlaylistModal";
-import { useNavigate } from "react-router";
 
 const MoreModal = ({
   Id,
@@ -37,23 +30,9 @@ const MoreModal = ({
   const [clickPlaylist, setClickPlaylist] = useState(false);
   const [playlistNameListDB, setPlaylistNameListDB] = useState([]);
 
-  // const nav = useNavigate();
-  // useEffect(() => {
-  //   const abc = async () => {
-  //     const docRef = doc(db, "Watch Later", Id);
-  //     const docSnap = await getDoc(docRef);
-  //     if (docSnap.exists()) {
-  //       setInWatchLater(false);
-  //     }
-  //   };
-  //   //  abc()
-  // }, []);
-
   let user = auth.currentUser;
   const handleDoc = async () => {
     const docRef = doc(db, "Watch Later", `${Id + "+"+user.uid}`);
-    const docSnap = await getDoc(docRef);
-    // if (!docSnap.exists()) {
       await setDoc(
         doc(db, "Watch Later",  `${Id + "+" +user.uid}`),
         {
@@ -68,10 +47,6 @@ const MoreModal = ({
         },
         { merge: true }
       );
-    
-    // }else{
-      
-    // }
    
   };
   const handlePlaylist = () => {
@@ -83,7 +58,6 @@ const MoreModal = ({
     where("Author", "==", user.uid)
   );
   const getPlaylistNames = async () => {
-    // const docRef = collection(db, "Playlist");
     const Playlists = await getDocs(q);
     Playlists.forEach((Playlist) => {
       setPlaylistNameListDB((r) =>
@@ -91,15 +65,6 @@ const MoreModal = ({
         .slice(0, Playlists.docs.length)
       );
     });}
-  // useEffect(() => {
-  //   const docRef = doc(db, "Playlist", "adf");
-  //   const colRef = collection(docRef, "checkout_sessions");
-  //   addDoc(colRef, {
-  //     price: 2,
-  //     and: 1,
-  //     more: "acd",
-  //   });
-  // }, [clickPlaylist]);
   return (
     <>
       {clickPlaylist && <PlaylistModal   Id={Id}
@@ -121,7 +86,6 @@ const MoreModal = ({
             handleDoc();
             setWL(true)
           }}
-          // disabled={WL = true}
           style={
             WL
               ? { backgroundColor: "#4b4b4b" }

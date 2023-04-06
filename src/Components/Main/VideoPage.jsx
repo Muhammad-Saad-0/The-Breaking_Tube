@@ -4,7 +4,6 @@ import MainData from "../../Data/MainData";
 import { v4 as uuidv4 } from "uuid";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
-import SideBar from "../SideBar/SideBar";
 import more from "../../assets/Icons/Misc/More.svg";
 import MoreModal from "./MoreModal";
 import { deleteDoc, doc, getDoc, setDoc ,query,collection,where} from "firebase/firestore";
@@ -19,7 +18,6 @@ const theme = useTheme()
 
   const [moreModal, setMoreModal] = useState(false);
   const [InWatchLater, setInWatchLater] = useState(false);
-  // const [videoLiked, setVideoLiked] = useState(false);
   const videoLiked = useCheckLiked()
   const setVideoLiked = useCheckLikedUpdate()
 
@@ -27,25 +25,9 @@ const theme = useTheme()
 
 
 
-//   useEffect(()=>{
-//     const checkLikedExistence = async (embedId) => {
-//     const docRef = doc(db, "Liked", embedId);
-//     const docSnap = await getDoc(docRef);
-//     if (!docSnap.exists()) {
-//       setVideoLiked(true);
-//     } else {
-//       setVideoLiked(true);
-//     }
-//   };
-// checkLikedExistence()
-//   },[])
-
-
   const addtoLiked = async (Avatar, Name, text, Thumbnail, time, views, embedId)=>{
-    console.log(embedId);
     const docRef = doc(db, "Liked", `${embedId + "+"+auth.currentUser.uid}`);
     const docSnap = await getDoc(docRef);
-    // if (!docSnap.exists()) {
      setDoc(doc(db, "Liked", `${embedId + "+"+auth.currentUser.uid}`),
      {
        embedId,
@@ -59,12 +41,12 @@ const theme = useTheme()
      },
      { merge: true }
    );
-    // }else{
+
       if(docSnap.exists()){
         deleteDoc(doc(db,'Liked',`${embedId + "+"+user.uid}`))
 
       }
-    // }
+
   }
  
   const checkExistence = async (embedId)=>{
@@ -79,7 +61,7 @@ const theme = useTheme()
   return (
     <>
     <section id={theme?'light':'dark'}>
-      {/* <SideBar /> */}
+
       {MainData.filter((a) => a.embedId === videoID).map(
         ({ Avatar, Name, text, Thumbnail, time, views, embedId }) => {
           return (
@@ -111,12 +93,12 @@ const theme = useTheme()
                   <button
                     className="more-button more-button-video"
                     onClick={(e) => {
-                      // handleClick(embedId);
+                   
                       e.preventDefault();
                       e.stopPropagation();
                       setMoreModal(!moreModal);
                       checkExistence(embedId);
-                      // checkLikedExistence(embedId);
+                
                     }}
                   >
                     <img src={more} alt="more" />
@@ -125,7 +107,7 @@ const theme = useTheme()
                 {moreModal && (
                   <MoreModal
                     style={style}
-                    // Id={selectedId}
+                  
                     Thumbnail={Thumbnail}
                     text={text}
                     Avatar={Avatar}

@@ -3,7 +3,6 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Data/base";
 import "../../styles/SignIn.css";
 import { useNavigate } from "react-router";
-import { async } from "@firebase/util";
 import { Link } from "react-router-dom";
 const SignUp = () => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -59,7 +58,6 @@ useEffect(()=>{
         console.log(e.message);
         if ((e.message = "(intermediate value).signIn is not a function")) {
           setErrorAlreadyReq(true)
-          // alert("email already in use");
         }
       }
       nav(-2);
@@ -77,7 +75,6 @@ useEffect(()=>{
 
           </label>
           <input
-            // type="email"
             id="email"
             placeholder="Enter your email"
             value={email}
@@ -105,8 +102,7 @@ useEffect(()=>{
               onClick={togglePassword}
             />
             <label htmlFor="show-password">
-              {/* {passwordShown ? "Hide Password" : "Show Password"
-            } */}
+              
               Show Password
             </label>
           </div>

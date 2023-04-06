@@ -15,15 +15,8 @@ import {
   doc,
   getDoc,
   setDoc,
-  query,
-  collection,
-  where,
-  getDocs,
 } from "firebase/firestore";
-import { async } from "@firebase/util";
-import SideBar from "../SideBar/SideBarClose";
 import { useCheckLikedUpdate } from "../../context/LikedContext";
-import { useCheckLiked } from "../../context/LikedContext";
 import { useTheme } from "../../context/ThemeContext";
 import { useAuth } from "../../context/AuthContext";
 
@@ -33,14 +26,10 @@ const VideosGrid = () => {
   const FilterId = useFilterId();
   const getWatchLaterId = useWatchLaterIdUpdate();
   const setVideoLiked = useCheckLikedUpdate();
-  const VideoLiked = useCheckLiked();
   const theme = useTheme();
   const AuthUser = useAuth();
   let user = auth.currentUser;
-  // const handleClick = (e) =>{
-  //   e.Stop
-  //   console.log('clicked');
-  // }
+
   const [moreModal, setMoreModal] = useState(false);
   const [selectedId, setSelectedId] = useState("");
   const [InWatchLater, setInWatchLater] = useState(false);
@@ -58,10 +47,10 @@ const VideosGrid = () => {
     Name,
     embedId
   ) => {
-    // setInWatchLater(!InWatchLater);
+
     const docRef = doc(db, "History", embedId);
     const docSnap = await getDoc(docRef);
-    // if (!docSnap.exists()) {
+
     await setDoc(
       doc(db, "History", `${embedId + "+" + auth.currentUser.uid}`),
       {
@@ -76,9 +65,9 @@ const VideosGrid = () => {
       },
       { merge: true }
     );
-    // }
+   
   };
-  // auth.onAuthStateChanged(()=>{
+
 
   const checkExistence = async (embedId) => {
     const docRef = doc(
@@ -93,21 +82,12 @@ const VideosGrid = () => {
       setInWatchLater(true);
     }
   };
-  // checkExistence() } )
-  // const [videoLiked, setVideoLiked] = useState(false);
-  // const q = query(
-  //   collection(db, "Liked",embedId),
-  //   where("Author", "==", auth.currentUser.uid)
-  // );
+ 
   const checkLikedExistence = async (embedId) => {
-    // const q = query(
-    //     collection(db, "Liked"),
-    //     where("Author", "==", auth.currentUser.uid),
-    //     where("embedId","==",embedId)
-    //   );
+    
     const docRef = doc(db, "Liked", `${embedId + "+" + auth.currentUser.uid}`);
     const docSnap = await getDoc(docRef);
-    console.log(docSnap.docs);
+
     if (!docSnap.exists()) {
       setVideoLiked(false);
     } else {
@@ -118,7 +98,6 @@ const VideosGrid = () => {
   return (
     <>
       <HomeFilter />
-      {/* <SideBar /> */}
       <section className="grid-section" id={theme ? "light" : "dark"}>
         {FilterId === "All" || !FilterId
           ? MainData.map(
@@ -130,7 +109,6 @@ const VideosGrid = () => {
                 time,
                 Name,
                 embedId,
-                Category,
               }) => {
                 return (
                   <div key={uuidv4()}>
@@ -228,7 +206,6 @@ const VideosGrid = () => {
                 time,
                 Name,
                 embedId,
-                Category,
               }) => {
                 return (
                   <div key={uuidv4()}>

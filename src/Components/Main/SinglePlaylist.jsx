@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useWatchLaterList } from "../../context/WatchLaterContext";
-import WatchLaterVideo from "./WatchLaterVideo";
 import "../../styles/watchLater.css";
 import { db, colRef, auth } from "../../Data/base";
 import {
@@ -12,22 +10,17 @@ import {
   getDoc,
   deleteDoc,
 } from "firebase/firestore";
-import { async } from "@firebase/util";
 import { doc, onSnapshot } from "firebase/firestore";
 import { Link, useParams } from "react-router-dom";
 import { useWatchLaterId } from "../../context/WatchLaterId";
 import { v4 as uuidv4 } from "uuid";
-import SideBar from "../SideBar/SideBar";
 import more from "../../assets/Icons/Misc/More.svg";
-import MoreModal from "./MoreModal";
 import { useTheme } from "../../context/ThemeContext";
 import RemoveWatchLater from "./RemoveWatchLater";
 import '../../styles/Home.css'
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { useNavigate } from "react-router";
-import { onAuthStateChanged } from "firebase/auth";
-const SinglePlaylist = ({ Id }) => {
-  const watchLaterId = useWatchLaterId();
+const SinglePlaylist = () => {
   const [moreModal, setMoreModal] = useState(false);
 const theme = useTheme()
 const [selectedId, setSelectedId] = useState("");
@@ -36,7 +29,6 @@ const [selectedId, setSelectedId] = useState("");
   };
   const nav = useNavigate()
   const {playlistID} = useParams()
-console.log(playlistID);
   let user = auth.currentUser;
 
 
@@ -71,9 +63,7 @@ console.log(playlistID);
   
   }, []);
   const handleDel = async (Id)=>{
-    console.log(Id);
      const docRef=  doc(db, "Playlist", `${playlistID +'+'+ auth.currentUser.uid}`, "videos", Id)
-    // const docRef = doc(db, "Liked", `${Id + "+"+auth.currentUser.uid}`);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       await deleteDoc(
@@ -84,18 +74,13 @@ console.log(playlistID);
      nav(0)
     }
   }
-  //  ro.map((r)=>{
-  // console.log(r.Name);
-  //  })
-  // const list = useWatchLaterList();
+ 
   return (
     <>
-      {/* <SideBar /> */}
       <section className="grid-section"
         id={theme ? "light" : "dark"}
         >
-        {/* <WatchLaterVideo Id={Id} /> */}
-        {/* {list} */}
+        
         {ro.map((r) => {
           return (
             <Link to={`/video/${r.Id}`} className="video" key={uuidv4()}>

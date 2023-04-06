@@ -1,31 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useWatchLaterList } from "../../context/WatchLaterContext";
-import WatchLaterVideo from "./WatchLaterVideo";
 import "../../styles/watchLater.css";
 import { db, colRef, auth } from "../../Data/base";
 import {
   getDocs,
   collection,
-  Firestore,
   where,
   query,
-  getDoc,
-  deleteDoc,
 } from "firebase/firestore";
-import { async } from "@firebase/util";
-import { doc, onSnapshot } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { useWatchLaterId } from "../../context/WatchLaterId";
 import { v4 as uuidv4 } from "uuid";
-import SideBar from "../SideBar/SideBar";
 import more from "../../assets/Icons/Misc/More.svg";
-import MoreModal from "./MoreModal";
 import RemoveWatchLater from "./RemoveWatchLater";
 import { useTheme } from "../../context/ThemeContext";
 import "../../styles/Home.css";
 import NoVideos from "./NoVideos";
-const WatchLater = ({ Id }) => {
-  const watchLaterId = useWatchLaterId();
+const WatchLater = () => {
   const [moreModal, setMoreModal] = useState(false);
   const [selectedId, setSelectedId] = useState("");
   const [empty,setEmpty] = useState(false)
@@ -67,21 +57,15 @@ const theme = useTheme()
     getVids();
   }, []);
 
-  //  ro.map((r)=>{
-  // console.log(r.Name);
-  //  })
-  // const list = useWatchLaterList();
   return (
     <>
-      {/* <SideBar /> */}
       <h3 style={theme?{color:'#303030'}:{color:'#ffffff'}}>Watch Later</h3>
     {empty?<NoVideos />:   <section
-        // className="watchlater-section"
+       
         className="grid-section"
         id={theme ? "light" : "dark"}
       >
-        {/* <WatchLaterVideo Id={Id} /> */}
-        {/* {list} */}
+        
         {ro.map((r) => {
           return (
             <div key={uuidv4()}>

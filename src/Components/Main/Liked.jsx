@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useWatchLaterList } from "../../context/WatchLaterContext";
-import WatchLaterVideo from "./WatchLaterVideo";
-// import "../../styles/watchLater.css";
 import { db, colRef, auth } from "../../Data/base";
 import {
   getDocs,
@@ -12,14 +9,11 @@ import {
   getDoc,
   deleteDoc,
 } from "firebase/firestore";
-import { async } from "@firebase/util";
 import { doc, onSnapshot } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { useWatchLaterId } from "../../context/WatchLaterId";
 import { v4 as uuidv4 } from "uuid";
-import SideBar from "../SideBar/SideBar";
 import more from "../../assets/Icons/Misc/More.svg";
-import MoreModal from "./MoreModal";
 import RemoveWatchLater from "./RemoveWatchLater";
 import NoVideos from "./NoVideos";
 import { useTheme } from "../../context/ThemeContext";
@@ -27,7 +21,6 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 import { useNavigate } from "react-router";
 
 const Liked = ({ Id }) => {
-  const watchLaterId = useWatchLaterId();
   const nav = useNavigate()
   const [empty,setEmpty] = useState(false)
   const [moreModal, setMoreModal] = useState(false);
@@ -35,7 +28,6 @@ const Liked = ({ Id }) => {
   const [selectedId, setSelectedId] = useState("");
   const handleClick = (embedId) => {
     setSelectedId(embedId);
-    console.log(selectedId);
   };
 
   let user = auth.currentUser;
@@ -82,15 +74,11 @@ const Liked = ({ Id }) => {
      nav(0)
     }
   }
-  // const list = useWatchLaterList();
   return (
     <>
     <h3 style={theme?{color:'#303030'}:{color:'#ffffff'}}>Liked</h3>
-      {/* <SideBar /> */}
     {empty?<NoVideos />:  <section className="grid-section"
         id={theme ? "light" : "dark"}>
-        {/* <WatchLaterVideo Id={Id} /> */}
-        {/* {list} */}
         {ro.map((r) => {
           return (
             <Link to={`/video/${r.embedId}`} className="video" key={uuidv4()}>

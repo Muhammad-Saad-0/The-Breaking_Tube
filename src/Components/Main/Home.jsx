@@ -19,8 +19,6 @@ import Liked from "./Liked";
 import { useTheme } from "../../context/ThemeContext";
 const Main = () => {
   const sideBarOpen = useSidebar();
-  const FilterId = useFilterId();
-  const videoId = useVideoId();
   const authUser = useAuth();
   const title = useVideoTitle();
   const theme = useTheme();
@@ -39,66 +37,40 @@ const Main = () => {
   useEffect(() => {
     function getBg() {
       if (sideBarOpen && !theme && window.innerWidth >= 620) {
-        // return "#1e1d1d";
         setBg('#1e1d1d')
       }
       if (sideBarOpen && !theme && window.innerWidth <= 620) {
         setBg('#303030')
-        // return "#303030";
       }
       if(!sideBarOpen && !theme){
         setBg('#303030')
 
       }
       if (sideBarOpen && theme && window.innerWidth >= 620) {
-        // return '#B0B0B0';
         setBg('#B0B0B0')
       }
       if (sideBarOpen && theme && window.innerWidth <= 620) {
-        // return '#B0B0B0';
         setBg('#ffffff')
       }
       if(!sideBarOpen && theme){
-      //  return "#ffffff"
       setBg('#ffffff')
       }
-      // return '#ffffff'
     }
     getBg()
   },[width , theme , sideBarOpen]);
   
-  // function getBg() {
-  //   if (sideBarOpen && !theme && window.innerWidth > 620) {
-  //     return "#1e1d1d";
-  //   }
-  //   if (sideBarOpen && !theme && window.innerWidth < 620) {
-  //     return "#303030";
-  //   }
-  //   if(!sideBarOpen && !theme){
-  //     return "#303030"
-  //   }
-  //   if (sideBarOpen && theme) {
-  //     return '#B0B0B0';
-  //   }
-  //   if(!sideBarOpen && theme){
-  //    return "#ffffff"
-  //   }
-  //   // return '#ffffff'
-  // }
   return (
     <>
       <section
         className="main-section"
         style={
           {backgroundColor: 
-            // `${getBg()}`
             bg
             ,
             transition: 'none'
 
       }
   }
-  // id={theme?'light':'dark'}
       >
         <Routes>
           <Route exact path="/" element={<VideosGrid />} />

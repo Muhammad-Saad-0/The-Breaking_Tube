@@ -3,8 +3,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Data/base";
 import "../../styles/SignIn.css";
 import { useNavigate } from "react-router";
-
-import { Link } from "react-router-dom";
 const LoginPage = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -39,7 +37,7 @@ const LoginPage = () => {
       setErrorReq2(true);
     }
     if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      // console.log("invalid");
+      console.log("invalid");
       setErrorReq3(true);
     }
     if (
@@ -117,17 +115,12 @@ const LoginPage = () => {
               onClick={togglePassword}
             />
             <label htmlFor="show-password">
-              {/* {passwordShown ? "Hide Password" : "Show Password"
-            } */}
               Show Password
             </label>
           </div>
 
           <button type="submit">Log In</button>
         </form>
-        {/* <p className="signup-redirect">Dont have an Account?
-          <Link to='/signUp'>Sign Up</Link>
-        </p> */}
       </section>
     </>
   );

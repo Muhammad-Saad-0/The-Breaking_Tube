@@ -11,7 +11,6 @@ import {
   deleteDoc,
   getDoc
 } from "firebase/firestore";
-import { async } from "@firebase/util";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { doc, onSnapshot } from "firebase/firestore";
 import { Link } from "react-router-dom";
@@ -21,7 +20,6 @@ import { useNavigate } from "react-router";
 import { useTheme } from "../../context/ThemeContext";
 const History = () => {
   let user = auth.currentUser;
-  console.log(user.uid);
   const theme = useTheme()
   const q = query(collection(db, "History"), where("Author", "==", user.uid));
   const [empty,setEmpty] = useState(false)
@@ -31,11 +29,8 @@ const History = () => {
   useEffect(() => {
     const getVids = async () => {
       const Vids = await getDocs(
-        // collection(db, "Watch Later"
-        // ,where("Author", "==", user.uid)
         q
       );
-      // .where("author", "==", user.uid)
       Vids.forEach((Vid) => {
         if (Vids.docs.length != ro.length) {
           setRo((r) => [
@@ -78,8 +73,6 @@ const History = () => {
         id={theme ? "light" : "dark"}
     
     >
-      {/* <WatchLaterVideo Id={Id} /> */}
-      {/* {list} */}
       {ro.map((r) => {
         return (
           <Link to={`/video/${r.Id}`} className="video" key={uuidv4()}>
@@ -110,27 +103,14 @@ const History = () => {
                   <button
                     className="more-button"
                     onClick={(e) => {
-                      // handleClick(embedId);
+                     
                       e.preventDefault();
                       e.stopPropagation();
-                      // setMoreModal(!moreModal);
+                    
                     }}
                   >
-                    {/* <img src={more} alt="more" /> */}
+                   
                   </button>
-                  {/* {moreModal && embedId === selectedId ? (
-                           <MoreModal
-                             Id={selectedId}
-                             Thumbnail={Thumbnail}
-                             text={text}
-                             Avatar={Avatar}
-                             views={views}
-                             time={time}
-                             Name={Name}
-                           />
-                         ) : (
-                           false
-                         )} */}
                 </div>
 
                 <p>{r.Name}</p>
