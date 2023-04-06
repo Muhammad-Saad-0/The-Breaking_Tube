@@ -14,7 +14,7 @@ export function ThemeProvider({ children }) {
 
   function toggleTheme() {
     setTheme(prev => !prev);
-    localStorage.setItem('theme', !Theme)
+    localStorage.setItem('theme', Theme)
   }
   useEffect(()=>{
     setTheme(  localStorage.getItem('theme'))
