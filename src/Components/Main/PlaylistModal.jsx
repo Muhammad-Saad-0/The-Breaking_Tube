@@ -85,6 +85,7 @@ const handleRefresh = ()=>{
         <div className="playlist-modal-top">
           <h4>Create Playlist</h4>
           <button
+          name="close"
             className="close-playlist-modal"
             onClick={() => {
               closePlaylist(false);
@@ -93,7 +94,7 @@ const handleRefresh = ()=>{
             <RxCross2 />{" "}
           </button>
         </div>
-       {btn&& <button onClick={handleRefresh}>
+       {btn&& <button onClick={handleRefresh} name="refresh">
           Refresh
         </button>}
         <ul>
@@ -101,6 +102,7 @@ const handleRefresh = ()=>{
             return (
               <li>
                 <button
+                name="playlist"
                   type="checkbox"
                   id={`${a}`}
                   onClick={(e) => {
@@ -135,6 +137,7 @@ const handleRefresh = ()=>{
             value={playlistName}
           />
           <button
+          name="enter"
             onClick={(e) => {
               e.stopPropagation();
               setPlaylistNameList([...playlistNameList, playlistName]);

@@ -85,6 +85,7 @@ const theme = useTheme()
                       {" "}
                       <p> {r.text}</p>
                       <button
+                      name="more"
                         className="more-button"
                         onClick={(e) => {
                           handleClick(r.Id);

@@ -74,6 +74,7 @@ const Playlist = ({ Id }) => {
               <div>
                 {" "}
                 <button
+                name="delete"
                   onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();

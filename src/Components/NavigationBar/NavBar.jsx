@@ -27,7 +27,7 @@ const NavBar = () => {
     <SidebarProvider>
       <nav id={theme ? "light" : "dark"}>
         <div className="nav-left">
-          <button onClick={toggleSidebar}>
+          <button onClick={toggleSidebar} name="toggle sidebar">
             <img src={hamburger} alt="menu" />
           </button>
           <Link to={"/"} style={{ textDecoration: "none" }}>
@@ -38,25 +38,26 @@ const NavBar = () => {
           <SearchBar />
         </div>
         <div className="nav-right">
-          <button id="search-btn-right" >
+          <button id="search-btn-right"  name="search">
             <img src={SearchLogo} alt="search" />
           </button>
-          <button>
-            <img src={create} alt="create" />
+          <button name="create">
+            <img src={create} alt="create"  />
           </button>
           <button
             className="theme-toggle"
             onClick={() => {
               toggleTheme(!theme);
             }}
+            name="toggle theme"
           >
             {theme ? <IoSunny /> : <IoMoonSharp />}
           </button>
-          <button>
+          <button name="notifications">
             <img src={notifications} alt="notifications" />
           </button>
           <Link to={"/profile"}>
-            <button>
+            <button name="profile">
               {auth ? (
                 <img src={profilepic} alt="profile" className="user-pfp" />
               ) : (

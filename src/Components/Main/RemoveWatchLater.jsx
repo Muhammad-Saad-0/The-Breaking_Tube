@@ -35,6 +35,7 @@ const RemoveWatchLater = ({
    
       <div className="more-modal remove-modal">
         <button
+        name="remove"
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();

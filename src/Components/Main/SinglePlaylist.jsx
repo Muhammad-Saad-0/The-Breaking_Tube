@@ -86,7 +86,7 @@ const [selectedId, setSelectedId] = useState("");
             <Link to={`/video/${r.Id}`} className="video" key={uuidv4()}>
               <div className="video-top">
                 
-                <div className="thumbnail-section">    <button
+                <div className="thumbnail-section">    <button name="delete"
                   onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
@@ -108,6 +108,7 @@ const [selectedId, setSelectedId] = useState("");
                     {" "}
                     <p> {r.text}</p>
                     <button
+                    name="more"
                       className="more-button"
                       onClick={(e) => {
                         handleClick(r.Id);

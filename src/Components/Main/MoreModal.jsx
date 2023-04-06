@@ -80,6 +80,7 @@ const MoreModal = ({
                                 }
       <div className="more-modal" style={style} >
         <button
+        name="add to watch later"
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
@@ -96,6 +97,7 @@ const MoreModal = ({
           {WL?'Added to ':'Add to'} Watch Later
         </button>
         <button
+        name="add to playlist"
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();

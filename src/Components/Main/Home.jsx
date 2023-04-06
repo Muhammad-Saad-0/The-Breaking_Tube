@@ -50,10 +50,10 @@ const Main = () => {
         setBg('#B0B0B0')
       }
       if (sideBarOpen && theme && window.innerWidth <= 620) {
-        setBg('#ffffff')
+        setBg('#FAF9F6')
       }
       if(!sideBarOpen && theme){
-      setBg('#ffffff')
+      setBg('#FAF9F6')
       }
     }
     getBg()

@@ -159,7 +159,7 @@ const VideosGrid = () => {
                               </button>
                             ) : (
                               <Link to={'/profile'}>
-                                <button className="more-button"    onClick={(e) => {
+                                <button name="more" className="more-button"    onClick={(e) => {
                                   e.preventDefault();
                                   e.stopPropagation();
                                 }} >

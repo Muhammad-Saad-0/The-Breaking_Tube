@@ -84,7 +84,7 @@ const Liked = ({ Id }) => {
             <Link to={`/video/${r.embedId}`} className="video" key={uuidv4()}>
               <div className="video-top">
                 <div className="thumbnail-section">
-                <button
+                <button name="delete"
                   onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
@@ -105,7 +105,7 @@ const Liked = ({ Id }) => {
                   <div className="title-button-section">
                     {" "}
                     <p> {r.text}</p>
-                    <button
+                    <button name="more"
                       className="more-button"
                       onClick={(e) => {
                         handleClick(r.embedId);

@@ -81,7 +81,7 @@ const theme = useTheme()
                 <p>{Name}</p>
 
                 <div className="video-buttons-container">
-                  <button
+                  <button name="like"
                     onClick={() => {
                       setVideoLiked(!videoLiked);
 
@@ -91,6 +91,7 @@ const theme = useTheme()
                     {videoLiked ? <AiFillHeart /> : <AiOutlineHeart />}
                   </button>
                   <button
+                  name="more"
                     className="more-button more-button-video"
                     onClick={(e) => {
                    
