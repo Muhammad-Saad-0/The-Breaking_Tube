@@ -49,18 +49,21 @@ useEffect(()=>{
           console.log(userCredential);
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.message);
+          if ((e.message = "Firebase: Error (auth/email-already-in-use).")) {
+            setErrorAlreadyReq(true)
+          }
         });
       try {
         await auth.signIn(email, password);
         userHasAuthenticated(true);
       } catch (e) {
         console.log(e.message);
-        if ((e.message = "(intermediate value).signIn is not a function")) {
-          setErrorAlreadyReq(true)
-        }
+        // if ((e.message = "(auth/email-already-in-use)")) {
+        //   setErrorAlreadyReq(true)
+        // }
       }
-      nav(-2);
+      nav('/profile');
     }
   }
 
